@@ -1,0 +1,21 @@
+<table class="w-full text-center">
+  <thead>
+    <tr>
+      <th class="px-6 py-3">Name</th>
+      <th class="px-6 py-3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="hover:bg-gray-100" *ngFor="let member of members">
+      <td class="border px-6 py-4">{{ member.name }}</td>
+      <td class="border px-6 py-4">        
+        <button mat-icon-button class="mx-2">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button class="mx-2">
+          <mat-icon>delete</mat-icon>
+        </button>        
+      </td>
+    </tr>
+  </tbody>
+</table>
