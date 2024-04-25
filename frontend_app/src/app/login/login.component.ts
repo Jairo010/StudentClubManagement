@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CoreModule } from "../core/core.module";
 
 @Component({
-  selector: 'app-login',  
-  standalone: true,
-  imports: [],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+    selector: 'app-login',
+    standalone: true,
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.css',
+    imports: [CoreModule]
 })
 export class LoginComponent {
   constructor(private router: Router) {
@@ -14,7 +15,7 @@ export class LoginComponent {
   }
 
   onLogin(){
-    this.router.navigate(['/inicio']);
+    this.router.navigate(['/pages-index']);
   }
 
 }
