@@ -1,25 +1,24 @@
 <app-container>
-    <table class="w-full text-center">
-      <thead>
-        <tr>
-          <th class="px-6 py-3">Nombre del proyecto</th>
-          <th class="px-6 py-3">Descripción</th>
-          <th class="px-6 py-3">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr class="hover:bg-gray-100" *ngFor="let projects of proyectos">
-          <td class="border px-6 py-4">{{ projects.name }}</td>
-          <td class="border px-6 py-4">{{ projects.description }}</td>
-          <td class="border px-6 py-4">        
-            <button mat-icon-button class="mx-2">
-              <mat-icon>edit</mat-icon>
+  <ng-scrollbar class="heightMaxScrollbar">
+    <app-table [data]="data" [metaDataColumns]="MetaDataColumn">
+    <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row"> 
+            <button mat-icon-button color="primary" (click)="openForm(row)">
+                <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button class="mx-2">
-              <mat-icon>delete</mat-icon>
-            </button>        
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <button mat-icon-button color="accent" (click)="delete(row.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+</app-table>
+</ng-scrollbar>
+<app-paginator
+fxLayout
+fxLayoutAlign="end center"
+[lenght]="totalRecords"
+(onChangePage)="changePage($event)"
+>
+</app-paginator>
     </app-container>
