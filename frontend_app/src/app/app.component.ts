@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { RegistrationprojectsComponent } from "./registrationprojects/registrationprojects.component";
 import { LoginComponent } from "./login/login.component";
-import { NavbarComponent } from "./navbar/navbar.component";
 import { CoreModule } from "./core/core.module";
 
 
@@ -11,7 +10,7 @@ import { CoreModule } from "./core/core.module";
     standalone: true,
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
-    imports: [RouterOutlet, RegistrationprojectsComponent, LoginComponent, NavbarComponent, CoreModule]
+    imports: [RouterOutlet, RegistrationprojectsComponent, LoginComponent, CoreModule]
 })
 export class AppComponent {
   title = 'frontend_app';
