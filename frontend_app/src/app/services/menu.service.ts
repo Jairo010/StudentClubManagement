@@ -11,7 +11,8 @@ export interface IMenu{
 export class MenuService {
   listMenu: IMenu[] = [
     {title: 'Miembros', url: '/miembros', icono: ''},
-    {title: 'Proyectos', url: '/registroproyectos', icono: ''}
+    {title: 'Registro de Proyectos', url: '/registroproyectos', icono: ''},
+    {title: 'Proyectos', url: '/proyectos', icono: ''}
 ]
 
   constructor() { }

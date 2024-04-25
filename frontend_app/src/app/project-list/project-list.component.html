@@ -1,0 +1,25 @@
+<app-container>
+    <table class="w-full text-center">
+      <thead>
+        <tr>
+          <th class="px-6 py-3">Nombre del proyecto</th>
+          <th class="px-6 py-3">Descripción</th>
+          <th class="px-6 py-3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="hover:bg-gray-100" *ngFor="let projects of proyectos">
+          <td class="border px-6 py-4">{{ projects.name }}</td>
+          <td class="border px-6 py-4">{{ projects.description }}</td>
+          <td class="border px-6 py-4">        
+            <button mat-icon-button class="mx-2">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button class="mx-2">
+              <mat-icon>delete</mat-icon>
+            </button>        
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    </app-container>
