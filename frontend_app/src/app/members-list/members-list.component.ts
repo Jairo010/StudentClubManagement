@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
+import { SharedModule } from "../shared/shared.module";
 
 @Component({
     selector: 'app-members-list',
     standalone: true,
     templateUrl: './members-list.component.html',
     styleUrl: './members-list.component.css',
-    imports: [CommonModule, MatButtonModule, MatIconModule, NavbarComponent]
+    imports: [CommonModule, MatButtonModule, MatIconModule, NavbarComponent, SharedModule]
 })
 export class MembersListComponent {
   members = [

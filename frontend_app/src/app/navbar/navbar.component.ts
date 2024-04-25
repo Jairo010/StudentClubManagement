@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { MembersListComponent } from '../members-list/members-list.component';
 import { MatIcon } from '@angular/material/icon';
 
@@ -11,9 +11,13 @@ import { MatIcon } from '@angular/material/icon';
     imports: [RouterOutlet, MembersListComponent, MatIcon]
 })
 export class NavbarComponent {
-  expanded=true
+  constructor(private router: Router) { }
+  menuVisible: boolean = false;
+  toggleMenu(): void {
+    this.menuVisible = !this.menuVisible;
+  }
+  menuItemClicked(route: string): void {
+    this.router.navigate([route]);
 
-  toggleExpanded(expanded:boolean){
-    this.expanded = expanded
   }
 }
