@@ -3,13 +3,12 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
-
 @Component({
-  selector: 'app-registrationprojects',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule,NavbarComponent],
-  templateUrl: './registrationprojects.component.html',
-  styleUrl: './registrationprojects.component.css'
+    selector: 'app-registrationprojects',
+    standalone: true,
+    templateUrl: './registrationprojects.component.html',
+    styleUrl: './registrationprojects.component.css',
+    imports: [CommonModule, MatButtonModule, MatIconModule, NavbarComponent]
 })
 export class RegistrationprojectsComponent {
   members = [

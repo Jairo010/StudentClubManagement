@@ -14,7 +14,7 @@ export class LoginComponent {
   }
 
   onLogin(){
-    this.router.navigate(['/registroproyectos']);
+    this.router.navigate(['/inicio']);
   }
 
 }

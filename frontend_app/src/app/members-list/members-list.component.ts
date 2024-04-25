@@ -5,11 +5,11 @@ import {MatIconModule} from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
-  selector: 'app-members-list',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule,NavbarComponent],
-  templateUrl: './members-list.component.html',
-  styleUrl: './members-list.component.css',
+    selector: 'app-members-list',
+    standalone: true,
+    templateUrl: './members-list.component.html',
+    styleUrl: './members-list.component.css',
+    imports: [CommonModule, MatButtonModule, MatIconModule, NavbarComponent]
 })
 export class MembersListComponent {
   members = [
