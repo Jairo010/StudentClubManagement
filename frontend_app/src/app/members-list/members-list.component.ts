@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
+import { NavbarComponent } from '../navbar/navbar.component';
 
 @Component({
   selector: 'app-members-list',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule,NavbarComponent],
   templateUrl: './members-list.component.html',
   styleUrl: './members-list.component.css',
 })
