@@ -27,7 +27,7 @@ export class TasksService {
     return this.http.put<ITasks>(environment.URL_API+`tasks`,task)
   }
 
-  deleteTask(id:number): Observable<any>{
+  deleteTask(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`tasks/${id}`)
   }
 }

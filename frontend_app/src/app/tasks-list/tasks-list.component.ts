@@ -75,6 +75,10 @@ export class TasksListComponent {
 
   }
   delete(id:string){
-
+    this.tasksService.deleteTask(id).subscribe(() => {
+      this.loadTasks()
+    }, (error) => {
+      console.error('Error deleting member:', error);
+    });
   }
 }

@@ -74,6 +74,10 @@ export class ProjectListComponent {
 
   }
   delete(id:string){
-
+    this.projectsService.deleteProject(id).subscribe(() => {
+      this.loadProjects()
+    }, (error) => {
+      console.error('Error deleting project:', error);
+    });
   }
-}
+  }

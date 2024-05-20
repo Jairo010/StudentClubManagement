@@ -7,6 +7,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { RegistrationMembersComponent } from './registration-members/registration-members.component';
 import { ResgistrationTasksComponent } from './resgistration-tasks/resgistration-tasks.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { RegistrationClubsComponent } from './registration-clubs/registration-clubs.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'registromiembros', component: RegistrationMembersComponent},
     { path: 'registroproyectos', component: RegistrationprojectsComponent},
     { path: 'proyectos', component: ProjectListComponent},
+    { path: 'clubs', component: RegistrationClubsComponent},
     { path: 'registrotareas', component: ResgistrationTasksComponent},
     { path: 'tareas', component: TasksListComponent},
 ];

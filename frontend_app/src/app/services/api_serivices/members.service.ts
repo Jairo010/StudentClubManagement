@@ -10,7 +10,7 @@ import { IMembers } from '../../members-list/members-list.component';
 })
 export class MembersService {
 
-  private http = inject(HttpClient);
+  constructor(private http: HttpClient) { }
 
 
   getMembers(): Observable<any>{
@@ -21,11 +21,11 @@ export class MembersService {
     return this.http.get<any>(environment.URL_API+`members/${id}`)
   }
 
-  updateMember(member:IMembers): Observable<IMembers>{
-    return this.http.put<IMembers>(environment.URL_API+`members`,member)
+  updateMember(id:string,member:IMembers): Observable<IMembers>{
+    return this.http.put<IMembers>(environment.URL_API+`members/${id}`,member)
   }
 
-  deleteMember(id:number): Observable<any>{
+  deleteMember(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`members/${id}`)
   }
 }
