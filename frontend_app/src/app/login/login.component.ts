@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { CoreModule } from "../core/core.module";
 import { UserService } from '../services/api_serivices/user.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ILogin } from '../interfaces/userAuth.interface';
 
 @Component({
     selector: 'app-login',
@@ -15,6 +16,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class LoginComponent {
 
   member = inject(UserService);
+  router = inject(Router);
+  loginError = false; 
 
   login = new FormGroup({
     email: new FormControl<any>('', [Validators.required, Validators.email]),
@@ -23,7 +26,26 @@ export class LoginComponent {
 
 
   onLogin(){
-    
-  }
+    if (this.login.valid) {
+      const loginData: ILogin = {
+        email: this.login.get('email')?.value,
+        password: this.login.get('password')?.value,
+      };
 
+      this.member.logInUserMember(loginData).subscribe(
+        response => {
+          alert("Inicio de sesion correcto")
+          this.router.navigate(['miembros']);
+        },
+        error => {
+          alert("Error de autenticación: " +error.error.data)
+          console.error('Error de autenticación', error);
+          this.loginError = true; 
+        }
+      );
+    } else {
+      console.log('Formulario inválido');
+    }
+  }
 }
+
