@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { ILogin, ISignUp } from '../../interfaces/userAuth.interface';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
 
 @Injectable({
@@ -15,7 +15,17 @@ export class UserService {
     return this.http.post<ISignUp>(environment.URL_API+"auth/createUser",user)
   }
 
-  logInUserMember(user:ILogin): Observable<ILogin>{
-    return this.http.post<ILogin>(environment.URL_API+"auth/login",user)
+  logInUserMember(user: ILogin): Observable<any> {
+    return this.http.post<any>(environment.URL_API + 'auth/login', user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 400) {
+          // El servidor devuelve un error de autenticación
+          return throwError('Credenciales incorrectas');
+        } else {
+          // Otro tipo de error (por ejemplo, error de conexión con la base de datos)
+          return throwError('Error de conexión con la base de datos');
+        }
+      })
+    );
   }
 }

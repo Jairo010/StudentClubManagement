@@ -13,31 +13,31 @@ import { ILogin } from '../interfaces/userAuth.interface';
   imports: [CoreModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginComponent {
-  constructor(private userService: UserService, private router: Router) {}
-
-  loginError = false;
+  member = inject(UserService);
+  router = inject(Router);
+  loginError = false; 
 
   login = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
+    email: new FormControl<any>('', [Validators.required, Validators.email]),
+    password: new FormControl<any>('', [Validators.required]),
   });
 
-  onLogin() {
+  constructor() {} 
+
+  onLogin(){
     if (this.login.valid) {
-      const email = this.login.get('email')?.value || '';
-      const password = this.login.get('password')?.value || '';
       const loginData: ILogin = {
-        email: email,
-        password: password,
+        email: this.login.get('email')?.value,
+        password: this.login.get('password')?.value,
       };
-  
-      this.userService.logInUserMember(loginData).subscribe(
+
+      this.member.logInUserMember(loginData).subscribe(
         response => {
           this.router.navigate(['/pages-index']);
         },
         error => {
           console.error('Error de autenticación', error);
-          this.loginError = true;
+          this.loginError = true; 
         }
       );
     } else {
