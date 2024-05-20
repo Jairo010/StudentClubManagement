@@ -18,6 +18,7 @@ export class LoginComponent {
   member = inject(UserService);
   router = inject(Router);
   loginError = false; 
+  user:any;
 
   login = new FormGroup({
     email: new FormControl<any>('', [Validators.required, Validators.email]),
@@ -34,6 +35,7 @@ export class LoginComponent {
 
       this.member.logInUserMember(loginData).subscribe(
         response => {
+          this.user = response;
           alert("Inicio de sesion correcto")
           this.router.navigate(['miembros']);
         },
