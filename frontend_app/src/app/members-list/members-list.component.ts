@@ -6,6 +6,7 @@ import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { MembersService } from '../services/api_serivices/members.service';
+import { Router } from '@angular/router';
 
 export interface IMembers {
   name: string;
@@ -21,6 +22,7 @@ export interface IMembers {
 })
 export class MembersListComponent {
   private membersService = inject(MembersService);
+  router = inject(Router);
 
   data: any = []
 
@@ -50,6 +52,7 @@ export class MembersListComponent {
           if (Array.isArray(record['0'])) {
             record['0'].forEach((dato: any) => {
               this.field.push({
+                id: record.id,
                 card: dato.cedula,
                 name: dato.Nombre,
                 lastName: dato.Apellido,
@@ -61,6 +64,7 @@ export class MembersListComponent {
           } else if (typeof record['0'] === 'object' && record['0'] !== null) {
             const dato = record['0'];
             this.field.push({
+              id: record.id,
               card: dato.cedula,
               name: dato.Nombre,
               lastName: dato.Apellido,
@@ -92,7 +96,11 @@ export class MembersListComponent {
     // Implement form opening logic here
   }
 
-  delete(id: string) {
-    // Implement delete logic here
-  }
+    delete(id: string) {
+      this.membersService.deleteMember(id).subscribe(() => {
+        this.loadMembers()
+      }, (error) => {
+        console.error('Error deleting member:', error);
+      });
+    }
 }

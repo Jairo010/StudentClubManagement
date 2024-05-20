@@ -25,7 +25,7 @@ export class MembersService {
     return this.http.put<IMembers>(environment.URL_API+`members`,member)
   }
 
-  deleteMember(id:number): Observable<any>{
+  deleteMember(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`members/${id}`)
   }
 }

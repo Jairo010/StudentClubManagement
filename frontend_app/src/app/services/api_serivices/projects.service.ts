@@ -27,7 +27,7 @@ export class ProjectsService {
     return this.http.put<IProjects>(environment.URL_API+`projects`,club)
   }
 
-  deleteProject(id:number): Observable<any>{
+  deleteProject(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`projects/${id}`)
   }
 }
