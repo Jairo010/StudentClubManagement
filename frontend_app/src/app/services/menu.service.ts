@@ -16,6 +16,7 @@ export class MenuService {
     {title: 'Proyectos', url: '/proyectos', icono: '/assets/icons/proyectos.png'},
     {title: 'Nueva Tarea', url: '/registrotareas', icono: '/assets/icons/proyectos.png'},
     {title: 'Tareas', url: '/tareas', icono: '/assets/icons/proyectos.png'},
+    {title: 'Agregar Club', url: '/clubs', icono: '/assets/icons/reunion.png'}
 ]
 
   constructor() { }
