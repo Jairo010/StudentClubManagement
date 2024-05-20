@@ -15,16 +15,20 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { PageIndexComponent } from './page-index/page-index.component';
 import { RouterModule } from '@angular/router';
+import { FormComponent } from './form/form.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [HeaderComponent, MenuComponent, PageIndexComponent],
+  declarations: [HeaderComponent, MenuComponent, PageIndexComponent,FormComponent],
   imports: [
     CommonModule,
     RouterModule,
     FlexLayoutModule,
     MatFormFieldModule,
+    MatDialogModule,
     MatButtonModule,
     MatCardModule,
+    MatToolbarModule,
     MatInputModule,
     MatIconModule,
     MatListModule,
