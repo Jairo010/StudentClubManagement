@@ -10,9 +10,9 @@ export interface IProjectData {
   id?: string;
   name: string;
   description: string;
-  dateStart: string;
-  dateEnd: string;
-  club: string;
+  startDate: string;
+  endDate: string;
+  idClub: string;
 }
 
 @Component({
@@ -29,9 +29,7 @@ export class ProjectEditFormComponent implements OnInit {
 
   constructor(
     private reference: MatDialogRef<ProjectEditFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IProjectData,
-    private projectsService: ProjectsService
-  ) {
+    @Inject(MAT_DIALOG_DATA) public data: IProjectData  ) {
     this.title = data && data.id ? "EDITAR" : "NUEVO";
   }
 
@@ -44,9 +42,9 @@ export class ProjectEditFormComponent implements OnInit {
       id: new FormControl(this.data?.id),
       name: new FormControl(this.data?.name, Validators.required),
       description: new FormControl(this.data?.description, Validators.required),
-      dateStart: new FormControl(this.data?.dateStart, Validators.required),
-      dateEnd: new FormControl(this.data?.dateEnd, Validators.required),
-      club: new FormControl(this.data?.club, Validators.required),
+      startDate: new FormControl(this.data?.startDate, Validators.required),
+      endDate: new FormControl(this.data?.endDate, Validators.required),
+      idClub: new FormControl(this.data?.idClub, Validators.required),
     });
   }
 

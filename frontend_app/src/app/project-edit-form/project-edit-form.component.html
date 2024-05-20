@@ -1,52 +1,31 @@
-<mat-toolbar fxLayout fxLayoutAlign="space-between center">
-    <h3>{{ title }} Project</h3>
-    <button mat-icon-button mat-dialog-close>
-      <mat-icon>close</mat-icon>
-    </button>
-  </mat-toolbar>
-  
-  <mat-dialog-content>
-    <form fxLayout="column" [formGroup]="group" (ngSubmit)="save()">
-      <mat-form-field appearance="outline">
-        <mat-label>Nombre</mat-label>
-        <input type="text" matInput id="name" formControlName="name" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Descripción</mat-label>
-        <input type="text" matInput id="description" formControlName="description" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Fecha de inicio</mat-label>
-        <input type="date" matInput id="dateStart" formControlName="dateStart" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Fecha de Fin</mat-label>
-        <input type="date" matInput id="dateEnd" formControlName="dateEnd" required>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline">
-        <mat-label>Club</mat-label>
-        <input type="text" matInput id="club" formControlName="club" required>
-      </mat-form-field>
-  
-      <div fxLayout fxLayoutAlign="end" fxLayoutGap="10px">
-        <button 
-          mat-raised-button 
-          color="primary" 
-          type="submit" 
-          [disabled]="group.invalid">
-          Guardar
-        </button>
-        <button 
-          mat-button 
-          type="button" 
-          mat-dialog-close>
-          Cancelar
-        </button>
+<body class="bg-gray-100 p-4">
+    <form class="max-w-md mx-auto bg-white p-8 rounded shadow-md" [formGroup]="group" (ngSubmit)="save()">
+      <h2 class="text-2xl font-bold mb-4 text-center">{{ title }} Project</h2>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <div class="mb-4">
+            <label for="name" class="block text-gray-700 font-bold mb-2">Nombre:</label>
+            <input type="text" id="name" formControlName="name" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label for="description" class="block text-gray-700 font-bold mb-2">Descripción:</label>
+            <input type="text" id="description" formControlName="description" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label for="dateStart" class="block text-gray-700 font-bold mb-2">Fecha de inicio:</label>
+            <input type="date" id="dateStart" formControlName="startDate" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label for="dateEnd" class="block text-gray-700 font-bold mb-2">Fecha de Fin:</label>
+            <input type="date" id="dateEnd" formControlName="endDate" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+          <div class="mb-4">
+            <label for="club" class="block text-gray-700 font-bold mb-2">Club:</label>
+            <input type="text" id="club" formControlName="idClub" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          </div>
+        </div>
       </div>
+      <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Guardar</button>
     </form>
-  </mat-dialog-content>
+  </body>
   
