@@ -8,7 +8,7 @@ import { RegistrationMembersComponent } from './registration-members/registratio
 import { RegistrationClubsComponent } from './registration-clubs/registration-clubs.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: '', redirectTo: '/miembros', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
     { path: 'pages-index', component: PageIndexComponent},
     { path: 'miembros', component: MembersListComponent },
