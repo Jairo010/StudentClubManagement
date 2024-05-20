@@ -5,8 +5,8 @@ export interface ISignUp {
     name:     string;
     lastName: string;
     semester: string;
-    major:    number;
-    rol:      number;
+    major:    string;
+    rol:      string;
 }
 
 export interface ILogin {

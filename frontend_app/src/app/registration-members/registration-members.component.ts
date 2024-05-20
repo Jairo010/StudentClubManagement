@@ -9,11 +9,11 @@ import { ISignUp } from '../interfaces/userAuth.interface';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './registration-members.component.html',
-  styleUrls: ['./registration-members.component.css']  // Asegúrate de que sea 'styleUrls' y no 'styleUrl'
+  styleUrls: ['./registration-members.component.css']
 })
 export class RegistrationMembersComponent {
   member = inject(UserService);
-  router = inject(Router); // Inyectar el Router para la navegación
+  router = inject(Router);
 
   register = new FormGroup({
     email: new FormControl<any>('', [Validators.required, Validators.email]),
@@ -22,8 +22,8 @@ export class RegistrationMembersComponent {
     name: new FormControl<any>('', [Validators.required]),
     lastName: new FormControl<any>('', [Validators.required]),
     semester: new FormControl<any>('', [Validators.required]),
-    major: new FormControl<any>('', [Validators.required]),
-    rol: new FormControl<any>('', [Validators.required]),
+    major: new FormControl<any>('1', [Validators.required]),  
+    rol: new FormControl<any>('1', [Validators.required]),  
   });
 
   onSignUp() {
@@ -42,12 +42,10 @@ export class RegistrationMembersComponent {
       this.member.signUpUserMember(signUpData).subscribe(
         response => {
           console.log('Registro exitoso', response);
-          // Redirigir a otra página después del registro exitoso
-          this.router.navigate(['/pantalla-principal']);
+          this.router.navigate(['/registromiembros']);
         },
         error => {
           console.error('Error al registrar', error);
-          // Mostrar un mensaje de error al usuario (opcional)
         }
       );
     } else {
