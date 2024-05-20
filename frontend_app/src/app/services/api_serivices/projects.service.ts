@@ -23,8 +23,8 @@ export class ProjectsService {
     return this.http.get<any>(environment.URL_API+`projects/${id}`)
   }
 
-  updateProject(club:IProjects): Observable<IProjects>{
-    return this.http.put<IProjects>(environment.URL_API+`projects`,club)
+  updateProject(club:any): Observable<any>{
+    return this.http.put<any>(environment.URL_API+`projects`,club)
   }
 
   deleteProject(id:string): Observable<any>{

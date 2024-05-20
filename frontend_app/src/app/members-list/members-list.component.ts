@@ -48,17 +48,17 @@ export class MembersListComponent  {
       (data) =>{
         
         this.records = data.data;
-        this.records.forEach((array:any) => {
-
-          array.forEach((dato: any) => {
+        this.records.forEach((dato:any) => {
+          
             this.field.push({
+              id: dato.id,
               card: dato.cedula,
-              name: dato.Nombre,
-              lastName: dato.Apellido,
-              semester: dato.Semestre,
-              major: dato.Carreras.Nombre,
-              rol: dato.Roles.Nombre
-            });
+              name: dato.nombre,
+              lastName: dato.apellido,
+              semester: dato.semestre,
+              major: dato.carrera.Nombre,
+              rol: dato.rol.Nombre
+            
           });
         })
         this.totalRecords = this.records.length
