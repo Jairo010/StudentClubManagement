@@ -5,11 +5,12 @@ import { MembersService } from '../services/api_serivices/members.service';
 
 export interface IMemberData {
   id?: string;
+  card:string;
   name: string;
   lastName: string;
   semester: string;
-  major: string;
-  rol: string;
+  idMajor: string;
+  idRol: string;
 }
 
 @Component({
@@ -39,11 +40,12 @@ export class MemberEditFormComponent implements OnInit {
   loadForm() {
     this.group = new FormGroup({
       id: new FormControl(this.data?.id),
+      card: new FormControl(this.data?.card, Validators.required),
       name: new FormControl(this.data?.name, Validators.required),
       lastName: new FormControl(this.data?.lastName, Validators.required),
       semester: new FormControl(this.data?.semester, Validators.required),
-      major: new FormControl(this.data?.major, Validators.required),
-      rol: new FormControl(this.data?.rol, Validators.required),
+      idMajor: new FormControl(this.data?.idMajor, Validators.required),
+      idRol: new FormControl(this.data?.idRol, Validators.required),
     });
   }
 
