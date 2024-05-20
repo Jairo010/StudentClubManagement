@@ -6,65 +6,52 @@ import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { MembersService } from '../services/api_serivices/members.service';
-import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MemberEditFormComponent } from '../member-edit-form/member-edit-form.component';
+import { UserService } from '../services/api_serivices/user.service';
 
-export interface IMembers {
-  name: string;
-  age: number;
-}
+export interface IMembers{
+  name:string; 
+  age:number; 
+} 
 
 @Component({
-  selector: 'app-members-list',
-  standalone: true,
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.css'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
+    selector: 'app-members-list',
+    standalone: true,
+    templateUrl: './members-list.component.html',
+    styleUrl: './members-list.component.css',
+    imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
 })
-export class MembersListComponent {
+export class MembersListComponent  {
   private membersService = inject(MembersService);
-  router = inject(Router);
+  private userService = inject(UserService);
 
-  data: any = []
+  data:any = []
 
+  
   MetaDataColumn: MetaDataColumn[] = [
-    { field: 'card', title: 'Cedula' },
-    { field: 'name', title: 'Nombre' },
-    { field: 'lastName', title: 'Apellido' },
-    { field: 'semester', title: 'Semestre' },
-    { field: 'major', title: 'Carrera' },
-    { field: 'rol', title: 'Rol' },
+    {field:'card', title:'Cedula'},
+    {field:'name', title:'Nombre'},
+    {field:'lastName', title:'Apellido'},
+    {field:'semester', title:'Semestre'},
+    {field:'major', title:'Carrera'},
+    {field:'rol', title:'Rol'},
   ]
-  records: any = []
-  totalRecords = 0;
-
-  constructor() {
-    this.loadMembers();
+  records:any =[]
+  totalRecords = this.records.length
+  constructor(private dialog:MatDialog){
+    this.loadMembers()
   }
-
-  field: any = [];
-
-  loadMembers() {
+  field: any=[];
+  loadMembers(){
     this.membersService.getMembers().subscribe(
-      (data) => {
+      (data) =>{
+        
         this.records = data.data;
+        this.records.forEach((array:any) => {
 
-        this.records.forEach((record: any) => {
-          if (Array.isArray(record['0'])) {
-            record['0'].forEach((dato: any) => {
-              this.field.push({
-                id: record.id,
-                card: dato.cedula,
-                name: dato.Nombre,
-                lastName: dato.Apellido,
-                semester: dato.Semestre,
-                major: dato.Carreras.Nombre,
-                rol: dato.Roles.Nombre
-              });
-            });
-          } else if (typeof record['0'] === 'object' && record['0'] !== null) {
-            const dato = record['0'];
+          array.forEach((dato: any) => {
             this.field.push({
-              id: record.id,
               card: dato.cedula,
               name: dato.Nombre,
               lastName: dato.Apellido,
@@ -72,29 +59,47 @@ export class MembersListComponent {
               major: dato.Carreras.Nombre,
               rol: dato.Roles.Nombre
             });
-          } else {
-            console.error('Expected an array or object but got:', record['0']);
-          }
-        });
-
-        this.totalRecords = this.field.length;
-        this.changePage(0);
-      },
-      (error) => {
-        console.error('Error fetching members:', error);
+          });
+        })
+        this.totalRecords = this.records.length
+        this.changePage(0)
       }
-    );
+    )
+    
   }
-
-  changePage(page: number) {
-    const pageSize = environment.PAGE_SIZE;
-    const skip = pageSize * page;
-    this.data = this.field.slice(skip, skip + pageSize);
+  changePage(page:number){
+    const pageSize = environment.PAGE_SIZE
+    const skip = pageSize * page
+    this.data = this.field.slice(skip, skip + pageSize)
   }
-
-  openForm(row: IMembers) {
-    // Implement form opening logic here
+  openForm(row: IMembers | null = null) {
+    const options = {
+      panelClass: 'panel-container',
+      disableClose: true,
+      data: row
+    };
+  
+    const dialogRef: MatDialogRef<MemberEditFormComponent> = this.dialog.open(MemberEditFormComponent, options);
+  
+    dialogRef.afterClosed().subscribe((response) => {
+      if (!response) {
+        return;
+      }
+  
+      if (response.id) {
+        const memberData = { ...response };
+        this.membersService.updateMember(response.id, memberData).subscribe(() => {
+          this.loadMembers();
+                });
+      } else {
+        const memberData = { ...response };
+        this.userService.signUpUserMember(memberData).subscribe(() => {
+          this.loadMembers();
+        });
+      }
+    });
   }
+  
 
     delete(id: string) {
       this.membersService.deleteMember(id).subscribe(() => {
