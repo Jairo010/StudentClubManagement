@@ -1,119 +1,71 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import {MatIconModule} from '@angular/material/icon';
 import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
-import { CoreModule } from "../core/core.module";
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { MembersService } from '../services/api_serivices/members.service';
-import { FormComponent } from '../core/form/form.component';
 
-export interface IMembers {
-  nombre: string;
-  apellido: string;
-  semestre: string;
-}
+export interface IMembers{
+  name:string; 
+  age:number; 
+} 
 
 @Component({
-  selector: 'app-members-list',
-  standalone: true,
-  templateUrl: './members-list.component.html',
-  styleUrls: ['./members-list.component.css'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule, CoreModule]
+    selector: 'app-members-list',
+    standalone: true,
+    templateUrl: './members-list.component.html',
+    styleUrl: './members-list.component.css',
+    imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
 })
 export class MembersListComponent {
-  expanded = true;
-
-  toggleExpanded(expanded: boolean) {
-    this.expanded = expanded;
-  }
-
-  records: IMembers[] = [];
-  data: IMembers[] = [];
-  totalRecords = this.records.length;
-
-  metaDataColumns: MetaDataColumn[] = [
-    { field: 'Nombre', title: 'Nombre' },
-    { field: 'Apellido', title: 'Apellido' },
-    { field: 'Semestre', title: 'Semestre' }
+  data: IMembers[] = [
+    { name: 'John Doe', age: 30 },
+    { name: 'Jane Smith', age: 25 },
+    { name: 'Alice Johnson', age: 35 },
+    { name: 'Bob Davis', age: 40 },
+    { name: 'Michael Brown', age: 28 },
+    { name: 'Emily Wilson', age: 32 },
+    { name: 'David Martinez', age: 45 },
+    { name: 'Sarah Thompson', age: 37 },
+    { name: 'Daniel Lee', age: 29 },
+    { name: 'Jennifer Rodriguez', age: 41 },
+    { name: 'Christopher Taylor', age: 27 },
+    { name: 'Amanda Harris', age: 33 },
+    { name: 'Matthew Clark', age: 38 },
+    { name: 'Laura Lewis', age: 31 },
+    { name: 'James White', age: 42 },
+    { name: 'Olivia Moore', age: 26 },
+    { name: 'Joshua King', age: 39 },
+    { name: 'Sophia Turner', age: 34 },
+    { name: 'Ryan Allen', age: 36 },
+    { name: 'Emma Scott', age: 43 }
   ];
-
-  constructor(
-    private memberService: MembersService,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private bottomSheet: MatBottomSheet
-  ) {
-    this.loadMembers();
+  
+  MetaDataColumn: MetaDataColumn[] = [
+    {field:'name', title:'Nombre'},
+    {field:'age', title:'Edad'},
+  ]
+  records: IMembers[]=[]
+  totalRecords = this.records.length
+  constructor(){
+    this.loadMembers()
   }
-
-  loadMembers() {
-    this.memberService.getMembers().subscribe((response: IMembers[]) => {
-      this.records = response;
-      this.totalRecords = this.records.length;
-      this.changePage(0);
-    });
+  loadMembers(){
+    this.records = this.data
+    this.totalRecords = this.records.length
+    this.changePage(0)
   }
-
-  changePage(page: number) {
-    const pageSize = environment.PAGE_SIZE;
-    const skip = pageSize * page;
-    this.data = this.records.slice(skip, skip + pageSize);
+  changePage(page:number){
+    const pageSize = environment.PAGE_SIZE
+    const skip = pageSize * page
+    this.data = this.records.slice(skip, skip + pageSize)
   }
+  openForm(row:IMembers){
 
-  openForm(row: IMembers | null = null) {
-    const options = {
-      panelClass: 'panel-container',
-      disableClose: true,
-      data: row
-    };
-    const reference: MatDialogRef<FormComponent> = this.dialog.open(FormComponent, options);
 
-    reference.afterClosed().subscribe((response) => {
-      if (!response) { return; }
-      if (response.id) {
-        const member = { ...response };
-        this.memberService.updateMember(response.card, member).subscribe(() => {
-          this.loadMembers();
-          this.showMessage('Registro actualizado');
-        });
-      } else {
-        const member = { ...response };
-        this.memberService. signUpUserMember(member).subscribe(() => {
-          this.loadMembers();
-          this.showMessage('Registro exitoso');
-        });
-      }
-    });
   }
+  delete(id:string){
 
-  delete(id: string) {
-    this.memberService.deleteMember(id).subscribe(() => {
-      this.loadMembers();
-      this.showMessage('Registro eliminado');
-    });
-  }
-
-  showMessage(message: string, duration: number = 5000) {
-    this.snackBar.open(message, '', { duration });
-  }
-
-  showBottomSheet(title: string, fileName: string, data: any) {
-    this.bottomSheet.open(DownloadComponent, { data: this.data });
-  }
-
-  doAction(action: string) {
-    switch (action) {
-      case 'DOWNLOAD':
-        this.showBottomSheet('Lista de Miembros', 'miembros', this.records);
-        break;
-      case 'NEW':
-        this.openForm();
-        break;
-    }
   }
 }
