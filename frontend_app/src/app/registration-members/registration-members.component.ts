@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 export class RegistrationMembersComponent {
   member = inject(UserService);
   router = inject(Router);
+  user:any;
 
   register = new FormGroup({
     email: new FormControl<any>('', [Validators.required, Validators.email]),
@@ -43,6 +44,7 @@ export class RegistrationMembersComponent {
 
       this.member.signUpUserMember(signUpData).subscribe(
         response => {
+          this.user = response;
           console.log('Registro exitoso', response);
           this.router.navigate(['/registromiembros']);
         },

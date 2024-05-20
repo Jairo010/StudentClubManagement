@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class RegistrationprojectsComponent {
   projects = inject(ProjectsService);
   router = inject(Router);
+  project:any;
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
@@ -35,6 +36,7 @@ export class RegistrationprojectsComponent {
 
       this.projects.createProject(projectData).subscribe(
         response => {
+          this.project = response;
           alert('Proyecto registrado exitosamente');
           console.log('Proyecto registrado exitosamente', response);
           this.router.navigate(['proyectos']);
