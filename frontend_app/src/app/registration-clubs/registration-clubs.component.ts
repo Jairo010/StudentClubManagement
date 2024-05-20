@@ -31,6 +31,7 @@ export class RegistrationClubsComponent {
       this.clubs.createClub(clubData).subscribe(
         response => {
           console.log('Club registrado exitosamente', response);
+          this.router.navigate(['/clubs']);
         },
         error => {
           console.error('Error al registrar el club', error);
