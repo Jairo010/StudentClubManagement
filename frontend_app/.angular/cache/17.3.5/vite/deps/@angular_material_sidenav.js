@@ -3,15 +3,15 @@ import {
   CdkScrollableModule,
   ScrollDispatcher,
   ViewportRuler
-} from "./chunk-Z76HRIWZ.js";
-import "./chunk-KWHRJALL.js";
+} from "./chunk-IAUBVYQB.js";
+import "./chunk-DJIOQKIT.js";
 import {
   animate,
   state,
   style,
   transition,
   trigger
-} from "./chunk-CKAGKVFD.js";
+} from "./chunk-DWVI4JJO.js";
 import {
   ESCAPE,
   FocusMonitor,
@@ -19,20 +19,20 @@ import {
   InteractivityChecker,
   MatCommonModule,
   hasModifierKey
-} from "./chunk-Y6D2B6YN.js";
+} from "./chunk-AHKELZMC.js";
 import {
   Platform
-} from "./chunk-UBRMT3XQ.js";
+} from "./chunk-7U6LWEUV.js";
 import {
   coerceBooleanProperty,
   coerceNumberProperty
-} from "./chunk-FNG5AI6Z.js";
+} from "./chunk-456GLPU4.js";
 import {
   Directionality
-} from "./chunk-JHKL7LNA.js";
+} from "./chunk-LX56MOX6.js";
 import {
   DOCUMENT
-} from "./chunk-PAGBDXAP.js";
+} from "./chunk-KTT5XIYZ.js";
 import {
   ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
@@ -50,21 +50,12 @@ import {
   Optional,
   Output,
   QueryList,
-  Subject,
   ViewChild,
   ViewEncapsulation$1,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
   forwardRef,
   fromEvent,
-  map,
-  mapTo,
   merge,
   setClassMetadata,
-  startWith,
-  take,
-  takeUntil,
   ɵɵInheritDefinitionFeature,
   ɵɵProvidersFeature,
   ɵɵStandaloneFeature,
@@ -94,7 +85,18 @@ import {
   ɵɵsyntheticHostProperty,
   ɵɵtemplate,
   ɵɵviewQuery
-} from "./chunk-EHRZSW5U.js";
+} from "./chunk-2VM6XDRD.js";
+import {
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  mapTo,
+  startWith,
+  take,
+  takeUntil
+} from "./chunk-RBHFVDQG.js";
 
 // node_modules/@angular/material/fesm2022/sidenav.mjs
 var _c0 = ["*"];
