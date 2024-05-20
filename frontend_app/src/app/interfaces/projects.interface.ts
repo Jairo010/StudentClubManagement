@@ -1,9 +1,9 @@
 export interface IProjects {
-    id?:         number,   
+    id?:         string,   
     name:        string;
     description: string;
     startDate:   Date;
     endDate:     Date;
-    idClub:      number;
+    idClub:      string;
 }
 

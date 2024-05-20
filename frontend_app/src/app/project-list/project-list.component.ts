@@ -8,11 +8,9 @@ import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { ProjectsService } from '../services/api_serivices/projects.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProjectEditFormComponent } from '../project-edit-form/project-edit-form.component';
+import { IProjects } from '../interfaces/projects.interface';
 
-export interface IProjects{
-  name:string; 
-  description:string; 
-} 
+
 @Component({
   selector: 'app-project-list',
   standalone: true,
@@ -86,22 +84,10 @@ export class ProjectListComponent {
       if(response.id){
         const project = {...response}
         this.projectsService.updateProject(project).subscribe(() => {
+          console.log("hora: "+JSON.stringify(project))
           this.loadProjects()
         })
-      }
-      if (response.id) {
-        const projectData = { ...response };
-        this.projectsService.updateProject(projectData).subscribe(() => {
-          console.log("hora: "+ projectData);
-          
-          this.loadProjects();
-        });
-      } else {
-        const projectData = { ...response };
-        this.projectsService.createProject(projectData).subscribe(() => {
-          this.loadProjects();
-        });
-      }
+      } 
     });
   }
   delete(id:string){
