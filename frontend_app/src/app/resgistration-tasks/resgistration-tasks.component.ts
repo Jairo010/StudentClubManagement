@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class ResgistrationTasksComponent {
   tasks = inject(TasksService);
   router = inject(Router);
+  task:any;
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
@@ -38,6 +39,7 @@ export class ResgistrationTasksComponent {
 
       this.tasks.createTasks(taskData).subscribe(
         response => {
+          this.task = response;
           alert('tarea registrado exitosamente');
           console.log('Tarea registrado exitosamente', response);
           this.router.navigate(['proyectos']);
