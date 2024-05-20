@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { ProjectsService } from '../services/api_serivices/projects.service';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProjectEditFormComponent } from '../project-edit-form/project-edit-form.component';
 
 export interface IProjects{
   name:string; 
@@ -34,7 +36,7 @@ export class ProjectListComponent {
   ]
   records:any =[]
   totalRecords = this.records.length
-  constructor(){
+  constructor(private dialog:MatDialog){
     this.loadProjects()
   }
   
@@ -69,9 +71,38 @@ export class ProjectListComponent {
     const skip = pageSize * page
     this.data = this.field.slice(skip, skip + pageSize)
   }
-  openForm(row:IProjects){
+ 
+  openForm(row: IProjects | null = null) {
+    const options = {
+      panelClass: 'panel-container',
+      disableClose: true,
+      data: row
+    };
 
-
+    const reference: MatDialogRef<ProjectEditFormComponent> = this.dialog.open(ProjectEditFormComponent, options);
+    
+    reference.afterClosed().subscribe((response) => {
+      if(!response){return}
+      if(response.id){
+        const project = {...response}
+        this.projectsService.updateProject(project).subscribe(() => {
+          this.loadProjects()
+        })
+      }
+      if (response.id) {
+        const projectData = { ...response };
+        this.projectsService.updateProject(projectData).subscribe(() => {
+          console.log("hora: "+ projectData);
+          
+          this.loadProjects();
+        });
+      } else {
+        const projectData = { ...response };
+        this.projectsService.createProject(projectData).subscribe(() => {
+          this.loadProjects();
+        });
+      }
+    });
   }
   delete(id:string){
     this.projectsService.deleteProject(id).subscribe(() => {

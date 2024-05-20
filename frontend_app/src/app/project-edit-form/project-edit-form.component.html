@@ -1,1 +1,52 @@
-<p>project-edit-form works!</p>
+<mat-toolbar fxLayout fxLayoutAlign="space-between center">
+    <h3>{{ title }} Project</h3>
+    <button mat-icon-button mat-dialog-close>
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <mat-dialog-content>
+    <form fxLayout="column" [formGroup]="group" (ngSubmit)="save()">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput id="name" formControlName="name" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Descripción</mat-label>
+        <input type="text" matInput id="description" formControlName="description" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de inicio</mat-label>
+        <input type="date" matInput id="dateStart" formControlName="dateStart" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Fin</mat-label>
+        <input type="date" matInput id="dateEnd" formControlName="dateEnd" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Club</mat-label>
+        <input type="text" matInput id="club" formControlName="club" required>
+      </mat-form-field>
+  
+      <div fxLayout fxLayoutAlign="end" fxLayoutGap="10px">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="group.invalid">
+          Guardar
+        </button>
+        <button 
+          mat-button 
+          type="button" 
+          mat-dialog-close>
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  
