@@ -33,7 +33,7 @@ export class LoginComponent {
 
       this.member.logInUserMember(loginData).subscribe(
         response => {
-          this.router.navigate(['/pages-index']);
+          this.router.navigate(['/miembros']);
         },
         error => {
           console.error('Error de autenticación', error);

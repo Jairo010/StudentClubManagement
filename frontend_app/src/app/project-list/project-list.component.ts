@@ -5,17 +5,18 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
+import { CoreModule } from "../core/core.module";
 
 export interface IProjects{
   name:string; 
   description:string; 
 } 
 @Component({
-  selector: 'app-project-list',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule],
-  templateUrl: './project-list.component.html',
-  styleUrl: './project-list.component.css'
+    selector: 'app-project-list',
+    standalone: true,
+    templateUrl: './project-list.component.html',
+    styleUrl: './project-list.component.css',
+    imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule, CoreModule]
 })
 export class ProjectListComponent {
   data: IProjects[] = [

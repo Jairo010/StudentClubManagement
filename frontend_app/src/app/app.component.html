@@ -1,1 +1,8 @@
-<router-outlet></router-outlet>
+<div *ngIf="isLoginRoute; else mainContent">
+    <router-outlet></router-outlet>
+  </div>
+  <ng-template #mainContent>
+    <app-page-index></app-page-index>
+  </ng-template>
+  
+  

@@ -5,6 +5,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
+import { CoreModule } from "../core/core.module";
 
 export interface IMembers{
   name:string; 
@@ -16,9 +17,14 @@ export interface IMembers{
     standalone: true,
     templateUrl: './members-list.component.html',
     styleUrl: './members-list.component.css',
-    imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
+    imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule, CoreModule]
 })
 export class MembersListComponent {
+  expanded=true
+
+  toggleExpanded(expanded:boolean){
+    this.expanded = expanded
+  }
   data: IMembers[] = [
     { name: 'John Doe', age: 30 },
     { name: 'Jane Smith', age: 25 },

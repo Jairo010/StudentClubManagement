@@ -1,6 +1,6 @@
 import {
   isPlatformBrowser
-} from "./chunk-XW3V3XBZ.js";
+} from "./chunk-Q6SLDVPO.js";
 import {
   Inject,
   Injectable,
@@ -11,7 +11,7 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-} from "./chunk-7VGXGJFP.js";
+} from "./chunk-PO72J5W3.js";
 
 // node_modules/@angular/cdk/fesm2022/platform.mjs
 var hasV8BreakIterator;
@@ -242,4 +242,4 @@ export {
   _getEventTarget,
   _isTestEnvironment
 };
-//# sourceMappingURL=chunk-DKBMOJGU.js.map
+//# sourceMappingURL=chunk-JAJ3YR2W.js.map
