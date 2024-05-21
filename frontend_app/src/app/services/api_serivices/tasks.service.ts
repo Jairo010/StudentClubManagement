@@ -24,7 +24,7 @@ export class TasksService {
   }
 
   updateTask(task:ITasks): Observable<ITasks>{
-    return this.http.put<ITasks>(environment.URL_API+`tasks`,task)
+    return this.http.put<ITasks>(environment.URL_API+"tasks",task)
   }
 
   deleteTask(id:string): Observable<any>{

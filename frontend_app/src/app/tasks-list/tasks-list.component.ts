@@ -7,6 +7,8 @@ import { TasksService } from '../services/api_serivices/tasks.service';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { environment } from '../../environments/environment.development';
 import { ITasks } from '../interfaces/tasks.interface';
+import { TasksEditFormComponent } from '../tasks-edit-form/tasks-edit-form.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-tasks-list',
@@ -20,7 +22,7 @@ export class TasksListComponent {
 
   data:any = []
 
-  constructor() {
+  constructor(private dialog:MatDialog) {
     this.loadTasks()
   }
 
@@ -70,9 +72,25 @@ export class TasksListComponent {
     const skip = pageSize * page
     this.data = this.field.slice(skip, skip + pageSize)
   }
-  openForm(row:ITasks){
+  openForm(row: ITasks | null = null) {
+    const options = {
+      panelClass: 'panel-container',
+      disableClose: true,
+      data: row
+    };
 
-
+    const reference: MatDialogRef<TasksEditFormComponent> = this.dialog.open(TasksEditFormComponent, options);
+    
+    reference.afterClosed().subscribe((response) => {
+      if(!response){return}
+      if(response.id){
+        const task = {...response}
+        this.tasksService.updateTask(task).subscribe(() => {
+          console.log("hora: "+JSON.stringify(task))
+          this.loadTasks()
+        })
+      } 
+    });
   }
   delete(id:string){
     this.tasksService.deleteTask(id).subscribe(() => {
