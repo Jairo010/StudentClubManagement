@@ -9,11 +9,8 @@ import { MembersService } from '../services/api_serivices/members.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MemberEditFormComponent } from '../member-edit-form/member-edit-form.component';
 import { UserService } from '../services/api_serivices/user.service';
+import { IMembers } from '../interfaces/members.interface';
 
-export interface IMembers{
-  name:string; 
-  age:number; 
-} 
 
 @Component({
     selector: 'app-members-list',
@@ -82,21 +79,14 @@ export class MembersListComponent  {
     const dialogRef: MatDialogRef<MemberEditFormComponent> = this.dialog.open(MemberEditFormComponent, options);
   
     dialogRef.afterClosed().subscribe((response) => {
-      if (!response) {
-        return;
-      }
-  
+      if (!response) {return;}
       if (response.id) {
         const memberData = { ...response };
-        this.membersService.updateMember(response.id, memberData).subscribe(() => {
+        this.membersService.updateMember(memberData).subscribe(() => {
+          console.log("hora: "+JSON.stringify(memberData))
           this.loadMembers();
                 });
-      } else {
-        const memberData = { ...response };
-        this.userService.signUpUserMember(memberData).subscribe(() => {
-          this.loadMembers();
-        });
-      }
+      } 
     });
   }
   

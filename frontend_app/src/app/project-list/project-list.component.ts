@@ -84,7 +84,6 @@ export class ProjectListComponent {
       if(response.id){
         const project = {...response}
         this.projectsService.updateProject(project).subscribe(() => {
-          console.log("hora: "+JSON.stringify(project))
           this.loadProjects()
         })
       } 
