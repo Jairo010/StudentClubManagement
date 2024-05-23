@@ -87,16 +87,19 @@ export class TasksListComponent {
         const task = {...response}
         this.tasksService.updateTask(task).subscribe(() => {
           console.log("hora: "+JSON.stringify(task))
-          this.loadTasks()
+          this. reloadPage() 
         })
       } 
     });
   }
   delete(id:string){
     this.tasksService.deleteTask(id).subscribe(() => {
-      this.loadTasks()
+      this. reloadPage() 
     }, (error) => {
       console.error('Error deleting member:', error);
     });
+  }
+  reloadPage() {
+    window.location.reload();
   }
 }

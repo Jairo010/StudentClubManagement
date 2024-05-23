@@ -84,16 +84,19 @@ export class ProjectListComponent {
       if(response.id){
         const project = {...response}
         this.projectsService.updateProject(project).subscribe(() => {
-          this.loadProjects()
+          this.reloadPage()
         })
       } 
     });
   }
   delete(id:string){
     this.projectsService.deleteProject(id).subscribe(() => {
-      this.loadProjects()
+      this.reloadPage()
     }, (error) => {
       console.error('Error deleting project:', error);
     });
+  }
+  reloadPage() {
+    window.location.reload();
   }
   }

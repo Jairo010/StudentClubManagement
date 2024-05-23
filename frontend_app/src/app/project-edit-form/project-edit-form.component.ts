@@ -52,4 +52,7 @@ export class ProjectEditFormComponent implements OnInit {
     const record = this.group.getRawValue();
     this.reference.close(record);
   }
+  closeForm() {
+    this.reference.close();
+   }
 }

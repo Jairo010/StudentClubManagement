@@ -46,7 +46,6 @@ export class RegistrationMembersComponent {
         response => {
           this.user = response;
           console.log('Registro exitoso', response);
-          this.router.navigate(['/registromiembros']);
         },
         error => {
           console.error('Error al registrar', error);
@@ -55,5 +54,6 @@ export class RegistrationMembersComponent {
     } else {
       console.log('Formulario inválido');
     }
+    this.router.navigate(['/miembros']);
   }
 }
