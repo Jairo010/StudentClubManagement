@@ -84,7 +84,7 @@ export class MembersListComponent  {
         const memberData = { ...response };
         this.membersService.updateMember(memberData).subscribe(() => {
           console.log("hora: "+JSON.stringify(memberData))
-          this.loadMembers();
+          this.reloadPage();
                 });
       } 
     });
@@ -93,9 +93,12 @@ export class MembersListComponent  {
 
     delete(id: string) {
       this.membersService.deleteMember(id).subscribe(() => {
-        this.loadMembers()
+        this.reloadPage();
       }, (error) => {
         console.error('Error deleting member:', error);
       });
+    }
+    reloadPage() {
+      window.location.reload();
     }
 }

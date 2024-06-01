@@ -22,6 +22,7 @@ export interface IMemberData {
   styleUrls: ['./member-edit-form.component.css']
 })
 export class MemberEditFormComponent implements OnInit {
+  formVisible = true;
   title: string = "";
   group!: FormGroup;
 
@@ -52,5 +53,8 @@ export class MemberEditFormComponent implements OnInit {
   save() {
     const record = this.group.value;
     this.reference.close(record);
+  }
+  closeForm() {
+   this.reference.close();
   }
 }

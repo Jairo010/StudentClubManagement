@@ -8,6 +8,8 @@ import { RegistrationMembersComponent } from './registration-members/registratio
 import { ResgistrationTasksComponent } from './resgistration-tasks/resgistration-tasks.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { RegistrationClubsComponent } from './registration-clubs/registration-clubs.component';
+import { ClubEditFormComponent } from './club-edit-form/club-edit-form.component';
+import { ClubsListComponent } from './club-list/club-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -18,6 +20,7 @@ export const routes: Routes = [
     { path: 'registroproyectos', component: RegistrationprojectsComponent},
     { path: 'proyectos', component: ProjectListComponent},
     { path: 'clubs', component: RegistrationClubsComponent},
+    { path: 'clubs-list', component: ClubsListComponent},
     { path: 'registrotareas', component: ResgistrationTasksComponent},
     { path: 'tareas', component: TasksListComponent},
 ];
