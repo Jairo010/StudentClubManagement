@@ -7,3 +7,8 @@ export interface ITasks {
     evidence:    string;
     idProject:   number;
 }
+
+export interface IAssignTasks {
+    idTask:         number,   
+    card:        string;
+}
