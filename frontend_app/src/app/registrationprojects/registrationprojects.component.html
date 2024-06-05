@@ -1,6 +1,5 @@
 <body class="bg-gray-100 p-4">
-
-  <form  method="POST" id="miFormulario" class="max-w-md mx-auto bg-white p-8 rounded shadow-md" [formGroup]="register" (ngSubmit)="onSubmit()">
+  <form method="POST" id="miFormulario" class="max-w-md mx-auto bg-white p-8 rounded shadow-md" [formGroup]="register" (ngSubmit)="onSubmit()">
     <h2 class="text-2xl font-bold mb-4 text-center">Registro de Proyectos</h2>
     <div class="grid grid-cols-2 gap-4">
       <div>
@@ -21,12 +20,13 @@
           <input type="date" formControlName="endDate" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
         <div class="mb-4">
-          <label for="club" class="block text-gray-700 font-bold mb-2">Club:</label>
-          <input type="text" formControlName="club" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <label for="club" class="block text-gray-700 font-bold mb-2">Club:</label>          
+          <select formControlName="club" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+            <option *ngFor="let club of clubsData" [value]="club.id">{{ club.Nombre }}</option>
+          </select>
         </div>
       </div>
     </div>
     <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Guardar</button>
   </form>
-  
 </body>

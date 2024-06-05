@@ -1,4 +1,5 @@
 export interface IClub {
+    id?: number;
     name:            string;
     description?:     string;
     cardResponsible: string;

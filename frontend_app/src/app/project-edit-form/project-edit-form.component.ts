@@ -1,10 +1,12 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogContainer, MatDialogModule } from '@angular/material/dialog';
 import { ProjectsService } from '../services/api_serivices/projects.service';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CommonModule } from '@angular/common';
+import { ClubsService } from '../services/api_serivices/clubs.service';
 
 export interface IProjectData {
   id?: string;
@@ -19,13 +21,15 @@ export interface IProjectData {
   selector: 'app-project-edit-form',
   standalone: true,
   imports: [FormsModule, 
-    ReactiveFormsModule,MatIconModule,MatLabel,MatFormFieldModule,MatDialogModule,MatToolbarModule,],
+    ReactiveFormsModule,MatIconModule,MatLabel,MatFormFieldModule,MatDialogModule,MatToolbarModule,CommonModule],
   templateUrl: './project-edit-form.component.html',
   styleUrls: ['./project-edit-form.component.css']
 })
 export class ProjectEditFormComponent implements OnInit {
   title: string = "";
   group!: FormGroup;
+  clubs = inject(ClubsService)
+  clubsData: any[] = [];
 
   constructor(
     private reference: MatDialogRef<ProjectEditFormComponent>,
@@ -35,6 +39,7 @@ export class ProjectEditFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadForm();
+    this.getClubs();
   }
 
   loadForm() {
@@ -55,4 +60,16 @@ export class ProjectEditFormComponent implements OnInit {
   closeForm() {
     this.reference.close();
    }
+
+  getClubs() {
+    this.clubs.getClubsCombo().subscribe(
+      response => {
+        this.clubsData = response;
+        console.log('Clubs data:', this.clubsData);
+      },
+      error => {
+        console.error('Error al obtener los clubs', error);
+      }
+    );
+  }
 }
