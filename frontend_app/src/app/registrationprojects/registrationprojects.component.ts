@@ -1,19 +1,23 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProjectsService } from '../services/api_serivices/projects.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IProjects } from '../interfaces/projects.interface';
 import { Router } from '@angular/router';
+import { ClubsService } from '../services/api_serivices/clubs.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-registrationprojects',
   standalone: true,
   templateUrl: './registrationprojects.component.html',
   styleUrl: './registrationprojects.component.css',
-  imports: [FormsModule, ReactiveFormsModule]
+  imports: [FormsModule, ReactiveFormsModule, CommonModule]
 })
-export class RegistrationprojectsComponent {
+export class RegistrationprojectsComponent implements OnInit{
   projects = inject(ProjectsService);
   router = inject(Router);
   project:any;
+  clubs = inject(ClubsService)
+  clubsData: any[] = [];
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
@@ -23,6 +27,9 @@ export class RegistrationprojectsComponent {
     club: new FormControl<any>('', [Validators.required,]),
   });
 
+  ngOnInit(){
+    this.getClubs()    
+  }
 
   onSubmit() {
     if (this.register.valid) {
@@ -50,5 +57,18 @@ export class RegistrationprojectsComponent {
       console.log('Formulario inválido');
     }
   }
+    
+  getClubs() {
+    this.clubs.getClubsCombo().subscribe(
+      response => {
+        this.clubsData = response;
+        console.log('Clubs data:', this.clubsData);
+      },
+      error => {
+        console.error('Error al obtener los clubs', error);
+      }
+    );
+  }  
+  
 }
 

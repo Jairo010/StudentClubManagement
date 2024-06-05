@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { IClub } from '../../interfaces/clubs.interface';
 import { environment } from '../../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,16 @@ export class ClubsService {
     return this.http.get<any>(environment.URL_API+"clubs")
   }
 
+  getClubsCombo(): Observable<IClub[]> {
+    return this.http.get<{ error: boolean, status: number, data: IClub[] }>(environment.URL_API + "clubs").pipe(
+      tap(response => console.log('Response:', response)),
+      catchError(error => {
+        console.error('Error:', error);
+        throw error;
+      }),
+      map(response => response.data)
+    );
+  }
   getClubById(id:number): Observable<any>{
     return this.http.get<any>(environment.URL_API+`clubs/${id}`)
   }
