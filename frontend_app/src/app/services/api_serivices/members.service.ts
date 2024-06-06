@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { Observable } from 'rxjs';
+import { Observable, catchError, map, tap } from 'rxjs';
 import { IMembers } from '../../interfaces/members.interface';
 
 @Injectable({
@@ -14,6 +14,17 @@ export class MembersService {
 
   getMembers(): Observable<any>{
     return this.http.get<any>(environment.URL_API+"members")
+  }
+
+  getMembersCombo(): Observable<IMembers[]> {
+    return this.http.get<{ error: boolean, status: number, data: IMembers[] }>(environment.URL_API + "members").pipe(
+      tap(response => console.log('Response:', response)),
+      catchError(error => {
+        console.error('Error:', error);
+        throw error;
+      }),
+      map(response => response.data)
+    );
   }
 
   getMemberById(id:number): Observable<any>{
