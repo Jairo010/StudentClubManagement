@@ -1,6 +1,8 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ProjectsService } from '../services/api_serivices/projects.service';
+import { CommonModule } from '@angular/common';
 
 export interface ITasks {
   id?:         number,   
@@ -15,13 +17,15 @@ export interface ITasks {
 @Component({
   selector: 'app-tasks-edit-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './tasks-edit-form.component.html',
   styleUrls: ['./tasks-edit-form.component.css']
 })
 export class TasksEditFormComponent implements OnInit {
   title: string = "";
   group!: FormGroup;
+  projects = inject(ProjectsService)
+  projectData: any [] = [];
 
   constructor(
     private reference: MatDialogRef<TasksEditFormComponent>,
@@ -32,6 +36,7 @@ export class TasksEditFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadForm();
+    this.getClubs();
   }
 
   loadForm() {
@@ -53,4 +58,16 @@ export class TasksEditFormComponent implements OnInit {
   closeForm() {
     this.reference.close();
    }
+
+   getClubs() {
+    this.projects.getProjectsCombo().subscribe(
+      response => {
+        this.projectData = response;
+        console.log('Clubs data:', this.projectData);
+      },
+      error => {
+        console.error('Error al obtener los clubs', error);
+      }
+    );
+  }  
 }

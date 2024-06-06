@@ -1,20 +1,24 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TasksService } from '../services/api_serivices/tasks.service';
 import { ITasks } from '../interfaces/tasks.interface';
 import { Router } from '@angular/router';
+import { ProjectsService } from '../services/api_serivices/projects.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resgistration-tasks',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './resgistration-tasks.component.html',
   styleUrl: './resgistration-tasks.component.css'
 })
-export class ResgistrationTasksComponent {
+export class ResgistrationTasksComponent implements OnInit{  
   tasks = inject(TasksService);
   router = inject(Router);
   task:any;
+  projectData: any[] = []
+  projects = inject(ProjectsService)
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
@@ -25,6 +29,10 @@ export class ResgistrationTasksComponent {
     idProject: new FormControl<any>('', [Validators.required,]),
   });
 
+  ngOnInit(): void {
+    this.getProjects()
+  
+  }
 
   onSubmit() {
     if (this.register.valid) {
@@ -53,4 +61,16 @@ export class ResgistrationTasksComponent {
       console.log('Formulario inválido');
     }
   }
+
+  getProjects() {
+    this.projects.getProjectsCombo().subscribe(
+      response => {
+        this.projectData = response;
+        console.log('Project data:', this.projectData);
+      },
+      error => {
+        console.error('Error al obtener los proyectos', error);
+      }
+    );
+  }  
 }

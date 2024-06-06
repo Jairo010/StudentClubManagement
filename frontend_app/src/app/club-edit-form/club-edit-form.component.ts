@@ -1,7 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClubsService } from '../services/api_serivices/clubs.service';
+import { CommonModule } from '@angular/common';
+import { MembersService } from '../services/api_serivices/members.service';
 
 export interface IClubData {
   id?: string;
@@ -13,7 +15,7 @@ export interface IClubData {
 @Component({
   selector: 'app-club-edit-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './club-edit-form.component.html',
   styleUrls: ['./club-edit-form.component.css']
 })
@@ -21,6 +23,8 @@ export class ClubEditFormComponent implements OnInit {
   formVisible = true;
   title: string = "";
   group!: FormGroup;
+  members = inject(MembersService)
+  memberData: any[] = [];
 
   constructor(
     private reference: MatDialogRef<ClubEditFormComponent>,
@@ -32,6 +36,7 @@ export class ClubEditFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadForm();
+    this.getMembers();
   }
 
   loadForm() {
@@ -50,5 +55,16 @@ export class ClubEditFormComponent implements OnInit {
 
   closeForm() {
     this.reference.close();
+  }
+
+  getMembers(){
+    this.members.getMembersCombo().subscribe(
+      response => {
+        this.memberData = response;
+      },
+      error => {
+        console.error('Error al obtener los miembros', error);
+      }
+    );
   }
 }
