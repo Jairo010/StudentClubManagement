@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { MembersService } from '../services/api_serivices/members.service';
+import { MembersService } from '../services/api_serivices/members/members.service';
 
 export interface IMemberData {
   id?: string;

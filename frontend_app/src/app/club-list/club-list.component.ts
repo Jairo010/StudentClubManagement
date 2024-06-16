@@ -6,7 +6,7 @@ import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { ClubsService } from '../services/api_serivices/clubs.service';
+import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { IClub } from '../interfaces/clubs.interface';
 import { ClubEditFormComponent } from '../club-edit-form/club-edit-form.component';
 

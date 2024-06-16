@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { CommonModule } from '@angular/common';
 
 export interface ITasks {

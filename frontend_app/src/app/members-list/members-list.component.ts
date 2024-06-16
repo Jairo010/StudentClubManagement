@@ -5,10 +5,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
-import { MembersService } from '../services/api_serivices/members.service';
+import { MembersService } from '../services/api_serivices/members/members.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MemberEditFormComponent } from '../member-edit-form/member-edit-form.component';
-import { UserService } from '../services/api_serivices/user.service';
+import { UserService } from '../services/api_serivices/user/user.service';
 import { IMembers } from '../interfaces/members.interface';
 
 

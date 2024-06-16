@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResgistrationTasksComponent } from './resgistration-tasks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { TasksService } from '../services/api_serivices/tasks.service';
+import { TasksService } from '../services/api_serivices/tasks/tasks.service';
 
 describe('ResgistrationTasksComponent', () => {
   let component: ResgistrationTasksComponent;

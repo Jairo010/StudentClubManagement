@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ProjectEditFormComponent } from '../project-edit-form/project-edit-form.component';
 import { IProjects } from '../interfaces/projects.interface';

@@ -3,7 +3,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
-import { TasksService } from '../services/api_serivices/tasks.service';
+import { TasksService } from '../services/api_serivices/tasks/tasks.service';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { environment } from '../../environments/environment.development';
 import { ITasks } from '../interfaces/tasks.interface';

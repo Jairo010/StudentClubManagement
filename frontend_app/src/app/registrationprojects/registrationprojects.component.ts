@@ -1,9 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IProjects } from '../interfaces/projects.interface';
 import { Router } from '@angular/router';
-import { ClubsService } from '../services/api_serivices/clubs.service';
+import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-registrationprojects',

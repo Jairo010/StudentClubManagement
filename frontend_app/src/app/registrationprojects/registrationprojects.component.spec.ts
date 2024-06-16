@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RegistrationprojectsComponent } from './registrationprojects.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 
 describe('RegistrationprojectsComponent', () => {
   let component: RegistrationprojectsComponent;
