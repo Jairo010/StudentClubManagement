@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, catchError, map, tap } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
-import { IParticipants } from '../../interfaces/participants.interface';
+import { environment } from '../../../../environments/environment.development';
+import { IParticipants } from '../../../interfaces/participants.interface';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -33,6 +33,10 @@ export class ParticipantsService {
 
   getParticipantById(card:number): Observable<any>{
     return this.http.get<any>(environment.URL_API+`participants/${card}`)
+  }
+
+  getGroupOfParticipant(card:number): Observable<any>{
+    return this.http.get<any>(environment.URL_API+`participants/groups/${card}`)
   }
 
   updateParticipant(participant:IParticipants): Observable<IParticipants>{

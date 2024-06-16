@@ -3,7 +3,7 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { LoginComponent } from './login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { UserService } from '../services/api_serivices/user.service';
+import { UserService } from '../services/api_serivices/user/user.service';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

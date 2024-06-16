@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { IClub } from '../../interfaces/clubs.interface';
-import { environment } from '../../../environments/environment.development';
+import { IClub } from '../../../interfaces/clubs.interface';
+import { environment } from '../../../../environments/environment.development';
 import { Observable, catchError, map, tap } from 'rxjs';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class ClubsService {
     return this.http.put<IClub>(environment.URL_API+`clubs`,club)
   }
 
-  deleteClub(id:string): Observable<any>{
+  deleteClub(id:number): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`clubs/${id}`)
   }
 }

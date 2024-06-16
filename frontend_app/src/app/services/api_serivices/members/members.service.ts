@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.development';
 import { Observable, catchError, map, tap } from 'rxjs';
-import { IMembers } from '../../interfaces/members.interface';
+import { IMembers } from '../../../interfaces/members.interface';
 
 @Injectable({
   providedIn: 'root'

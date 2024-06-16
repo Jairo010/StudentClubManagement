@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { UserService } from '../services/api_serivices/user.service';
+import { UserService } from '../services/api_serivices/user/user.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ISignUp } from '../interfaces/userAuth.interface';
 import { Router } from '@angular/router';

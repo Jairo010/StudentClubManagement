@@ -1,9 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TasksService } from '../services/api_serivices/tasks.service';
+import { TasksService } from '../services/api_serivices/tasks/tasks.service';
 import { ITasks } from '../interfaces/tasks.interface';
 import { Router } from '@angular/router';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { CommonModule } from '@angular/common';
 
 @Component({

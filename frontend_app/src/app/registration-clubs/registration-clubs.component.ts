@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ClubsService } from '../services/api_serivices/clubs.service';
+import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { Router } from '@angular/router';
 import { IClub } from '../interfaces/clubs.interface';
 import { CommonModule } from '@angular/common';
-import { MembersService } from '../services/api_serivices/members.service';
+import { MembersService } from '../services/api_serivices/members/members.service';
 
 @Component({
   selector: 'app-registration-clubs',

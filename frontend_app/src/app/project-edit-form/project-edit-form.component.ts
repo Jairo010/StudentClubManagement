@@ -1,12 +1,12 @@
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatDialogContainer, MatDialogModule } from '@angular/material/dialog';
-import { ProjectsService } from '../services/api_serivices/projects.service';
+import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
-import { ClubsService } from '../services/api_serivices/clubs.service';
+import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 
 export interface IProjectData {
   id?: string;

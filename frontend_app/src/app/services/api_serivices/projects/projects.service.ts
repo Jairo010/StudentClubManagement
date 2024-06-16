@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { environment } from '../../../environments/environment.development';
-import { IProjects } from '../../interfaces/projects.interface';
+import { environment } from '../../../../environments/environment.development';
+import { IProjects } from '../../../interfaces/projects.interface';
 import { Observable, catchError, map, tap } from 'rxjs';
 
 @Injectable({

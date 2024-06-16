@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegistrationMembersComponent } from './registration-members.component';
-import { UserService } from '../services/api_serivices/user.service';
+import { UserService } from '../services/api_serivices/user/user.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

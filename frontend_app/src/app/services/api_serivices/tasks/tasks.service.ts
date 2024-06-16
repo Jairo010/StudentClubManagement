@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { IAssignTasks, ITasks } from '../../interfaces/tasks.interface';
+import { IAssignTasks, ITasks } from '../../../interfaces/tasks.interface';
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
