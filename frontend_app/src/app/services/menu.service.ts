@@ -17,7 +17,9 @@ export class MenuService {
     {title: 'Nueva Tarea', url: '/registrotareas', icono: '/assets/icons/registroproyectos.png'},
     {title: 'Tareas', url: '/tareas', icono: '/assets/icons/registroproyectos.png'},
     {title: 'Agregar Club', url: '/clubs', icono: '/assets/icons/reunion.png'},
-    {title: 'Clubs', url: '/clubs-list', icono: '/assets/icons/reunion.png'}
+    {title: 'Clubs', url: '/clubs-list', icono: '/assets/icons/reunion.png'},
+    {title: 'Eventos', url: '/eventos', icono: '/assets/icons/reunion.png'},
+    {title: 'Agregar Eventos', url: '/events', icono: '/assets/icons/reunion.png'}
 ]
 
   constructor() { }

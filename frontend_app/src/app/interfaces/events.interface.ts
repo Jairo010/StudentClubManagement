@@ -1,7 +1,9 @@
-export interface IEvents{
-    name: String;
-    description: String;
+export interface IEvents {
+    id?: string,
+    name: string;
+    description: string;
     startDate: Date;
     endDate: Date;
-    typeEvent: String;
-}
+    typeEvent: string;
+  }
+  

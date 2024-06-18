@@ -10,6 +10,8 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { RegistrationClubsComponent } from './registration-clubs/registration-clubs.component';
 import { ClubEditFormComponent } from './club-edit-form/club-edit-form.component';
 import { ClubsListComponent } from './club-list/club-list.component';
+import { EventsListComponent } from './events-list/events-list.component';
+import { RegistrationEventsComponent } from './registration-events/registration-events.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -23,4 +25,6 @@ export const routes: Routes = [
     { path: 'clubs-list', component: ClubsListComponent},
     { path: 'registrotareas', component: ResgistrationTasksComponent},
     { path: 'tareas', component: TasksListComponent},
+    { path: 'eventos', component: EventsListComponent},
+    { path: 'events', component: RegistrationEventsComponent},
 ];
