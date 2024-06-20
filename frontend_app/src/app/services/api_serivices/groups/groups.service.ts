@@ -17,8 +17,8 @@ export class GroupsService {
     return this.http.post<IGroups>(environment.URL_API+"groups",group);
   }
 
-  assignGroup(idGroup: number, card: string, key: string): Observable<IGroups>{
-    return this.http.post<IGroups>(environment.URL_API+"groups/assign",{idGroup: idGroup, card: card, key: key});
+  assignGroup(idGroup: number, card: string, key: string): Observable<any>{
+    return this.http.post<any>(environment.URL_API+"groups/assign",{idGroup: idGroup, card: card, key: key});
   }
 
   getGroups(): Observable<any>{
@@ -54,5 +54,9 @@ export class GroupsService {
 
   deleteAssignGroup(idGroup: number, card:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`groups/assign/${idGroup}/${card}`)
+  }
+
+  getCompetitionsOfGroup(id: number): Observable<any>{
+    return this.http.get<any>(environment.URL_API+`groups/assign/competitions/${id}`)
   }
 }
