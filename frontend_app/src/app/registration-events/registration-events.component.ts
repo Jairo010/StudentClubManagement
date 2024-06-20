@@ -2,8 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IEvents } from '../interfaces/events.interface';
-import { EventsService } from '../services/api_serivices/events.service';
 import { CommonModule } from '@angular/common';
+import { EventsService } from '../services/api_serivices/events/events.service';
 
 @Component({
   selector: 'app-registration-events',

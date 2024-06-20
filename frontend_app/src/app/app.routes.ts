@@ -12,6 +12,8 @@ import { ClubEditFormComponent } from './club-edit-form/club-edit-form.component
 import { ClubsListComponent } from './club-list/club-list.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { RegistrationEventsComponent } from './registration-events/registration-events.component';
+import { UniversityComponent } from './university/university.component';
+import { UniversityListComponent } from './university-list/university-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -27,4 +29,6 @@ export const routes: Routes = [
     { path: 'tareas', component: TasksListComponent},
     { path: 'eventos', component: EventsListComponent},
     { path: 'events', component: RegistrationEventsComponent},
+    { path: 'university', component: UniversityComponent},
+    { path: 'university-list', component: UniversityListComponent},
 ];

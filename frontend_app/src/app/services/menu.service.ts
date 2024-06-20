@@ -19,7 +19,9 @@ export class MenuService {
     {title: 'Agregar Club', url: '/clubs', icono: '/assets/icons/reunion.png'},
     {title: 'Clubs', url: '/clubs-list', icono: '/assets/icons/reunion.png'},
     {title: 'Eventos', url: '/eventos', icono: '/assets/icons/reunion.png'},
-    {title: 'Agregar Eventos', url: '/events', icono: '/assets/icons/reunion.png'}
+    {title: 'Agregar Eventos', url: '/events', icono: '/assets/icons/reunion.png'},
+    {title: 'Agregrar Universidades', url: '/university', icono: '/assets/icons/reunion.png'},
+    {title: 'Universidades', url: '/university-list', icono: '/assets/icons/reunion.png'}
 ]
 
   constructor() { }

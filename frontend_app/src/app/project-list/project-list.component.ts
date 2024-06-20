@@ -76,9 +76,7 @@ export class ProjectListComponent {
       disableClose: true,
       data: row
     };
-
     const reference: MatDialogRef<ProjectEditFormComponent> = this.dialog.open(ProjectEditFormComponent, options);
-    
     reference.afterClosed().subscribe((response) => {
       if(!response){return}
       if(response.id){

@@ -29,7 +29,7 @@ export class ClubsService {
       map(response => response.data)
     );
   }
-  getClubById(id:number): Observable<any>{
+  getClubById(id:string): Observable<any>{
     return this.http.get<any>(environment.URL_API+`clubs/${id}`)
   }
 
@@ -37,7 +37,7 @@ export class ClubsService {
     return this.http.put<IClub>(environment.URL_API+`clubs`,club)
   }
 
-  deleteClub(id:number): Observable<any>{
+  deleteClub(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`clubs/${id}`)
   }
 }
