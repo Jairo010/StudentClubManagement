@@ -6,4 +6,3 @@ export interface IEvents {
     endDate: Date;
     typeEvent: string;
   }
-  
