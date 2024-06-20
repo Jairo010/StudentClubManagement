@@ -8,7 +8,6 @@ import { RegistrationMembersComponent } from './registration-members/registratio
 import { ResgistrationTasksComponent } from './resgistration-tasks/resgistration-tasks.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
 import { RegistrationClubsComponent } from './registration-clubs/registration-clubs.component';
-import { ClubEditFormComponent } from './club-edit-form/club-edit-form.component';
 import { ClubsListComponent } from './club-list/club-list.component';
 import { EventsListComponent } from './events-list/events-list.component';
 import { RegistrationEventsComponent } from './registration-events/registration-events.component';
@@ -16,6 +15,8 @@ import { UniversityComponent } from './university/university.component';
 import { UniversityListComponent } from './university-list/university-list.component';
 import { RegistrationGroupsComponent } from './registration-groups/registration-groups.component';
 import { GroupsListComponent } from './groups-list/groups-list.component';
+import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
+import { RegistrationCompetitionsComponent } from './registration-competitions/registration-competitions.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -35,4 +36,6 @@ export const routes: Routes = [
     { path: 'university-list', component: UniversityListComponent},
     { path: 'group', component: RegistrationGroupsComponent},
     { path: 'group-list', component: GroupsListComponent},
+    { path: 'competitions', component: RegistrationCompetitionsComponent},
+    { path: 'competitions-list', component: CompetitionsListComponent},
 ];

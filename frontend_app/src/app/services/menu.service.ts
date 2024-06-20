@@ -23,7 +23,9 @@ export class MenuService {
     {title: 'Agregrar Universidades', url: '/university', icono: '/assets/icons/reunion.png'},
     {title: 'Universidades', url: '/university-list', icono: '/assets/icons/reunion.png'},
     {title: 'Agregrar Grupo', url: '/group', icono: '/assets/icons/reunion.png'},
-    {title: 'Grupos', url: '/group-list', icono: '/assets/icons/reunion.png'}
+    {title: 'Grupos', url: '/group-list', icono: '/assets/icons/reunion.png'},
+    {title: 'Agregrar Competiciones', url: '/competitions', icono: '/assets/icons/reunion.png'},
+    {title: 'Competiciones', url: '/competitions-list', icono: '/assets/icons/reunion.png'}
 ]
 
   constructor() { }
