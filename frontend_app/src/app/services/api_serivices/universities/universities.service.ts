@@ -37,7 +37,7 @@ export class UniversitiesService {
     return this.http.put<IUniversities>(environment.URL_API+`universities`,university)
   }
 
-  deleteUniversity(id:number): Observable<any>{
+  deleteUniversity(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`universities/${id}`)
   }
 }

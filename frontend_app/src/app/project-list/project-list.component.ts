@@ -91,7 +91,7 @@ export class ProjectListComponent {
     this.projectsService.deleteProject(id).subscribe(() => {
       this.reloadPage()
     }, (error) => {
-      console.error('Error deleting project:', error);
+      console.error('Error al eliminar el proyecto:', error);
     });
   }
   reloadPage() {

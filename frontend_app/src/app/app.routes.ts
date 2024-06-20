@@ -14,6 +14,8 @@ import { EventsListComponent } from './events-list/events-list.component';
 import { RegistrationEventsComponent } from './registration-events/registration-events.component';
 import { UniversityComponent } from './university/university.component';
 import { UniversityListComponent } from './university-list/university-list.component';
+import { RegistrationGroupsComponent } from './registration-groups/registration-groups.component';
+import { GroupsListComponent } from './groups-list/groups-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,4 +33,6 @@ export const routes: Routes = [
     { path: 'events', component: RegistrationEventsComponent},
     { path: 'university', component: UniversityComponent},
     { path: 'university-list', component: UniversityListComponent},
+    { path: 'group', component: RegistrationGroupsComponent},
+    { path: 'group-list', component: GroupsListComponent},
 ];

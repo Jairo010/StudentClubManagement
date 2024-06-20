@@ -56,7 +56,7 @@ export class GroupsService {
     return this.http.delete<any>(environment.URL_API+`groups/assign/${idGroup}/${card}`)
   }
 
-  getCompetitionsOfGroup(id: number): Observable<any>{
+  getCompetitionsOfGroup(id: string): Observable<any>{
     return this.http.get<any>(environment.URL_API+`groups/assign/competitions/${id}`)
   }
 }

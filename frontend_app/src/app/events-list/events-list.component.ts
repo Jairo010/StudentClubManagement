@@ -8,7 +8,7 @@ import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IEvents } from '../interfaces/events.interface';
 import { EventEditFormComponent } from '../event-edit-form/event-edit-form.component';
-import { EventsService } from '../services/api_serivices/events.service';
+import { EventsService } from '../services/api_serivices/events/events.service';
 
 @Component({
   selector: 'app-events-list',

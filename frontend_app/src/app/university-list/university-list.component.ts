@@ -24,8 +24,7 @@ export class UniversityListComponent {
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'name', title: 'Nombre' },
     { field: 'city', title: 'Ciudad' },
-    { field: 'province', title: 'Provincia' },
-    { field: 'actions', title: 'Acciones' }
+    { field: 'province', title: 'Provincia' }
   ];
   records: any = [];
   totalRecords = this.records.length;
@@ -42,10 +41,10 @@ export class UniversityListComponent {
         console.log(this.records);
         this.records.forEach((dato: any) => {
           this.field.push({
-            id: dato.id,
-            name: dato.name,
-            city: dato.city,
-            province: dato.province
+            id: dato.Id_Universidades,
+            name: dato.Nombre_Universidad,
+            city: dato.Ciudad_Universidad,
+            province: dato.Provincia_Universidad
           });
         });
 
@@ -69,7 +68,7 @@ export class UniversityListComponent {
     };
 
     const reference = this.dialog.open(UniversityEditFormComponent, options);
-    
+
     reference.afterClosed().subscribe((response) => {
       if (!response) { return; }
       if (response.id) {
@@ -77,15 +76,19 @@ export class UniversityListComponent {
         this.universitiesService.updateUniversity(university).subscribe(() => {
           this.reloadPage();
         });
+      } else {
+        this.universitiesService.createUniversity(response).subscribe(() => {
+          this.reloadPage();
+        });
       }
     });
   }
 
-  delete(id: number) {
+  delete(id: string) {
     this.universitiesService.deleteUniversity(id).subscribe(() => {
       this.reloadPage();
     }, (error) => {
-      console.error('Error deleting university:', error);
+      console.error('Error al eliminar la universidad:', error);
     });
   }
 

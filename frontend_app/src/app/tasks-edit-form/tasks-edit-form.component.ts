@@ -52,7 +52,7 @@ export class TasksEditFormComponent implements OnInit {
   }
 
   save() {
-    const record = this.group.getRawValue(); // Get form value including disabled fields
+    const record = this.group.getRawValue(); 
     this.reference.close(record);
   }
   closeForm() {

@@ -47,6 +47,6 @@ export class UniversityComponent implements OnInit {
   }
 
   closeForm() {
-    this.router.navigate(['/universidades']);
+    this.router.navigate(['/university-list']);
   }
 }
