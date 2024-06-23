@@ -38,4 +38,12 @@ export class MembersService {
   deleteMember(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`members/${id}`)
   }
+
+  getClubsOfMember(card: string):Observable<any>{
+    return this.http.get<any>(environment.URL_API+`members/clubs/${card}`)
+  }
+
+  getMembersByCard(card: string):Observable<any>{
+    return this.http.get<any>(environment.URL_API+ `members/getByCard/${card}`)
+  }
 }
