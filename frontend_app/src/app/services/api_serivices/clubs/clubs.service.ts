@@ -40,4 +40,16 @@ export class ClubsService {
   deleteClub(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`clubs/${id}`)
   }
+
+  assignMember(idClub: string, idMember: string): Observable<any>{
+    return this.http.post<any>(environment.URL_API + "clubs/members", {idClub: idClub, idMember: idMember})
+  }
+
+  deleteAssignedMember(idClub: string, card: string): Observable<any>{
+    return this.http.delete<any>(environment.URL_API+ `clubs/members/${idClub}/${card}`)
+  }
+
+  getMembersByClub(idClub: string):Observable<any>{
+    return this.http.get<any>(environment.URL_API+`clubs/members/${idClub}`)
+  }
 }
