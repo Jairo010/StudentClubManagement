@@ -47,7 +47,7 @@ export class TalksService {
     return this.http.put<ITalks>(environment.URL_API+"talks",talk)
   }
 
-  deleteTalk(id:number): Observable<any>{
+  deleteTalk(id:string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`talks/${id}`)
   }
 

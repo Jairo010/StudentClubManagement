@@ -9,6 +9,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { IClub } from '../interfaces/clubs.interface';
 import { ClubEditFormComponent } from '../club-edit-form/club-edit-form.component';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-clubs-list',
@@ -33,7 +34,7 @@ export class ClubsListComponent {
     totalRecords = this.records.length;
     field: any[] = [];
 
-    constructor(private dialog: MatDialog) {
+    constructor(private dialog: MatDialog,private router: Router) {
         this.loadClubs();
     }
 
@@ -93,4 +94,5 @@ export class ClubsListComponent {
     reloadPage() {
         window.location.reload();
     }
+    
 }

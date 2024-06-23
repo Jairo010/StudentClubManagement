@@ -45,15 +45,16 @@ export class RegistrationMembersComponent {
       this.member.signUpUserMember(signUpData).subscribe(
         response => {
           this.user = response;
-          console.log('Registro exitoso', response);
+          alert('Registro exitoso');
+          this.router.navigate(['/miembros']);
         },
         error => {
+          alert('Error al registrar');
           console.error('Error al registrar', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
-    this.router.navigate(['/miembros']);
   }
 }

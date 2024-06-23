@@ -40,7 +40,7 @@ export class LoginComponent {
           this.router.navigate(['miembros']);
         },
         error => {
-          alert("Error de autenticación: " +error.error.data)
+          alert("Error de autenticación")
           console.error('Error de autenticación', error);
           this.loginError = true; 
         }

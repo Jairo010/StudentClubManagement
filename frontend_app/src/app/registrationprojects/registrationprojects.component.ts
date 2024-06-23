@@ -50,11 +50,12 @@ export class RegistrationprojectsComponent implements OnInit{
 
         },
         error => {
+          alert('Error al registrar el Proyecto');
           console.error('Error al registrar el proyecto', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
     

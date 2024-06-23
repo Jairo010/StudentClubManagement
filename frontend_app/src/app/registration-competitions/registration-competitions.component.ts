@@ -32,15 +32,17 @@ export class RegistrationCompetitionsComponent {
 
       this.competitionService.createCompetition(competitionData).subscribe(
         response => {
+          alert('Competicion registrada exitosamente');
           console.log('Registro exitoso', response);
           this.router.navigate(['/competitions-list']);
         },
         error => {
+          alert('Error al registrar la competicion');
           console.error('Error al registrar', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 }

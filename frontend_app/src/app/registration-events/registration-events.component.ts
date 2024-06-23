@@ -39,15 +39,17 @@ export class RegistrationEventsComponent implements OnInit {
 
       this.events.createEvent(eventData).subscribe(
         response => {
+          alert('Evento registrado exitosamente');
           console.log('Evento registrado con éxito', response);
           this.router.navigate(['/eventos']);
         },
         error => {
+          alert('Error al registrar el evento');
           console.error('Error al registrar evento', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 
