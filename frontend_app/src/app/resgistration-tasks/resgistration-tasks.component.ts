@@ -54,11 +54,12 @@ export class ResgistrationTasksComponent implements OnInit{
 
         },
         error => {
+          alert('Error al registrar la tarea');
           console.error('Error al registrar una tarea', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 

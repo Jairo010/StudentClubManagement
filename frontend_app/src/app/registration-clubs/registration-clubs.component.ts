@@ -39,15 +39,17 @@ export class RegistrationClubsComponent implements OnInit{
 
       this.clubs.createClub(clubData).subscribe(
         response => {
+          alert('Club registrado exitosamente');
           console.log('Club registrado exitosamente', response);
           this.router.navigate(['/clubs']);
         },
         error => {
+          alert('Error al registrar el club');
           console.error('Error al registrar el club', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 

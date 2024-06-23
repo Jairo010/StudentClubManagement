@@ -34,15 +34,17 @@ export class RegistrationGroupsComponent implements OnInit {
 
       this.groupsService.createGroup(groupData).subscribe(
         response => {
+          alert('Grupo registrado exitosamente');
           console.log('Grupo registrado con éxito', response);
           this.router.navigate(['/group-list']);
         },
         error => {
+          alert('Error al registrar el grupo');
           console.error('Error al registrar grupo', error);
         }
       );
     } else {
-      console.log('Formulario inválido');
+      alert('Formulario inválido');
     }
   }
 }

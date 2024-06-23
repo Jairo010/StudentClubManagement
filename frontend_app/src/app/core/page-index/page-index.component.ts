@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class PageIndexComponent {
   expanded=true
 
-  toggleExpanded(expanded:boolean){
+  toggleExpanded(expanded:boolean):void{
     this.expanded = expanded
   }
 }

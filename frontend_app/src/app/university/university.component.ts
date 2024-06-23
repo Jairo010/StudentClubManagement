@@ -34,10 +34,12 @@ export class UniversityComponent implements OnInit {
 
       this.universitiesService.createUniversity(universityData).subscribe(
         response => {
+          alert('Universidad registrada exitosamente');
           console.log('Universidad registrada con éxito', response);
           this.router.navigate(['/universidades']);
         },
         error => {
+          alert('Error al registrar la universidad');
           console.error('Error al registrar universidad', error);
         }
       );

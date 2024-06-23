@@ -17,6 +17,10 @@ import { RegistrationGroupsComponent } from './registration-groups/registration-
 import { GroupsListComponent } from './groups-list/groups-list.component';
 import { CompetitionsListComponent } from './competitions-list/competitions-list.component';
 import { RegistrationCompetitionsComponent } from './registration-competitions/registration-competitions.component';
+import { RegistrationSpeakersComponent } from './registration-speakers/registration-speakers.component';
+import { SpeakersListComponent } from './speakers-list/speakers-list.component';
+import { RegistrationTalksComponent } from './registration-talks/registration-talks.component';
+import { TalksListComponent } from './talks-list/talks-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -38,4 +42,8 @@ export const routes: Routes = [
     { path: 'group-list', component: GroupsListComponent},
     { path: 'competitions', component: RegistrationCompetitionsComponent},
     { path: 'competitions-list', component: CompetitionsListComponent},
+    { path: 'speakers', component: RegistrationSpeakersComponent},
+    { path: 'speakers-list', component: SpeakersListComponent},
+    { path: 'talks', component: RegistrationTalksComponent},
+    { path: 'talks-list', component: TalksListComponent},
 ];
