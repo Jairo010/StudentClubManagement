@@ -5,4 +5,5 @@ export interface IEvents {
     startDate: Date;
     endDate: Date;
     typeEvent: string;
+    status:string;
   }
