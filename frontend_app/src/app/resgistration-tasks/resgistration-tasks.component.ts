@@ -50,7 +50,7 @@ export class ResgistrationTasksComponent implements OnInit{
           this.task = response;
           alert('tarea registrado exitosamente');
           console.log('Tarea registrado exitosamente', response);
-          this.router.navigate(['proyectos']);
+          this.router.navigate(['tareas']);
 
         },
         error => {

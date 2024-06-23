@@ -23,6 +23,7 @@ export class RegistrationEventsComponent implements OnInit {
     startDate: new FormControl<any>('', [Validators.required]),
     endDate: new FormControl<any>('', [Validators.required]),
     typeEvent: new FormControl<any>('', [Validators.required]),
+    status: new FormControl<any>('', [Validators.required]),
   });
 
   ngOnInit() {}
@@ -35,6 +36,7 @@ export class RegistrationEventsComponent implements OnInit {
         startDate: this.eventos.get('startDate')?.value,
         endDate: this.eventos.get('endDate')?.value,
         typeEvent: this.eventos.get('typeEvent')?.value,
+        status: this.eventos.get('status')?.value
       };
 
       this.events.createEvent(eventData).subscribe(
