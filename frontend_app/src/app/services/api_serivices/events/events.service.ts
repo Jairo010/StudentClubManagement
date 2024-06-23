@@ -31,4 +31,28 @@ export class EventsService {
     return this.http.delete<any>(environment.URL_API+`events/${id}`)
   }
 
+  assignCompetition(idEvent: string, idCompetition: string):Observable<any>{
+    return this.http.post<any>(environment.URL_API+"events/competition", {idEvent: idEvent, idCompetition: idCompetition})
+  }
+
+  assignTalk(idEvent: string, idTalk: string):Observable<any>{
+    return this.http.post<any>(environment.URL_API+"events/talk", {idEvent: idEvent, idTalk: idTalk})
+  }
+
+  deleteAssignedCompetition(idEvent: string, idCompetition: string ):Observable<any>{
+    return this.http.delete<any>(environment.URL_API+ `events/competition/${idEvent}/${idCompetition}`)
+  }
+
+  deleteAssignedTalk(idEvent: string, idTalk: string):Observable<any>{
+    return this.http.delete<any>(environment.URL_API+ `events/competition/${idEvent}/${idTalk}`)
+  }
+
+  getCompetitionsByEvent (idEvent: string):Observable<any>{
+    return this.http.get<any>(environment.URL_API+`events/competition/${idEvent}`)
+  }
+
+  getTalksByEvent(idTalk: string):Observable<any>{
+    return this.http.get<any>(environment.URL_API+`events/talk/${idTalk}`)
+  }
+
 }
