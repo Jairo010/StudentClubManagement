@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 import { CoreModule } from "../core/core.module";
 import { UserService } from '../services/api_serivices/user/user.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -10,26 +11,24 @@ import { ILogin } from '../interfaces/userAuth.interface';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.css',
-    imports: [CoreModule,FormsModule, 
-      ReactiveFormsModule,]
+    imports: [CoreModule, FormsModule, ReactiveFormsModule]
 })
 export class LoginComponent {
-registrarse() {
-  this.router.navigate(['/participantes']);
-}
+  constructor(private router: Router, private member: UserService, private snackBar: MatSnackBar) {}
 
-  member = inject(UserService);
-  router = inject(Router);
-  loginError = false; 
-  user:any;
+  registrarse() {
+    this.router.navigate(['/participantes']);
+  }
+
+  loginError = false;
+  user: any;
 
   login = new FormGroup({
     email: new FormControl<any>('', [Validators.required, Validators.email]),
     password: new FormControl<any>('', [Validators.required]),
   });
 
-
-  onLogin(){
+  onLogin() {
     if (this.login.valid) {
       const loginData: ILogin = {
         email: this.login.get('email')?.value,
@@ -39,18 +38,23 @@ registrarse() {
       this.member.logInUserMember(loginData).subscribe(
         response => {
           this.user = response;
-          alert("Inicio de sesion correcto")
+          this.snackBar.open("Inicio de sesión correcto", "Cerrar", {
+            duration: 3000,
+          });
           this.router.navigate(['miembros']);
         },
         error => {
-          alert("Error de autenticación")
+          this.snackBar.open("Error de autenticación", "Cerrar", {
+            duration: 3000,
+          });
           console.error('Error de autenticación', error);
-          this.loginError = true; 
+          this.loginError = true;
         }
       );
     } else {
-      console.log('Formulario inválido');
+      this.snackBar.open("Formulario invalido", "Cerrar", {
+        duration: 3000,
+      });
     }
   }
 }
-

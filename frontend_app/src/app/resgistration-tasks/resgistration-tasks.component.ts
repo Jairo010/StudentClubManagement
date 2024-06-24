@@ -3,6 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { TasksService } from '../services/api_serivices/tasks/tasks.service';
 import { ITasks } from '../interfaces/tasks.interface';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { CommonModule } from '@angular/common';
 
@@ -11,27 +12,29 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, CommonModule],
   templateUrl: './resgistration-tasks.component.html',
-  styleUrl: './resgistration-tasks.component.css'
+  styleUrls: ['./resgistration-tasks.component.css']
 })
-export class ResgistrationTasksComponent implements OnInit{  
+export class ResgistrationTasksComponent implements OnInit {
   tasks = inject(TasksService);
   router = inject(Router);
-  task:any;
-  projectData: any[] = []
-  projects = inject(ProjectsService)
+  task: any;
+  projectData: any[] = [];
+  projects = inject(ProjectsService);
+
+  // Agrega MatSnackBar al constructor
+  constructor(private snackBar: MatSnackBar) {}
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
-    description: new FormControl<any>('',),
-    limitDate: new FormControl<any>('', [Validators.required,]),
-    state: new FormControl<any>('', [Validators.required,]),
-    evidence: new FormControl<any>('', [Validators.required,]),
-    idProject: new FormControl<any>('', [Validators.required,]),
+    description: new FormControl<any>(''),
+    limitDate: new FormControl<any>('', [Validators.required]),
+    state: new FormControl<any>('', [Validators.required]),
+    evidence: new FormControl<any>('', [Validators.required]),
+    idProject: new FormControl<any>('', [Validators.required]),
   });
 
   ngOnInit(): void {
-    this.getProjects()
-  
+    this.getProjects();
   }
 
   onSubmit() {
@@ -48,18 +51,26 @@ export class ResgistrationTasksComponent implements OnInit{
       this.tasks.createTasks(taskData).subscribe(
         response => {
           this.task = response;
-          alert('tarea registrado exitosamente');
-          console.log('Tarea registrado exitosamente', response);
+          // Utiliza MatSnackBar para mostrar mensaje de éxito
+          this.snackBar.open('Tarea registrada exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
+          console.log('Tarea registrada exitosamente', response);
           this.router.navigate(['tareas']);
-
         },
         error => {
-          alert('Error al registrar la tarea');
+          // Utiliza MatSnackBar para mostrar mensaje de error
+          this.snackBar.open('Error al registrar la tarea', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.error('Error al registrar una tarea', error);
         }
       );
     } else {
-      alert('Formulario inválido');
+      // Utiliza MatSnackBar para mostrar mensaje de formulario inválido
+      this.snackBar.open('Formulario inválido', 'Cerrar', {
+        duration: 3000, // Duración del mensaje en milisegundos
+      });
     }
   }
 
@@ -73,5 +84,5 @@ export class ResgistrationTasksComponent implements OnInit{
         console.error('Error al obtener los proyectos', error);
       }
     );
-  }  
+  }
 }

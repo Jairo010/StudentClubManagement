@@ -40,17 +40,21 @@
               <option *ngFor="let university of universitys" [value]="university.Id_Universidades">{{ university.Nombre_Universidad}}</option>
             </select>
           </div>
-          <div class="mb-4">
-            <label for="status" class="block text-gray-700 font-bold mb-2">Estado:</label>
-            <select formControlName="status" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-              <option [value]="true">Habilitado</option>
-              <option [value]="false">Deshabilitado</option>
-            </select>
-          </div>
         </div>
       </div>
       <button type="submit" class="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-700">Guardar</button>
-   
-    </form>
+   <p>
+
+   </p>
+   <div class="flex  mt-4">
+    <button
+      class="bg-green-500 hover:bg-green-700 text-white text-center font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+      type="button"
+      (click)="registrarConcurso()"
+    >
+      Completar Registro
+    </button>
+  </div>
+  </form>
   </body>
   

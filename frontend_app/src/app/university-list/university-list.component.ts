@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { UniversityEditFormComponent } from '../university-edit-form/university-edit-form.component';
 import { IUniversities } from '../interfaces/universities.interface';
 import { UniversitiesService } from '../services/api_serivices/universities/universities.service';
@@ -19,6 +20,7 @@ import { UniversitiesService } from '../services/api_serivices/universities/univ
 })
 export class UniversityListComponent {
   private universitiesService = inject(UniversitiesService);
+  private snackBar: MatSnackBar; // Agrega snackBar
 
   data: any = [];
   MetaDataColumn: MetaDataColumn[] = [
@@ -29,7 +31,8 @@ export class UniversityListComponent {
   records: any = [];
   totalRecords = this.records.length;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, snackBar: MatSnackBar) {
+    this.snackBar = snackBar; // Asigna snackBar
     this.loadUniversities();
   }
 
@@ -74,11 +77,16 @@ export class UniversityListComponent {
       if (response.id) {
         const university = { ...response };
         this.universitiesService.updateUniversity(university).subscribe(() => {
-          alert('Universidad actualizada exitosamente');
+          this.snackBar.open('Universidad actualizada exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.reloadPage();
         });
       } else {
         this.universitiesService.createUniversity(response).subscribe(() => {
+          this.snackBar.open('Universidad creada exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.reloadPage();
         });
       }
@@ -87,12 +95,15 @@ export class UniversityListComponent {
 
   delete(id: string) {
     if (confirm("¿Está seguro de eliminar esta universidad?")) {
-    this.universitiesService.deleteUniversity(id).subscribe(() => {
-      this.reloadPage();
-    }, (error) => {
-      console.error('Error al eliminar la universidad:', error);
-    });
-   }
+      this.universitiesService.deleteUniversity(id).subscribe(() => {
+        this.snackBar.open('Universidad eliminada exitosamente', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error al eliminar la universidad:', error);
+      });
+    }
   }
 
   reloadPage() {

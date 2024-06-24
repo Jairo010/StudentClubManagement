@@ -41,8 +41,8 @@ export class ClubsService {
     return this.http.delete<any>(environment.URL_API+`clubs/${id}`)
   }
 
-  assignMember(idClub: string, idMember: string): Observable<any>{
-    return this.http.post<any>(environment.URL_API + "clubs/members", {idClub: idClub, idMember: idMember})
+  assignMember(idClub: string, card: string): Observable<any>{
+    return this.http.post<any>(environment.URL_API + "clubs/members", {idClub: idClub, card: card})
   }
 
   deleteAssignedMember(idClub: string, card: string): Observable<any>{

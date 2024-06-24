@@ -3,6 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ITalks } from '../interfaces/talks.interface';
 import { TalksService } from '../services/api_serivices/talks/talks.service';
 import { TalksEditFormComponent } from '../talks-edit-form/talks-edit-form.component';
@@ -40,7 +41,7 @@ export class TalksListComponent {
   totalRecords = this.records.length;
   field: any[] = [];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.loadTalks();
   }
 
@@ -84,7 +85,9 @@ export class TalksListComponent {
       if (response.id) {
         const talkData = { ...response };
         this.talksService.updateTalk(talkData).subscribe(() => {
-          alert('Charla actualizada exitosamente');
+          this.snackBar.open('Charla actualizada exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.reloadPage();
         });
       }
@@ -93,12 +96,18 @@ export class TalksListComponent {
 
   delete(id:string){
     if (confirm("¿Está seguro de eliminar esta charla?")) {
-    this.talksService.deleteTalk(id).subscribe(() => {
-      this. reloadPage() 
-    }, (error) => {
-      console.error('Error deleting member:', error);
-    });
-   }
+      this.talksService.deleteTalk(id).subscribe(() => {
+        this.snackBar.open('Charla eliminada exitosamente', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error deleting member:', error);
+        this.snackBar.open('Error al eliminar la charla', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+      });
+    }
   }
 
   reloadPage() {

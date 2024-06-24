@@ -25,6 +25,9 @@ import { ClubsGeneralComponent } from './clubs-general/clubs-general.component';
 import { EventsGeneralComponent } from './events-general/events-general.component';
 import { RegistrationParticipantsComponent } from './registration-participants/registration-participants.component';
 import { AsignSpeakersComponent } from './asign-speakers/asign-speakers.component';
+import { RegistrationParticipantCompetitionComponent } from './registration-participant-competition/registration-participant-competition.component';
+import { CompetitionParticipantsListComponent } from './competition-participants-list/competition-participants-list.component';
+import { GroupsParticipantsComponent } from './groups-participants/groups-participants.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -54,4 +57,7 @@ export const routes: Routes = [
     { path: 'talks-list', component: TalksListComponent},
     { path: 'participantes', component: RegistrationParticipantsComponent},
     { path: 'talkspeaker-list', component: AsignSpeakersComponent},
+    { path: 'registrar-concurso', component: RegistrationParticipantCompetitionComponent},
+    { path: 'competition-list', component: CompetitionParticipantsListComponent},
+    { path: 'group-competition-list', component: GroupsParticipantsComponent},
 ];

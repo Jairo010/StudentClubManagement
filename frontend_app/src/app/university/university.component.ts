@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { IUniversities } from '../interfaces/universities.interface';
 import { CommonModule } from '@angular/common';
 import { UniversitiesService } from '../services/api_serivices/universities/universities.service';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 
 @Component({
   selector: 'app-university',
@@ -15,12 +16,17 @@ import { UniversitiesService } from '../services/api_serivices/universities/univ
 export class UniversityComponent implements OnInit {
   universitiesService = inject(UniversitiesService);
   router = inject(Router);
+  snackBar: MatSnackBar;
 
   universitiesForm = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
     city: new FormControl<any>('', [Validators.required]),
     province: new FormControl<any>('', [Validators.required]),
   });
+
+  constructor(snackBar: MatSnackBar) {
+    this.snackBar = snackBar;
+  }
 
   ngOnInit() {}
 
@@ -34,12 +40,16 @@ export class UniversityComponent implements OnInit {
 
       this.universitiesService.createUniversity(universityData).subscribe(
         response => {
-          alert('Universidad registrada exitosamente');
+          this.snackBar.open('Universidad registrada exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.log('Universidad registrada con éxito', response);
           this.router.navigate(['/universidades']);
         },
         error => {
-          alert('Error al registrar la universidad');
+          this.snackBar.open('Error al registrar la universidad', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.error('Error al registrar universidad', error);
         }
       );

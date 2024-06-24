@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { CommonModule } from '@angular/common';
 import { ITalks } from '../interfaces/talks.interface';
 import { TalksService } from '../services/api_serivices/talks/talks.service';
@@ -15,6 +16,8 @@ import { TalksService } from '../services/api_serivices/talks/talks.service';
 export class RegistrationTalksComponent implements OnInit {
   talksService = inject(TalksService);
   router = inject(Router);
+  // Agrega MatSnackBar al constructor
+  constructor(private snackBar: MatSnackBar) {}
 
   talks = new FormGroup({
     topic: new FormControl<any>('', [Validators.required]),
@@ -38,17 +41,25 @@ export class RegistrationTalksComponent implements OnInit {
 
       this.talksService.createTalk(talkData).subscribe(
         response => {
-          alert('Charla registrada con éxito');
-          console.log('Charla registrada con éxito', response);
+          // Utiliza MatSnackBar para mostrar mensaje de éxito
+          this.snackBar.open('Charla registrada con éxito', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.router.navigate(['/talks-list']);
         },
         error => {
-          alert('Error Charla registrada');
+          // Utiliza MatSnackBar para mostrar mensaje de error
+          this.snackBar.open('Error Charla registrada', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.error('Error al registrar charla', error);
         }
       );
     } else {
-      alert('Formulario inválido');
+      // Utiliza MatSnackBar para mostrar mensaje de formulario inválido
+      this.snackBar.open('Formulario inválido', 'Cerrar', {
+        duration: 3000, // Duración del mensaje en milisegundos
+      });
     }
   }
 }

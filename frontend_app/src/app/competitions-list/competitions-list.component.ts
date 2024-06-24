@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Agrega MatSnackBar
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,9 +15,8 @@ import { ICompetition } from '../interfaces/competition.interface';
   selector: 'app-competitions-list',
   standalone: true,
   imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule],
-templateUrl: './competitions-list.component.html',
-  styleUrl: './competitions-list.component.css'
-  
+  templateUrl: './competitions-list.component.html',
+  styleUrls: ['./competitions-list.component.css']
 })
 export class CompetitionsListComponent {
   private competitionsService = inject(CompetitionsService);
@@ -35,7 +35,7 @@ export class CompetitionsListComponent {
   totalRecords = this.records.length;
   field: any[] = [];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) { // Agrega MatSnackBar al constructor
     this.loadCompetitions();
   }
 
@@ -79,7 +79,9 @@ export class CompetitionsListComponent {
       if (response.id) {
         const competitionData = { ...response };
         this.competitionsService.updateCompetition(competitionData).subscribe(() => {
-          alert('Competición actualizada exitosamente');
+          this.snackBar.open('Competición actualizada exitosamente.', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.reloadPage();
         });
       }
@@ -87,13 +89,16 @@ export class CompetitionsListComponent {
   }
 
   delete(id: string) {
-    if (confirm("¿Está seguro de eliminar esta Competicion?")){ 
-    this.competitionsService.deleteCompetition!(id).subscribe(() => {
-      this.reloadPage();
-    }, (error) => {
-      console.error('Error deleting competition:', error);
-    });
-  }
+    if (confirm("¿Está seguro de eliminar esta Competicion?")) {
+      this.competitionsService.deleteCompetition!(id).subscribe(() => {
+        this.snackBar.open('Competicion eliminada correctamente.', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error deleting competition:', error);
+      });
+    }
   }
 
   reloadPage() {

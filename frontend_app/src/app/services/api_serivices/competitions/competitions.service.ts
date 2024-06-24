@@ -47,7 +47,7 @@ export class CompetitionsService {
     return this.http.delete<any>(environment.URL_API+`competitions/${id}`)
   }
 
-  deleteAssignCompetition(idCompetition:number, idGroup: number): Observable<any>{
+  deleteAssignCompetition(idCompetition:string, idGroup: string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`competitions/assign/${idCompetition}/${idGroup}`)
   }
 

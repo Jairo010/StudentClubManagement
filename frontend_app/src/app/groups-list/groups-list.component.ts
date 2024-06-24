@@ -1,11 +1,12 @@
+import { Component, inject } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IGroups } from '../interfaces/groups.interface';
 import { GroupsService } from '../services/api_serivices/groups/groups.service';
 import { GroupsEditFormComponent } from '../groups-edit-form/groups-edit-form.component';
@@ -13,9 +14,14 @@ import { GroupsEditFormComponent } from '../groups-edit-form/groups-edit-form.co
 @Component({
   selector: 'app-groups-list',
   standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    SharedModule
+  ],
   templateUrl: './groups-list.component.html',
-  styleUrls: ['./groups-list.component.css'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
+  styleUrls: ['./groups-list.component.css']
 })
 export class GroupsListComponent implements OnInit{
   private groupsService = inject(GroupsService);
@@ -27,7 +33,8 @@ export class GroupsListComponent implements OnInit{
     { field: 'id', title: 'ID' },
     { field: 'name', title: 'Nombre del Grupo' },
     { field: 'description', title: 'Descripción' },
-    { field: 'status', title: 'Habilitado' }
+    { field: 'status', title: 'Habilitado' },
+    
   ];
 
   ngOnInit(): void {
@@ -38,7 +45,7 @@ export class GroupsListComponent implements OnInit{
   totalRecords = this.records.length;
   field: any[] = [];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.loadGroups();
   }
 
@@ -80,7 +87,9 @@ export class GroupsListComponent implements OnInit{
       if (response.id) {
         const groupData = { ...response };
         this.groupsService.updateGroup(groupData).subscribe(() => {
-          alert('Grupo actualizado exitosamente');
+          this.snackBar.open('Grupo actualizado exitosamente', 'Cerrar', {
+            duration: 3000,
+          });
           this.reloadPage();
         });
       }
@@ -89,12 +98,15 @@ export class GroupsListComponent implements OnInit{
 
   delete(id: number) {
     if (confirm("¿Está seguro de eliminar este grupo?")) {
-    this.groupsService.deleteGroup!(id.toString()).subscribe(() => {
-      this.reloadPage();
-    }, (error) => {
-      console.error('Error al eliminar el grupo:', error);
-    });
-  }
+      this.groupsService.deleteGroup!(id.toString()).subscribe(() => {
+        this.snackBar.open('Grupo eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error al eliminar el grupo:', error);
+      });
+    }
   }
 
   reloadPage() {

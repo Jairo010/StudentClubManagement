@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SharedModule } from '../shared/shared.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,37 +21,33 @@ import { IProjects } from '../interfaces/projects.interface';
 })
 export class ProjectListComponent {
   private projectsService = inject(ProjectsService);
+  private snackBar: MatSnackBar;
 
-  data:any = []
+  data: any = []
 
-  ngOnInit(): void {
-    this.loadProjects();
-  }
-  
   MetaDataColumn: MetaDataColumn[] = [
-    {field:'id', title:'Codigo'},
-    {field:'name', title:'Nombre'},
-    {field:'description', title:'Descripcion'},
-    {field:'dateStart', title:'Fecha Inicio'},
-    {field:'dateEnd', title:'Fecha FIn'},
-    {field:'club', title:'Club'},
+    { field: 'id', title: 'Codigo' },
+    { field: 'name', title: 'Nombre' },
+    { field: 'description', title: 'Descripcion' },
+    { field: 'dateStart', title: 'Fecha Inicio' },
+    { field: 'dateEnd', title: 'Fecha FIn' },
+    { field: 'club', title: 'Club' },
   ]
-  records:any =[]
+  records: any = []
   totalRecords = this.records.length
-  constructor(private dialog:MatDialog){
+
+  constructor(private dialog: MatDialog, snackBar: MatSnackBar) {
+    this.snackBar = snackBar;
     this.loadProjects()
   }
   
-  field: any=[];
-  loadProjects(){
+  field: any = [];
+
+  loadProjects() {
     this.projectsService.getProjects().subscribe(
-      (data) =>{
-        
-        
+      (data) => {
         this.records = data.data;
-        console.log(this.records);
-        this.records.forEach((dato:any) => {
-          
+        this.records.forEach((dato: any) => {
           this.field.push({
             id: dato.id,
             name: dato.Nombre,
@@ -59,18 +56,17 @@ export class ProjectListComponent {
             dateEnd: dato.Fecha_Fin,
             club: dato.Id_Club.Nombre
           });
-        })
-
-        this.totalRecords = this.records.length
-        this.changePage(0)
+        });
+        this.totalRecords = this.records.length;
+        this.changePage(0);
       }
-    )
-    
+    );
   }
-  changePage(page:number){
-    const pageSize = environment.PAGE_SIZE
-    const skip = pageSize * page
-    this.data = this.field.slice(skip, skip + pageSize)
+
+  changePage(page: number) {
+    const pageSize = environment.PAGE_SIZE;
+    const skip = pageSize * page;
+    this.data = this.field.slice(skip, skip + pageSize);
   }
  
   openForm(row: IProjects | null = null) {
@@ -81,26 +77,29 @@ export class ProjectListComponent {
     };
     const reference: MatDialogRef<ProjectEditFormComponent> = this.dialog.open(ProjectEditFormComponent, options);
     reference.afterClosed().subscribe((response) => {
-      if(!response){return}
-      if(response.id){
-        const project = {...response}
+      if (!response) { return; }
+      if (response.id) {
+        const project = { ...response };
         this.projectsService.updateProject(project).subscribe(() => {
-          alert('Proyecto actualizado exitosamente');
-          this.reloadPage()
-        })
+          this.snackBar.open('Proyecto actualizado exitosamente', 'Cerrar', { duration: 3000 });
+          this.reloadPage();
+        });
       } 
     });
   }
-  delete(id:string){
+
+  delete(id: string) {
     if (confirm("¿Está seguro de eliminar este Proyecto?")) {
-    this.projectsService.deleteProject!(id).subscribe(() => {
-      this.reloadPage()
-    }, (error) => {
-      console.error('Error al eliminar el proyecto:', error);
-    });
-   }
+      this.projectsService.deleteProject!(id).subscribe(() => {
+        this.snackBar.open('Proyecto eliminado exitosamente', 'Cerrar', { duration: 3000 });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error al eliminar el proyecto:', error);
+      });
+    }
   }
+
   reloadPage() {
     window.location.reload();
   }
-  }
+}
