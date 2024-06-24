@@ -7,7 +7,7 @@
             <span *ngIf="expanded">{{menu.title}}</span>
           </button>
           <a *ngIf="!menu.subMenu || menu.subMenu.length === 0" [routerLink]="menu.url"></a>
-          <mat-menu #subMenu="matMenu" class="small-menu">
+          <mat-menu #subMenu="matMenu">
             <ng-container *ngFor="let subMenu of menu.subMenu">
               <button mat-menu-item [routerLink]="subMenu.url">
                 <img [src]="subMenu.icono" alt="">

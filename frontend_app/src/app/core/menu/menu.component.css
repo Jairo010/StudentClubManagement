@@ -16,41 +16,19 @@ mat-nav-list {
   
   span {
     display: inline-block;
-    padding-left: 20px;
+    padding-left: 25px;
     font-size: 20px;
+    height: max-content;
+    width: max-content;
   }
   
-  a,
-  a:link,
-  a:visited,
-  a:active {
-    color: white !important;
-    font-size: 14px;
-  }
-  
-  .mat-menu-content {
-    font-size: 14px;
-  }
-  
-  .mat-menu-item {
+  .mat-mdc-menu-item {
+    font-size: 14px; 
     padding: 8px 16px;
   }
   
-  .mat-menu-item img {
-    width: 20px;
-    height: 20px;
-  }
-  .small-menu {
-    max-height: 200px;
-    overflow-y: auto;
-  }
-  .mat-mdc-menu-item {
-    font-size: 14px; /* Reducir tamaño de fuente */
-    padding: 8px 16px; /* Reducir espaciado interno */
-  }
-  
   .mat-mdc-menu-item img {
-    width: 20px; /* Reducir tamaño de íconos */
+    width: 20px; 
     height: 20px;
   }
     

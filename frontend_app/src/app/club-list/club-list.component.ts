@@ -77,6 +77,7 @@ export class ClubsListComponent {
             if (response.id) {
                 const clubData = { ...response };
                 this.clubsService.updateClub(clubData).subscribe(() => {
+                    alert('Club actualizado exitosamente');
                     this.reloadPage();
                 });
             }
@@ -84,11 +85,13 @@ export class ClubsListComponent {
     }
 
     delete(id: string) {
-        this.clubsService.deleteClub(id).subscribe(() => {
+        if (confirm("¿Está seguro de eliminar este Club?")) {
+        this.clubsService.deleteClub!(id).subscribe(() => {
             this.reloadPage();
         }, (error) => {
             console.error('Error deleting club:', error);
         });
+    }
     }
 
     reloadPage() {

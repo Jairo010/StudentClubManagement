@@ -80,6 +80,7 @@ export class TalksListComponent {
       if (response.id) {
         const talkData = { ...response };
         this.talksService.updateTalk(talkData).subscribe(() => {
+          alert('Charla actualizada exitosamente');
           this.reloadPage();
         });
       }
@@ -87,11 +88,13 @@ export class TalksListComponent {
   }
 
   delete(id:string){
+    if (confirm("¿Está seguro de eliminar esta charla?")) {
     this.talksService.deleteTalk(id).subscribe(() => {
       this. reloadPage() 
     }, (error) => {
       console.error('Error deleting member:', error);
     });
+   }
   }
 
   reloadPage() {

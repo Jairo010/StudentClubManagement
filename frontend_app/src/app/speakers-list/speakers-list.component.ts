@@ -82,6 +82,7 @@ export class SpeakersListComponent {
       if (response.card) {
         const speakerData = { ...response };
         this.speakersService.updateSpeaker(speakerData).subscribe(() => {
+          alert('Ponente actualizado exitosamente');
           this.reloadPage();
         });
       }
@@ -89,11 +90,13 @@ export class SpeakersListComponent {
   }
 
   delete(card: string) {
-    this.speakersService.deleteSpeaker(card).subscribe(() => {
+    if (confirm("¿Está seguro de eliminar este ponente?")) {
+    this.speakersService.deleteSpeaker!(card).subscribe(() => {
       this.reloadPage();
     }, (error) => {
       console.error('Error al eliminar el speaker:', error);
     });
+   }
   }
 
   reloadPage() {

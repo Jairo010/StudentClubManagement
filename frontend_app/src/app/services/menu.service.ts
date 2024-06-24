@@ -16,7 +16,7 @@ export class MenuService {
       title: 'Miembros', url: '/', icono: '/assets/icons/miembros.png',
       subMenu: [
         {title: 'Nuevo Miembro', url: '/registromiembros', icono: '/assets/icons/registromiembro.png'},
-        {title: 'Lista de Miebros', url: '/miembros', icono: '/assets/icons/miembros.png'}
+        {title: 'Lista de Miembros', url: '/miembros', icono: '/assets/icons/miembros.png'}
       ]
     },
     {
@@ -32,12 +32,14 @@ export class MenuService {
       title: 'Clubs', url: '/', icono: '/assets/icons/reunion.png',
       subMenu: [
         {title: 'Clubs', url: '/clubs-list', icono: '/assets/icons/reunion.png'},
+        {title: 'Miembros', url: '/clubs-miembros', icono: '/assets/icons/reunion.png'},
         {title: 'Agregar Club', url: '/clubs', icono: '/assets/icons/agregar-club.png'},
       ]
     },
     {
       title: 'Eventos', url: '/', icono: '/assets/icons/evento.png',
       subMenu: [
+        {title: 'Programación', url: '/eventos-generales', icono: '/assets/icons/evento.png'},
         {title: 'Eventos', url: '/eventos', icono: '/assets/icons/evento.png'},
         {title: 'Agregar Eventos', url: '/events', icono: '/assets/icons/agregar-evento.png'},
         {title: 'Competiciones', url: '/competitions-list', icono: '/assets/icons/concurso.png'},
@@ -47,6 +49,7 @@ export class MenuService {
     {
       title: 'Charlas', url: '/', icono: '/assets/icons/charla.png',
       subMenu: [
+        {title: 'Temas Ponencias', url: '/talkspeaker-list', icono: '/assets/icons/charla.png'},
         {title: 'Charlas', url: '/talks-list', icono: '/assets/icons/charla.png'},
         {title: 'Agregar Charlas', url: '/talks', icono: '/assets/icons/agregar-charla.png'},
         {title: 'Ponentes', url: '/speakers-list', icono: '/assets/icons/ponente.png'},

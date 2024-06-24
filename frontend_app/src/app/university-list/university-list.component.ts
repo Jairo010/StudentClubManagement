@@ -74,6 +74,7 @@ export class UniversityListComponent {
       if (response.id) {
         const university = { ...response };
         this.universitiesService.updateUniversity(university).subscribe(() => {
+          alert('Universidad actualizada exitosamente');
           this.reloadPage();
         });
       } else {
@@ -85,11 +86,13 @@ export class UniversityListComponent {
   }
 
   delete(id: string) {
+    if (confirm("¿Está seguro de eliminar esta universidad?")) {
     this.universitiesService.deleteUniversity(id).subscribe(() => {
       this.reloadPage();
     }, (error) => {
       console.error('Error al eliminar la universidad:', error);
     });
+   }
   }
 
   reloadPage() {

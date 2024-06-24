@@ -82,17 +82,20 @@ export class ProjectListComponent {
       if(response.id){
         const project = {...response}
         this.projectsService.updateProject(project).subscribe(() => {
+          alert('Proyecto actualizado exitosamente');
           this.reloadPage()
         })
       } 
     });
   }
   delete(id:string){
-    this.projectsService.deleteProject(id).subscribe(() => {
+    if (confirm("¿Está seguro de eliminar este Proyecto?")) {
+    this.projectsService.deleteProject!(id).subscribe(() => {
       this.reloadPage()
     }, (error) => {
       console.error('Error al eliminar el proyecto:', error);
     });
+   }
   }
   reloadPage() {
     window.location.reload();
