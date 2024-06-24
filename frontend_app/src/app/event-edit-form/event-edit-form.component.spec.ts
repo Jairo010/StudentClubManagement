@@ -18,6 +18,7 @@ describe('EventEditFormComponent', () => {
     startDate: new Date(),
     endDate: new Date(),
     typeEvent: 'Test Type',
+    status: 'activo'
   };
 
   beforeEach(async () => {

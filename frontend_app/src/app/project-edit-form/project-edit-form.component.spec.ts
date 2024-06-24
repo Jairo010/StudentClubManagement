@@ -17,9 +17,9 @@ describe('ProjectEditFormComponent', () => {
       id: '1',
       name: 'Test Project',
       description: 'Test Description',
-      startDate: '2022-01-01',
-      endDate: '2022-01-31',
-      idClub: '1'
+      dateStart: '2022-01-01',
+      dateEnd: '2022-01-31',
+      Club: '1'
     };
 
     await TestBed.configureTestingModule({      
