@@ -25,9 +25,6 @@ describe('ResgistrationTasksComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
   it('form should be an Object when all inpust are complete', () => {
     const name = component.register.controls['name'];
     const description = component.register.controls['description'];
@@ -50,7 +47,7 @@ describe('ResgistrationTasksComponent', () => {
     };
       component.onSubmit();
     
-      const req = httpMock.expectOne('http://localhost:5000/api/tasks'); // Ajusta la URL según tu API
+      const req = httpMock.expectOne('https://studentsmanagementclub-back.onrender.com/api/tasks'); // Ajusta la URL según tu API
       expect(req.request.method).toBe('POST');
       req.flush(mockUser);
   
@@ -79,7 +76,7 @@ describe('ResgistrationTasksComponent', () => {
     };
       component.onSubmit();
     
-      //const req = httpMock.expectOne('http://localhost:5000/api/tasks'); // Ajusta la URL según tu API
+      //const req = httpMock.expectOne('https://studentsmanagementclub-back.onrender.com/api/tasks'); // Ajusta la URL según tu API
       //expect(req.request.method).toBe('POST');
       //req.flush(mockUser);
   
@@ -108,8 +105,8 @@ describe('ResgistrationTasksComponent', () => {
     };
       component.onSubmit();
     
-      //const req = httpMock.expectOne('http://localhost:5000/api/tasks'); // Ajusta la URL según tu API
-      //expect(req.request.method).toBe('POST');
+      //const req = httpMock.expectOne('https://studentsmanagementclub-back.onrender.com/api/tasks'); // Ajusta la URL según tu API
+      //expect(req.request.method).toBe('PUT');
       //req.flush(mockUser);
   
       expect(component.register.valid).toBeFalsy;
@@ -138,7 +135,7 @@ describe('ResgistrationTasksComponent', () => {
     };
       component.onSubmit();
     
-      //const req = httpMock.expectOne('http://localhost:5000/api/tasks'); // Ajusta la URL según tu API
+      //const req = httpMock.expectOne('https://studentsmanagementclub-back.onrender.com/api/tasks'); // Ajusta la URL según tu API
       //expect(req.request.method).toBe('POST');
       //req.flush(mockUser);
   

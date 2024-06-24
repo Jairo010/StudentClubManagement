@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
@@ -17,7 +17,7 @@ import { GroupsEditFormComponent } from '../groups-edit-form/groups-edit-form.co
   styleUrls: ['./groups-list.component.css'],
   imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
 })
-export class GroupsListComponent {
+export class GroupsListComponent implements OnInit{
   private groupsService = inject(GroupsService);
 
   data: any = [];
@@ -29,6 +29,10 @@ export class GroupsListComponent {
     { field: 'description', title: 'Descripción' },
     { field: 'status', title: 'Habilitado' }
   ];
+
+  ngOnInit(): void {
+      this.loadGroups();
+  }
 
   records: any = [];
   totalRecords = this.records.length;

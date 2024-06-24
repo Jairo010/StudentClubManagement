@@ -25,6 +25,9 @@ export class MembersListComponent  {
 
   data:any = []
 
+  ngOnInit(): void {
+    this.loadMembers();
+  }
   
   MetaDataColumn: MetaDataColumn[] = [
     {field:'card', title:'Cedula'},
