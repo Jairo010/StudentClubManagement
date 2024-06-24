@@ -1,8 +1,9 @@
 {
-    "builds": [
+    "routes": [
       {
-        "src": "develop",
-        "use": "@vercel/build-angular"
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ]
   }
-  ]
-}
+  
