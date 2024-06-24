@@ -27,7 +27,7 @@ export class MemberEditFormComponent implements OnInit {
   group!: FormGroup;
 
   constructor(
-    private reference: MatDialogRef<MemberEditFormComponent>,
+    public reference: MatDialogRef<MemberEditFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IMemberData,
     private membersService: MembersService
   ) {

@@ -23,6 +23,10 @@ export class TalksListComponent {
   data: any = [];
   displayedColumns: string[] = ['id','topic', 'image', 'startDate', 'endDate', 'status', 'actions'];
 
+  ngOnInit(): void{
+      this.loadTalks();
+  }
+
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'id', title: 'Codigo' },
     { field: 'topic', title: 'Tema' },

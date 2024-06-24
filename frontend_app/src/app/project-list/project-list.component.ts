@@ -23,6 +23,9 @@ export class ProjectListComponent {
 
   data:any = []
 
+  ngOnInit(): void {
+    this.loadProjects();
+  }
   
   MetaDataColumn: MetaDataColumn[] = [
     {field:'id', title:'Codigo'},
