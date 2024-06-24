@@ -19,13 +19,13 @@
       <div class="mb-4">
         <label for="idCompetition" class="block text-gray-700 font-bold mb-2">Concurso:</label>
         <select id="idCompetition" formControlName="idCompetition" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-          <option *ngFor="let competition of competitions" [value]="competition.id">{{ competition.name }}</option>
+          <option *ngFor="let competition of competitions" [value]="competition.id">{{ competition.Tipo_Concurso }}</option>
         </select>
       </div>
       <div class="mb-4">
         <label for="idGroup" class="block text-gray-700 font-bold mb-2">Grupo:</label>
-        <select id="idGroup" formControlName="idGroup" class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
-          <option *ngFor="let group of groups" [value]="group.id">{{ group.name }}</option>
+        <select formControlName="idGroup" id="idGroup" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
+          <option *ngFor="let group of groups" [value]="group.Id_Grupo">{{ group.Nombre_Grupo }}</option>
         </select>
       </div>
       <div class="mb-4">

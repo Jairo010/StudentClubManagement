@@ -9,19 +9,32 @@ import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { environment } from '../../environments/environment.development';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
+import { TransactionEditFormComponent } from '../transaction-edit-form/transaction-edit-form.component';
 
 @Component({
   selector: 'app-transactions-list',
   standalone: true,
   templateUrl: './transactions-list.component.component.html',
   styleUrl: './transactions-list.component.component.css',
-  imports: [CommonModule, MatButtonModule, MatIconModule,SharedModule]
+  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
 })
 export class TransactionsListComponent implements OnInit {
   private transactionsService = inject(TransactionsService);
 
   data: any[] = [];
-  displayedColumns: string[] = ['id', 'amount', 'typeRegister', 'typeTransaction', 'idCompetition', 'idGroup', 'total', 'description', 'actions'];
+  field: any[] = []; 
+  displayedColumns: string[] = [
+    'id',
+    'amount',
+    'typeRegister',
+    'typeTransaction',
+    'idCompetition',
+    'idGroup',
+    'total',
+    'description',
+    'actions'
+  ];
+  
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -36,33 +49,36 @@ export class TransactionsListComponent implements OnInit {
     { field: 'idGroup', title: 'Grupo' },
     { field: 'total', title: 'Total' },
     { field: 'description', title: 'Descripción' },
-    { field: 'actions', title: 'Acciones' }
   ];
 
   records: any[] = [];
   totalRecords = this.records.length;
 
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
-    this.loadTransactions();
   }
 
   loadTransactions() {
     this.transactionsService.getTransactions().subscribe(
-      (data) => {
-        this.records = data;
-        this.totalRecords = this.records.length;
-        this.changePage(0);
+      (data: any) => {
+        this.records = data.data; 
+        this.field = [];
+        this.records.forEach((transaction: any) => {
+          this.field.push({
+            id: transaction.id_Transaccion,
+            amount: transaction.Monto_Transaccion,
+            typeRegister: transaction.Tipo_Registro,
+            typeTransaction: transaction.Tipo_Transaccion,
+            idCompetition: transaction.Id_Concurso,
+            idGroup: transaction.Id_Grupo,
+            total: transaction.Total,
+            description: transaction.Descripcion,
+          });
+        });
       },
       (error) => {
         console.error('Error al cargar las transacciones:', error);
       }
     );
-  }
-
-  changePage(page: number) {
-    const pageSize = environment.PAGE_SIZE;
-    const skip = pageSize * page;
-    this.data = this.records.slice(skip, skip + pageSize);
   }
 
   openForm(row: any | null = null) {
@@ -72,7 +88,7 @@ export class TransactionsListComponent implements OnInit {
       data: row
     };
 
-    const dialogRef = this.dialog.open(TransactionsRegisterFormComponent, options);
+    const dialogRef = this.dialog.open(TransactionEditFormComponent, options);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {

@@ -42,7 +42,7 @@ export class MenuService {
         {title: 'Programación', url: '/eventos-generales', icono: '/assets/icons/evento.png'},
         {title: 'Eventos', url: '/eventos', icono: '/assets/icons/evento.png'},
         {title: 'Agregar Eventos', url: '/events', icono: '/assets/icons/agregar-evento.png'},
-        {title: 'Competiciones', url: '/competitions-list', icono: '/assets/icons/concurso.png'},
+        {title: 'Competencias', url: '/competitions-list', icono: '/assets/icons/concurso.png'},
         {title: 'Agregar Competiciones', url: '/competitions', icono: '/assets/icons/agregar-concurso.png'},
       ]    
     },
@@ -59,19 +59,19 @@ export class MenuService {
     {
       title: 'Participantes', url: '/', icono: '/assets/icons/Usuario.png',
       subMenu: [
-        {title: 'Lista de Participantes', url: '/participants-list', icono: '/assets/icons/grupo.png'},
-        {title: 'Integrantes', url: '/competition-list', icono: '/assets/icons/grupo.png'},
-        {title: 'Concursos', url: '/group-competition-list', icono: '/assets/icons/grupo.png'},
+        {title: 'Lista de Participantes', url: '/participants-list', icono: '/assets/icons/lista-cliente.png'},
+        {title: 'Integrantes', url: '/competition-list', icono: '/assets/icons/diversidad.png'},
+        {title: 'Concursos', url: '/group-competition-list', icono: '/assets/icons/concurso1.png'},
         {title: 'Grupos', url: '/group-list', icono: '/assets/icons/grupo.png'},
         {title: 'Agregar Grupo', url: '/group', icono: '/assets/icons/agregar-grupo.png'},
         { title: 'Universidades', url: '/university-list', icono: '/assets/icons/universidad.png' },
         {title: 'Agregar Universidades', url: '/university', icono: '/assets/icons/agregar-universidad.png'}
       ]
     },{
-      title: 'Transacciones', url: '/competitions-list', icono: '/assets/icons/Usuario.png',
+      title: 'Transacciones', url: '/competitions-list', icono: '/assets/icons/transaccion.png',
       subMenu: [
-        {title: 'Transacciones', url: '/Transacciones', icono: '/assets/icons/grupo.png'},
-        {title: 'Historial', url: '/Transacciones-history', icono: '/assets/icons/grupo.png'}
+        {title: 'Transacciones', url: '/Transacciones', icono: '/assets/icons/transaccion.png'},
+        {title: 'Historial', url: '/Transacciones-history', icono: '/assets/icons/transaccion-history.png'}
       ]
     }
   ];

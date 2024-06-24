@@ -41,13 +41,13 @@ export class TransactionsRegisterFormComponent implements OnInit {
     }
 
     loadCompetitions() {
-      this.competitionsService.getCompetitions().subscribe(data => {
+      this.competitionsService.getCompetitionsCombo().subscribe(data => {
         this.competitions = data;
       });
     }
   
     loadGroups() {
-      this.groupsService.getGroups().subscribe(data => {
+      this.groupsService.getGroupsCombo().subscribe(data => {
         this.groups = data;
       });
     }
@@ -70,7 +70,7 @@ export class TransactionsRegisterFormComponent implements OnInit {
             this.snackBar.open('Transacción registrada con éxito', 'Cerrar', {
               duration: 3000, // Duración del mensaje en milisegundos
             });
-            this.router.navigate(['/transactions-list']);
+            this.router.navigate(['/Transacciones-history']);
           },
           error => {
             // Utiliza MatSnackBar para mostrar mensaje de error
