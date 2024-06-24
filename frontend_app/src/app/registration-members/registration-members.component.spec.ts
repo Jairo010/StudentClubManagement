@@ -28,6 +28,7 @@ describe('RegistrationMembersComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
   it('form should be an Object when all inpust are fill', () => {
     const emial = component.register.controls['email'];
     const password = component.register.controls['password'];
@@ -54,7 +55,7 @@ describe('RegistrationMembersComponent', () => {
     };
       component.onSignUp();
     
-      const req = httpMock.expectOne('http://localhost:5000/api/auth/createUser'); // Ajusta la URL según tu API
+      const req = httpMock.expectOne('https://studentsmanagementclub-back.onrender.com/api/auth/createUser'); // Ajusta la URL según tu API
       expect(req.request.method).toBe('POST');
       req.flush(mockUser);
   

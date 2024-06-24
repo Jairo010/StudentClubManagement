@@ -43,6 +43,10 @@ export class ClubsListComponent {
         this.loadClubs();
     }
 
+    ngOnInit(): void{
+        this.loadClubs();
+    }
+
     loadClubs() {
         this.clubsService.getClubs().subscribe(
             (data) => {

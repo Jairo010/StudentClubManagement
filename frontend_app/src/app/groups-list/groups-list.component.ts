@@ -23,7 +23,7 @@ import { GroupsEditFormComponent } from '../groups-edit-form/groups-edit-form.co
   templateUrl: './groups-list.component.html',
   styleUrls: ['./groups-list.component.css']
 })
-export class GroupsListComponent {
+export class GroupsListComponent implements OnInit{
   private groupsService = inject(GroupsService);
 
   data: any = [];
@@ -36,6 +36,10 @@ export class GroupsListComponent {
     { field: 'status', title: 'Habilitado' },
     
   ];
+
+  ngOnInit(): void {
+      this.loadGroups();
+  }
 
   records: any = [];
   totalRecords = this.records.length;

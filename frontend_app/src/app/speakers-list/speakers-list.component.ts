@@ -24,6 +24,10 @@ export class SpeakersListComponent {
   data: any = [];
   displayedColumns: string[] = ['card', 'name', 'lastName', 'email', 'phone','topic', 'actions'];
 
+  ngOnInit(): void{
+    this.loadSpeakers();
+  }
+
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'card', title: 'Cédula' },
     { field: 'name', title: 'Nombre' },
