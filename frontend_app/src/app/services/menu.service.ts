@@ -57,14 +57,21 @@ export class MenuService {
       ]
     },
     {
-      title: 'Participantes', url: '/competitions-list', icono: '/assets/icons/Usuario.png',
+      title: 'Participantes', url: '/', icono: '/assets/icons/Usuario.png',
       subMenu: [
-        {title: 'Grupos', url: '/group-list', icono: '/assets/icons/grupo.png'},
+        {title: 'Lista de Participantes', url: '/participants-list', icono: '/assets/icons/grupo.png'},
         {title: 'Integrantes', url: '/competition-list', icono: '/assets/icons/grupo.png'},
         {title: 'Concursos', url: '/group-competition-list', icono: '/assets/icons/grupo.png'},
+        {title: 'Grupos', url: '/group-list', icono: '/assets/icons/grupo.png'},
         {title: 'Agregar Grupo', url: '/group', icono: '/assets/icons/agregar-grupo.png'},
         { title: 'Universidades', url: '/university-list', icono: '/assets/icons/universidad.png' },
         {title: 'Agregar Universidades', url: '/university', icono: '/assets/icons/agregar-universidad.png'}
+      ]
+    },{
+      title: 'Transacciones', url: '/competitions-list', icono: '/assets/icons/Usuario.png',
+      subMenu: [
+        {title: 'Transacciones', url: '/Transacciones', icono: '/assets/icons/grupo.png'},
+        {title: 'Historial', url: '/Transacciones-history', icono: '/assets/icons/grupo.png'}
       ]
     }
   ];

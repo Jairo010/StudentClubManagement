@@ -28,6 +28,9 @@ import { AsignSpeakersComponent } from './asign-speakers/asign-speakers.componen
 import { RegistrationParticipantCompetitionComponent } from './registration-participant-competition/registration-participant-competition.component';
 import { CompetitionParticipantsListComponent } from './competition-participants-list/competition-participants-list.component';
 import { GroupsParticipantsComponent } from './groups-participants/groups-participants.component';
+import { ListParticipantsComponent } from './list-participants/list-participants.component';
+import { TransactionsRegisterFormComponent } from './transactions-register-form/transactions-register-form.component';
+import { TransactionsListComponent } from './transactions-list.component/transactions-list.component.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -60,4 +63,7 @@ export const routes: Routes = [
     { path: 'registrar-concurso', component: RegistrationParticipantCompetitionComponent},
     { path: 'competition-list', component: CompetitionParticipantsListComponent},
     { path: 'group-competition-list', component: GroupsParticipantsComponent},
+    { path: 'participants-list', component:ListParticipantsComponent},
+    { path: 'Transacciones', component:TransactionsRegisterFormComponent},
+    { path: 'Transacciones-history', component:TransactionsListComponent},
 ];
