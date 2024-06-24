@@ -2,6 +2,6 @@
   <app-page-index></app-page-index>
 </ng-template>
 
-<div *ngIf="isLoginRoute || isRegisterRoute; else mainContent">
+<div *ngIf="isLoginRoute || isRegisterRoute || isConcursoRoute; else mainContent">
   <router-outlet></router-outlet>
 </div>

@@ -1,14 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ISpeakers } from '../interfaces/speakers.interface';
 import { SpeakersService } from '../services/api_serivices/speakers/speakers.service';
 import { SpeakersEditFormComponent } from '../speakers-edit-form/speakers-edit-form.component';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
 import { environment } from '../../environments/environment.development';
 import { SharedModule } from '../shared/shared.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-speakers-list',
@@ -36,7 +37,7 @@ export class SpeakersListComponent {
   totalRecords = this.records.length;
   field: any[] = [];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.loadSpeakers();
   }
 
@@ -53,7 +54,6 @@ export class SpeakersListComponent {
             phone: speaker.Telefono_Ponente,
             biography: speaker.Biografia_Ponente,
             topic: speaker.Tema_Charla
-
           });
         });
         this.totalRecords = this.records.length;
@@ -82,7 +82,9 @@ export class SpeakersListComponent {
       if (response.card) {
         const speakerData = { ...response };
         this.speakersService.updateSpeaker(speakerData).subscribe(() => {
-          alert('Ponente actualizado exitosamente');
+          this.snackBar.open('Ponente actualizado exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.reloadPage();
         });
       }
@@ -91,12 +93,18 @@ export class SpeakersListComponent {
 
   delete(card: string) {
     if (confirm("¿Está seguro de eliminar este ponente?")) {
-    this.speakersService.deleteSpeaker!(card).subscribe(() => {
-      this.reloadPage();
-    }, (error) => {
-      console.error('Error al eliminar el speaker:', error);
-    });
-   }
+      this.speakersService.deleteSpeaker!(card).subscribe(() => {
+        this.snackBar.open('Ponente eliminado exitosamente', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error al eliminar el speaker:', error);
+        this.snackBar.open('Error al eliminar el ponente', 'Cerrar', {
+          duration: 3000, // Duración del mensaje en milisegundos
+        });
+      });
+    }
   }
 
   reloadPage() {

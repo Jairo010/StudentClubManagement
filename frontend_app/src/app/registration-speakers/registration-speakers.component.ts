@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { CommonModule } from '@angular/common';
 import { ISpeakers } from '../interfaces/speakers.interface';
 import { SpeakersService } from '../services/api_serivices/speakers/speakers.service';
@@ -15,6 +16,8 @@ import { SpeakersService } from '../services/api_serivices/speakers/speakers.ser
 export class RegistrationSpeakersComponent implements OnInit {
   speakersService = inject(SpeakersService);
   router = inject(Router);
+  // Agrega MatSnackBar al constructor
+  constructor(private snackBar: MatSnackBar) {}
 
   speakers = new FormGroup({
     card: new FormControl<any>('', [Validators.required]),
@@ -42,15 +45,24 @@ export class RegistrationSpeakersComponent implements OnInit {
 
       this.speakersService.createSpeaker(speakerData).subscribe(
         response => {
-          alert('Ponente registrado con éxito');
+          // Utiliza MatSnackBar para mostrar mensaje de éxito
+          this.snackBar.open('Ponente registrado con éxito', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           this.router.navigate(['/speakers-list']);
         },
         error => {
-          alert('Error al registrar ponente');
+          // Utiliza MatSnackBar para mostrar mensaje de error
+          this.snackBar.open('Error al registrar ponente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
         }
       );
     } else {
-      alert('Formulario inválido');
+      // Utiliza MatSnackBar para mostrar mensaje de formulario inválido
+      this.snackBar.open('Formulario inválido', 'Cerrar', {
+        duration: 3000, // Duración del mensaje en milisegundos
+      });
     }
   }
 }

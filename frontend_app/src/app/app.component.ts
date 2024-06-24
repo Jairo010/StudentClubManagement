@@ -18,6 +18,7 @@ export class AppComponent {
   title = 'frontend_app';
   isLoginRoute = false;
   isRegisterRoute= false;
+  isConcursoRoute= false;
 
   constructor(private router: Router) {
     this.router.events
@@ -25,6 +26,7 @@ export class AppComponent {
       .subscribe((event: NavigationEnd) => {
         this.isLoginRoute = event.urlAfterRedirects === '/login';
         this.isRegisterRoute = event.urlAfterRedirects === '/participantes';
+        this.isConcursoRoute = event.urlAfterRedirects === '/registrar-concurso';
       });
   }
 }

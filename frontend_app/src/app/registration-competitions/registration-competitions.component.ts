@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CompetitionsService } from '../services/api_serivices/competitions/competitions.service';
 
@@ -13,6 +14,7 @@ import { CompetitionsService } from '../services/api_serivices/competitions/comp
 export class RegistrationCompetitionsComponent {
   competitionService = inject(CompetitionsService);
   router = inject(Router);
+  private snackBar: MatSnackBar;
 
   register = new FormGroup({
     type: new FormControl<any>('', [Validators.required]),
@@ -20,6 +22,10 @@ export class RegistrationCompetitionsComponent {
     price: new FormControl<any>('', [Validators.required]),
     status: new FormControl<any>('', [Validators.required])
   });
+
+  constructor(snackBar: MatSnackBar) {
+    this.snackBar = snackBar;
+  }
 
   onSignUp() {
     if (this.register.valid) {
@@ -32,17 +38,17 @@ export class RegistrationCompetitionsComponent {
 
       this.competitionService.createCompetition(competitionData).subscribe(
         response => {
-          alert('Competicion registrada exitosamente');
+          this.snackBar.open('Competicion registrada exitosamente', 'Cerrar', { duration: 3000 });
           console.log('Registro exitoso', response);
           this.router.navigate(['/competitions-list']);
         },
         error => {
-          alert('Error al registrar la competicion');
+          this.snackBar.open('Error al registrar la competicion', 'Cerrar', { duration: 3000 });
           console.error('Error al registrar', error);
         }
       );
     } else {
-      alert('Formulario inválido');
+      this.snackBar.open('Formulario inválido', 'Cerrar', { duration: 3000 });
     }
   }
 }

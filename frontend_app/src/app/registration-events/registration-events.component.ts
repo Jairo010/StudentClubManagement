@@ -1,5 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { IEvents } from '../interfaces/events.interface';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { EventsService } from '../services/api_serivices/events/events.service';
 export class RegistrationEventsComponent implements OnInit {
   events = inject(EventsService);
   router = inject(Router);
-  project:any;
+  project: any;
+  private snackBar: MatSnackBar;
 
   eventos = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
@@ -25,6 +27,10 @@ export class RegistrationEventsComponent implements OnInit {
     typeEvent: new FormControl<any>('', [Validators.required]),
     status: new FormControl<any>('', [Validators.required]),
   });
+
+  constructor(snackBar: MatSnackBar) {
+    this.snackBar = snackBar;
+  }
 
   ngOnInit() {}
 
@@ -41,17 +47,17 @@ export class RegistrationEventsComponent implements OnInit {
 
       this.events.createEvent(eventData).subscribe(
         response => {
-          alert('Evento registrado exitosamente');
+          this.snackBar.open('Evento registrado exitosamente', 'Cerrar', { duration: 3000 });
           console.log('Evento registrado con éxito', response);
           this.router.navigate(['/eventos']);
         },
         error => {
-          alert('Error al registrar el evento');
+          this.snackBar.open('Error al registrar el evento', 'Cerrar', { duration: 3000 });
           console.error('Error al registrar evento', error);
         }
       );
     } else {
-      alert('Formulario inválido');
+      this.snackBar.open('Formulario inválido', 'Cerrar', { duration: 3000 });
     }
   }
 

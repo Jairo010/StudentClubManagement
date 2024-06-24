@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { TableComponent } from './table/table.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [ ContainerComponent,PaginatorComponent, TableComponent],
@@ -23,10 +24,11 @@ import { TableComponent } from './table/table.component';
     NgScrollbarModule,
     MatPaginatorModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   exports:[
-    MatButtonModule,MatIconModule, TableComponent,ContainerComponent,PaginatorComponent,NgScrollbarModule,FlexModule,MatTableModule
+    MatButtonModule, MatDialogModule,MatIconModule, TableComponent,ContainerComponent,PaginatorComponent,NgScrollbarModule,FlexModule,MatTableModule
   ]
 })
 export class SharedModule { 

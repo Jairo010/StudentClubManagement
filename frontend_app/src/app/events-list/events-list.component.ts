@@ -1,11 +1,12 @@
-import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importar MatSnackBar
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SharedModule } from '../shared/shared.module';
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IEvents } from '../interfaces/events.interface';
 import { EventEditFormComponent } from '../event-edit-form/event-edit-form.component';
 import { EventsService } from '../services/api_serivices/events/events.service';
@@ -13,9 +14,14 @@ import { EventsService } from '../services/api_serivices/events/events.service';
 @Component({
   selector: 'app-events-list',
   standalone: true,
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatIconModule,
+    SharedModule
+  ],
   templateUrl: './events-list.component.html',
-  styleUrls: ['./events-list.component.css'],
-  imports: [CommonModule, MatButtonModule, MatIconModule, SharedModule]
+  styleUrls: ['./events-list.component.css']
 })
 export class EventsListComponent {
   private eventsService = inject(EventsService);
@@ -36,7 +42,7 @@ export class EventsListComponent {
   totalRecords = this.records.length;
   field: any[] = [];
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.loadEvents();
   }
 
@@ -80,7 +86,9 @@ export class EventsListComponent {
       if (response.id) {
         const eventData = { ...response };
         this.eventsService.updateEvent(eventData).subscribe(() => {
-          alert('Evento actualizado exitosamente');
+          this.snackBar.open('Evento actualizado exitosamente', 'Cerrar', {
+            duration: 3000,
+          });
           this.reloadPage();
         });
       }
@@ -89,12 +97,15 @@ export class EventsListComponent {
 
   delete(id: number) {
     if (confirm("¿Está seguro de eliminar este Evento?")) {
-    this.eventsService.deleteEvent(id).subscribe(() => {
-      this.reloadPage();
-    }, (error) => {
-      console.error('Error deleting event:', error);
-    });
-  }
+      this.eventsService.deleteEvent(id).subscribe(() => {
+        this.snackBar.open('Evento eliminado correctamente', 'Cerrar', {
+          duration: 3000,
+        });
+        this.reloadPage();
+      }, (error) => {
+        console.error('Error deleting event:', error);
+      });
+    }
   }
 
   reloadPage() {

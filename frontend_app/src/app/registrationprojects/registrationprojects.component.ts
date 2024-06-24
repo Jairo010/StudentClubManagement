@@ -1,34 +1,39 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IProjects } from '../interfaces/projects.interface';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-registrationprojects',
   standalone: true,
   templateUrl: './registrationprojects.component.html',
-  styleUrl: './registrationprojects.component.css',
+  styleUrls: ['./registrationprojects.component.css'],
   imports: [FormsModule, ReactiveFormsModule, CommonModule]
 })
-export class RegistrationprojectsComponent implements OnInit{
+export class RegistrationprojectsComponent implements OnInit {
   projects = inject(ProjectsService);
   router = inject(Router);
-  project:any;
-  clubs = inject(ClubsService)
+  project: any;
+  clubs = inject(ClubsService);
   clubsData: any[] = [];
+
+  // Agrega MatSnackBar al constructor
+  constructor(private snackBar: MatSnackBar) {}
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
-    description: new FormControl<any>('',),
-    startDate: new FormControl<any>('', [Validators.required,]),
-    endDate: new FormControl<any>('', [Validators.required,]),
-    club: new FormControl<any>('', [Validators.required,]),
+    description: new FormControl<any>(''),
+    startDate: new FormControl<any>('', [Validators.required]),
+    endDate: new FormControl<any>('', [Validators.required]),
+    club: new FormControl<any>('', [Validators.required]),
   });
 
-  ngOnInit(){
-    this.getClubs()    
+  ngOnInit() {
+    this.getClubs();
   }
 
   onSubmit() {
@@ -44,21 +49,29 @@ export class RegistrationprojectsComponent implements OnInit{
       this.projects.createProject(projectData).subscribe(
         response => {
           this.project = response;
-          alert('Proyecto registrado exitosamente');
+          // Utiliza MatSnackBar para mostrar mensaje de éxito
+          this.snackBar.open('Proyecto registrado exitosamente', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.log('Proyecto registrado exitosamente', response);
           this.router.navigate(['proyectos']);
-
         },
         error => {
-          alert('Error al registrar el Proyecto');
+          // Utiliza MatSnackBar para mostrar mensaje de error
+          this.snackBar.open('Error al registrar el Proyecto', 'Cerrar', {
+            duration: 3000, // Duración del mensaje en milisegundos
+          });
           console.error('Error al registrar el proyecto', error);
         }
       );
     } else {
-      alert('Formulario inválido');
+      // Utiliza MatSnackBar para mostrar mensaje de formulario inválido
+      this.snackBar.open('Formulario inválido', 'Cerrar', {
+        duration: 3000, // Duración del mensaje en milisegundos
+      });
     }
   }
-    
+
   getClubs() {
     this.clubs.getClubsCombo().subscribe(
       response => {
@@ -69,7 +82,5 @@ export class RegistrationprojectsComponent implements OnInit{
         console.error('Error al obtener los clubs', error);
       }
     );
-  }  
-  
+  }
 }
-

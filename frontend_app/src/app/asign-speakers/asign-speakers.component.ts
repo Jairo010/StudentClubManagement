@@ -1,25 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { TalksService } from '../services/api_serivices/talks/talks.service';
 import { SpeakersService } from '../services/api_serivices/speakers/speakers.service';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { environment } from '../../environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
-
-export interface ITalks {
-  id_Charla: string;
-  Tema_Charla: string;
-  Imagen_Charla: string;
-  Hora_Inicio: Date;
-  Hora_Fin: Date;
-  Estado_Charla: string;
-}
 
 @Component({
   selector: 'app-asign-speakers',
@@ -27,8 +17,8 @@ export interface ITalks {
   imports: [
     CommonModule,
     MatButtonModule,
-    MatIconModule,
     MatPaginatorModule,
+    MatIconModule,
     MatSelectModule,
     MatTableModule,
     SharedModule,
@@ -38,18 +28,27 @@ export interface ITalks {
   styleUrls: ['./asign-speakers.component.css']
 })
 export class AsignSpeakersComponent implements OnInit {
-  talks: any[] = [];
-  displayedColumns: string[] = ['id', 'name', 'topic', 'actions'];
+  talks: any = [];
   selectedTalk: any = null;
+  displayedColumns: string[] = ['id', 'name', 'apellido', 'topic', 'actions'];
   speakers: any[] = [];
+  allSpeakers: any[] = [];
+  selectedSpeakerId: string | null = null;
   loadingSpeakers = false;
-  pageSize = environment.PAGE_SIZE;
   pageIndex = 0;
+  pageSize = 10;
+  totalSpeakers = 0;
 
-  constructor(private talksService: TalksService, private speakersService: SpeakersService) {}
+  constructor(
+    private talksService: TalksService,
+    private speakersService: SpeakersService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     this.loadTalks();
+    this.loadSpeakers();
+    this.loadAllSpeakers();
   }
 
   loadTalks() {
@@ -58,9 +57,14 @@ export class AsignSpeakersComponent implements OnInit {
     });
   }
 
-  onSelectTalk(talk: ITalks) {
-    this.selectedTalk = talk;
+  onSelectTalk(event: any) {
+    this.selectedTalk = event.value;
     this.loadSpeakers();
+  }
+  loadAllSpeakers(){
+    this.speakersService.getSpeakers().subscribe(data => {
+      this.allSpeakers = data.data;
+    });
   }
 
   loadSpeakers() {
@@ -69,6 +73,7 @@ export class AsignSpeakersComponent implements OnInit {
       this.talksService.getSpeakersByTalk(this.selectedTalk.id_Charla).subscribe(
         data => {
           this.speakers = data.data;
+          this.totalSpeakers = this.speakers.length;
           this.loadingSpeakers = false;
         },
         error => {
@@ -80,37 +85,42 @@ export class AsignSpeakersComponent implements OnInit {
   }
 
   addSpeaker() {
-    const speakerId = prompt("Ingrese el ID del ponente a agregar:");
-    if (speakerId) {
-      this.talksService.assignTalk(this.selectedTalk!.id_Charla, speakerId).subscribe(
+    if (this.selectedSpeakerId && this.selectedTalk) {
+      this.talksService.assignTalk(this.selectedTalk.id_Charla, this.selectedSpeakerId).subscribe(
         () => {
           this.loadSpeakers();
-          alert('Se agregó el ponente correctamente.');
+          this.snackBar.open('Ponente agregado correctamente.', 'Cerrar', {
+            duration: 3000,
+          });
         },
         error => {
           console.error('Error adding speaker:', error);
+          this.snackBar.open('Error al agregar el ponente. Por favor, inténtalo de nuevo.', 'Cerrar', {
+            duration: 3000,
+          });
         }
       );
     }
   }
 
-  
   deleteSpeaker(speakerId: string) {
-    if (confirm("¿Está seguro de eliminar este ponente?")) {
-      this.talksService.deleteAssignedTalk(this.selectedTalk!.id_Charla, speakerId).subscribe(
-        () => {
-          this.loadSpeakers();
-          alert('Se eliminó el ponente correctamente.');
-        },
-        error => {
-          console.error('Error deleting speaker:', error);
-        }
-      );
+    if (confirm('¿Está seguro de eliminar este ponente?')) {
+      if (this.selectedTalk) {
+        this.talksService.deleteAssignedTalk(this.selectedTalk.id_Charla, speakerId).subscribe(
+          () => {
+            this.loadSpeakers();
+            this.snackBar.open('Ponente eliminado correctamente.', 'Cerrar', {
+              duration: 3000,
+            });
+          },
+          error => {
+            console.error('Error deleting speaker:', error);
+            this.snackBar.open('Error al eliminar el ponente. Por favor, inténtalo de nuevo.', 'Cerrar', {
+              duration: 3000,
+            });
+          }
+        );
+      }
     }
-  }
-
-  onPageChange(event: PageEvent) {
-    this.pageIndex = event.pageIndex;
-    this.loadSpeakers(); 
   }
 }

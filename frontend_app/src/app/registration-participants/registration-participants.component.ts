@@ -5,31 +5,35 @@ import { ParticipantsService } from '../services/api_serivices/participants/part
 import { CommonModule } from '@angular/common';
 import { UniversitiesService } from '../services/api_serivices/universities/universities.service';
 import { Router } from '@angular/router';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+
 export interface IUniversities {
   Id_Universidades: string;
   Nombre_Universidad: string;
   city: string;
   province: string;
 }
+
 @Component({
   selector: 'app-registration-participants',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatSnackBarModule],
   templateUrl: './registration-participants.component.html',
   styleUrls: ['./registration-participants.component.css']
 })
-
 export class RegistrationParticipantsComponent implements OnInit {
-regresar() {
-  this.router.navigate(['/']);
-
-}
   registerForm: FormGroup;
-  universitys: IUniversities[] = [];
+  universitys: any[] = [];
   private universitiesService = inject(UniversitiesService);
-  
+  private snackBar: MatSnackBar;
 
-  constructor(private fb: FormBuilder, private participantsService: ParticipantsService, private router:Router) {
+  constructor(
+    private fb: FormBuilder,
+    private participantsService: ParticipantsService,
+    private router: Router,
+    snackBar: MatSnackBar
+  ) {
+    this.snackBar = snackBar;
     this.registerForm = this.fb.group({
       card: ['', Validators.required],
       name: ['', Validators.required],
@@ -37,7 +41,7 @@ regresar() {
       email: ['', [Validators.required, Validators.email]],
       document: ['', Validators.required],
       idUniversity: ['', Validators.required],
-      status: [false, Validators.required]
+      status: [false, Validators.required] // Cambiado a booleano
     });
   }
 
@@ -53,21 +57,39 @@ regresar() {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const newParticipant: IParticipants = this.registerForm.value;
+      const statusValue = this.registerForm.get('status')?.value === 'Habilitado' ? true : false;
+
+      const newParticipant: IParticipants = {
+        card: this.registerForm.get('card')?.value,
+        name: this.registerForm.get('name')?.value,
+        lastName: this.registerForm.get('lastName')?.value,
+        email: this.registerForm.get('email')?.value,
+        document: this.registerForm.get('document')?.value,
+        idUniversity: this.registerForm.get('idUniversity')?.value,
+        status: statusValue
+      };
+
       this.participantsService.createParticipant(newParticipant).subscribe(
         response => {
           console.log('Participant registered successfully', response);
-          alert('Participante registrado correctamente');
+          this.snackBar.open('Participante registrado correctamente', 'Cerrar', { duration: 3000 });
           this.router.navigate(['/login']);
-
         },
         error => {
           console.error('Error registering participant', error);
-          alert('Error al registrar al participante, intentelo nuevamente');
+          this.snackBar.open('Error al registrar al participante, inténtelo nuevamente', 'Cerrar', { duration: 3000 });
         }
       );
     } else {
-      alert('Formulario Invalido.');
+      this.snackBar.open('Formulario inválido.', 'Cerrar', { duration: 3000 });
     }
+  }
+
+  regresar() {
+    this.router.navigate(['/']);
+  }
+
+  registrarConcurso() {
+    this.router.navigate(['/registrar-concurso']);
   }
 }

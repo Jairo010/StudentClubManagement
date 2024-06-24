@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { SharedModule } from "../shared/shared.module";
 import { environment } from '../../environments/environment.development';
 import { MetaDataColumn } from '../shared/interfaces/metacolumn.interface';
@@ -34,7 +35,11 @@ export class ClubsListComponent {
     totalRecords = this.records.length;
     field: any[] = [];
 
-    constructor(private dialog: MatDialog,private router: Router) {
+    constructor(
+        private dialog: MatDialog,
+        private router: Router,
+        private snackBar: MatSnackBar // Agrega MatSnackBar al constructor
+    ) {
         this.loadClubs();
     }
 
@@ -77,7 +82,9 @@ export class ClubsListComponent {
             if (response.id) {
                 const clubData = { ...response };
                 this.clubsService.updateClub(clubData).subscribe(() => {
-                    alert('Club actualizado exitosamente');
+                    this.snackBar.open('Club actualizado exitosamente', 'Cerrar', {
+                        duration: 3000, // Duración del mensaje en milisegundos
+                    });
                     this.reloadPage();
                 });
             }
@@ -86,12 +93,15 @@ export class ClubsListComponent {
 
     delete(id: string) {
         if (confirm("¿Está seguro de eliminar este Club?")) {
-        this.clubsService.deleteClub!(id).subscribe(() => {
-            this.reloadPage();
-        }, (error) => {
-            console.error('Error deleting club:', error);
-        });
-    }
+            this.clubsService.deleteClub!(id).subscribe(() => {
+                this.snackBar.open('Club eliminado exitosamente', 'Cerrar', {
+                    duration: 3000, // Duración del mensaje en milisegundos
+                });
+                this.reloadPage();
+            }, (error) => {
+                console.error('Error deleting club:', error);
+            });
+        }
     }
 
     reloadPage() {
