@@ -14,6 +14,9 @@ import { ILogin } from '../interfaces/userAuth.interface';
       ReactiveFormsModule,]
 })
 export class LoginComponent {
+registrarse() {
+  this.router.navigate(['/participantes']);
+}
 
   member = inject(UserService);
   router = inject(Router);

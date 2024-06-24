@@ -1,8 +1,8 @@
 <body class="bg-gray-100 p-4">
   <form method="POST" id="miFormulario" class="max-w-md mx-auto bg-white p-8 rounded shadow-md" [formGroup]="register" (ngSubmit)="onSubmit()">
     <h2 class="text-2xl font-bold mb-4 text-center">Registro de Proyectos</h2>
-    <div class="grid grid-cols-2 gap-4">
-      <div class="col-span-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
         <div class="mb-4">
           <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre:</label>
           <input type="text" formControlName="name" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
@@ -15,6 +15,8 @@
           <label for="fecha" class="block text-gray-700 font-bold mb-2">Fecha de inicio:</label>
           <input type="date" formControlName="startDate" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">
         </div>
+      </div>
+      <div>
         <div class="mb-4">
           <label for="fecha" class="block text-gray-700 font-bold mb-2">Fecha de Fin:</label>
           <input type="date" formControlName="endDate" required class="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500">

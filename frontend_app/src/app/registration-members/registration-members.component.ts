@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-registration-members',
   standalone: true,
   imports: [FormsModule, 
-    ReactiveFormsModule,],
+    ReactiveFormsModule],
   templateUrl: './registration-members.component.html',
   styleUrl: './registration-members.component.css'
 })

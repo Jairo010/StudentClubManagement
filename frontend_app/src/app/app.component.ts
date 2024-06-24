@@ -17,12 +17,14 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent {
   title = 'frontend_app';
   isLoginRoute = false;
+  isRegisterRoute= false;
 
   constructor(private router: Router) {
     this.router.events
       .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
         this.isLoginRoute = event.urlAfterRedirects === '/login';
+        this.isRegisterRoute = event.urlAfterRedirects === '/participantes';
       });
   }
 }

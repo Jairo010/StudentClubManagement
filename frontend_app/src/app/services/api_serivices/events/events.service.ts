@@ -44,7 +44,7 @@ export class EventsService {
   }
 
   deleteAssignedTalk(idEvent: string, idTalk: string):Observable<any>{
-    return this.http.delete<any>(environment.URL_API+ `events/competition/${idEvent}/${idTalk}`)
+    return this.http.delete<any>(environment.URL_API+ `events/talk/${idEvent}/${idTalk}`)
   }
 
   getCompetitionsByEvent (idEvent: string):Observable<any>{

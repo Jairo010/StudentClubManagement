@@ -80,6 +80,7 @@ export class EventsListComponent {
       if (response.id) {
         const eventData = { ...response };
         this.eventsService.updateEvent(eventData).subscribe(() => {
+          alert('Evento actualizado exitosamente');
           this.reloadPage();
         });
       }
@@ -87,11 +88,13 @@ export class EventsListComponent {
   }
 
   delete(id: number) {
+    if (confirm("¿Está seguro de eliminar este Evento?")) {
     this.eventsService.deleteEvent(id).subscribe(() => {
       this.reloadPage();
     }, (error) => {
       console.error('Error deleting event:', error);
     });
+  }
   }
 
   reloadPage() {

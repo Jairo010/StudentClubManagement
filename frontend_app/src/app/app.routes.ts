@@ -21,6 +21,10 @@ import { RegistrationSpeakersComponent } from './registration-speakers/registrat
 import { SpeakersListComponent } from './speakers-list/speakers-list.component';
 import { RegistrationTalksComponent } from './registration-talks/registration-talks.component';
 import { TalksListComponent } from './talks-list/talks-list.component';
+import { ClubsGeneralComponent } from './clubs-general/clubs-general.component';
+import { EventsGeneralComponent } from './events-general/events-general.component';
+import { RegistrationParticipantsComponent } from './registration-participants/registration-participants.component';
+import { AsignSpeakersComponent } from './asign-speakers/asign-speakers.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -32,9 +36,11 @@ export const routes: Routes = [
     { path: 'proyectos', component: ProjectListComponent},
     { path: 'clubs', component: RegistrationClubsComponent},
     { path: 'clubs-list', component: ClubsListComponent},
+    { path: 'clubs-miembros', component: ClubsGeneralComponent},
     { path: 'registrotareas', component: ResgistrationTasksComponent},
     { path: 'tareas', component: TasksListComponent},
     { path: 'eventos', component: EventsListComponent},
+    { path: 'eventos-generales', component: EventsGeneralComponent},
     { path: 'events', component: RegistrationEventsComponent},
     { path: 'university', component: UniversityComponent},
     { path: 'university-list', component: UniversityListComponent},
@@ -46,4 +52,6 @@ export const routes: Routes = [
     { path: 'speakers-list', component: SpeakersListComponent},
     { path: 'talks', component: RegistrationTalksComponent},
     { path: 'talks-list', component: TalksListComponent},
+    { path: 'participantes', component: RegistrationParticipantsComponent},
+    { path: 'talkspeaker-list', component: AsignSpeakersComponent},
 ];

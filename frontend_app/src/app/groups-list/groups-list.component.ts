@@ -76,6 +76,7 @@ export class GroupsListComponent {
       if (response.id) {
         const groupData = { ...response };
         this.groupsService.updateGroup(groupData).subscribe(() => {
+          alert('Grupo actualizado exitosamente');
           this.reloadPage();
         });
       }
@@ -83,11 +84,13 @@ export class GroupsListComponent {
   }
 
   delete(id: number) {
-    this.groupsService.deleteGroup(id.toString()).subscribe(() => {
+    if (confirm("¿Está seguro de eliminar este grupo?")) {
+    this.groupsService.deleteGroup!(id.toString()).subscribe(() => {
       this.reloadPage();
     }, (error) => {
       console.error('Error al eliminar el grupo:', error);
     });
+  }
   }
 
   reloadPage() {

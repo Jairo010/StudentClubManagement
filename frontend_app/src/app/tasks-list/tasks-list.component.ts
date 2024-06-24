@@ -93,11 +93,13 @@ export class TasksListComponent {
     });
   }
   delete(id:string){
+    if (confirm("¿Está seguro de eliminar esta Tarea?")) {
     this.tasksService.deleteTask(id).subscribe(() => {
       this. reloadPage() 
     }, (error) => {
       console.error('Error deleting member:', error);
     });
+   }
   }
   reloadPage() {
     window.location.reload();
