@@ -12,9 +12,9 @@ export interface IProjectData {
   id?: string;
   name: string;
   description: string;
-  startDate: string;
-  endDate: string;
-  idClub: string;
+  dateStart: string;
+  dateEnd: string;
+  Club: string;
 }
 
 @Component({
@@ -47,9 +47,9 @@ export class ProjectEditFormComponent implements OnInit {
       id: new FormControl(this.data?.id),
       name: new FormControl(this.data?.name, Validators.required),
       description: new FormControl(this.data?.description, Validators.required),
-      startDate: new FormControl(this.data?.startDate, Validators.required),
-      endDate: new FormControl(this.data?.endDate, Validators.required),
-      idClub: new FormControl(this.data?.idClub, Validators.required),
+      startDate: new FormControl(this.data?.dateStart, Validators.required),
+      endDate: new FormControl(this.data?.dateEnd, Validators.required),
+      Club: new FormControl(this.data?.Club, Validators.required),
     });
   }
 

@@ -10,6 +10,7 @@ export interface IEvents {
   startDate: Date;
   endDate: Date;
   typeEvent: string;
+  status: string;
 }
 
 @Component({
@@ -44,6 +45,7 @@ export class EventEditFormComponent implements OnInit {
       startDate: new FormControl(this.data?.startDate, Validators.required),
       endDate: new FormControl(this.data?.endDate, Validators.required),
       typeEvent: new FormControl(this.data?.typeEvent, Validators.required),
+      status: new FormControl(this.data?.status, Validators.required),
     });
   }
 

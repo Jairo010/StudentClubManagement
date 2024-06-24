@@ -79,6 +79,7 @@ export class CompetitionsListComponent {
       if (response.id) {
         const competitionData = { ...response };
         this.competitionsService.updateCompetition(competitionData).subscribe(() => {
+          alert('Competición actualizada exitosamente');
           this.reloadPage();
         });
       }
@@ -86,11 +87,13 @@ export class CompetitionsListComponent {
   }
 
   delete(id: string) {
-    this.competitionsService.deleteCompetition(id).subscribe(() => {
+    if (confirm("¿Está seguro de eliminar esta Competicion?")){ 
+    this.competitionsService.deleteCompetition!(id).subscribe(() => {
       this.reloadPage();
     }, (error) => {
       console.error('Error deleting competition:', error);
     });
+  }
   }
 
   reloadPage() {

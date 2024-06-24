@@ -16,7 +16,7 @@ export class TalksService {
     return this.http.post<ITalks>(environment.URL_API+"talks",talk);
   }
 
-  assignTalk(idTalk: number, card: string): Observable<any>{
+  assignTalk(idTalk: string, card: string): Observable<any>{
     return this.http.post<any>(environment.URL_API+"talks/assign",{idTalk: idTalk, card: card});
   }
 
@@ -35,11 +35,11 @@ export class TalksService {
     );
   }
 
-  getTalkById(id:number): Observable<any>{
+  getTalkById(id:string): Observable<any>{
     return this.http.get<any>(environment.URL_API+`talks/${id}`)
   }
 
-  getSpeakersByTalk(idTalk: number): Observable<any>{
+  getSpeakersByTalk(idTalk: string): Observable<any>{
     return this.http.get<any>(environment.URL_API+`talks/assign/${idTalk}`)
   }
 
@@ -51,7 +51,7 @@ export class TalksService {
     return this.http.delete<any>(environment.URL_API+`talks/${id}`)
   }
 
-  deleteAssignedTalk(idTalk: number, card: string): Observable<any>{
+  deleteAssignedTalk(idTalk: string, card: string): Observable<any>{
     return this.http.delete<any>(environment.URL_API+`talks/assign/${idTalk}/${card}`)
   }
 }

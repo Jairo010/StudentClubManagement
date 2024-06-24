@@ -41,7 +41,7 @@ export class RegistrationClubsComponent implements OnInit{
         response => {
           alert('Club registrado exitosamente');
           console.log('Club registrado exitosamente', response);
-          this.router.navigate(['/clubs']);
+          this.router.navigate(['/clubs-list']);
         },
         error => {
           alert('Error al registrar el club');
