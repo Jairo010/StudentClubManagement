@@ -3,7 +3,7 @@ import { ProjectsService } from '../services/api_serivices/projects/projects.ser
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { IProjects } from '../interfaces/projects.interface';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   templateUrl: './registrationprojects.component.html',
   styleUrls: ['./registrationprojects.component.css'],
-  imports: [FormsModule, ReactiveFormsModule, CommonModule]
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatSnackBarModule]
 })
 export class RegistrationprojectsComponent implements OnInit {
   projects = inject(ProjectsService);
@@ -20,20 +20,28 @@ export class RegistrationprojectsComponent implements OnInit {
   project: any;
   clubs = inject(ClubsService);
   clubsData: any[] = [];
+  minStartDate!: string;
+  minEndDate!: string;
 
   // Agrega MatSnackBar al constructor
   constructor(private snackBar: MatSnackBar) {}
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
-    description: new FormControl<any>(''),
+    description: new FormControl<any>('', [Validators.required]),
     startDate: new FormControl<any>('', [Validators.required]),
     endDate: new FormControl<any>('', [Validators.required]),
     club: new FormControl<any>('', [Validators.required]),
   });
 
   ngOnInit() {
-    this.getClubs();
+    this.getClubs();    
+      this.minStartDate = new Date().toISOString().split('T')[0];
+      this.minEndDate = this.minStartDate;    
+  }
+
+  updateEndDateMin() {
+    this.minEndDate = this.project.get('startDate')?.value || this.minStartDate;
   }
 
   onSubmit() {
@@ -82,5 +90,13 @@ export class RegistrationprojectsComponent implements OnInit {
         console.error('Error al obtener los clubs', error);
       }
     );
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.register.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es obligatorio';
+    }
+    return '';
   }
 }

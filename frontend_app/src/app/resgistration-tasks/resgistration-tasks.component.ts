@@ -3,14 +3,14 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { TasksService } from '../services/api_serivices/tasks/tasks.service';
 import { ITasks } from '../interfaces/tasks.interface';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { ProjectsService } from '../services/api_serivices/projects/projects.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-resgistration-tasks',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatSnackBarModule],
   templateUrl: './resgistration-tasks.component.html',
   styleUrls: ['./resgistration-tasks.component.css']
 })
@@ -20,21 +20,29 @@ export class ResgistrationTasksComponent implements OnInit {
   task: any;
   projectData: any[] = [];
   projects = inject(ProjectsService);
+  minStartDate!: string;
+  minEndDate!: string;
 
   // Agrega MatSnackBar al constructor
   constructor(private snackBar: MatSnackBar) {}
 
   register = new FormGroup({
     name: new FormControl<any>('', [Validators.required]),
-    description: new FormControl<any>(''),
+    description: new FormControl<any>('', [Validators.required]),
     limitDate: new FormControl<any>('', [Validators.required]),
     state: new FormControl<any>('', [Validators.required]),
-    evidence: new FormControl<any>('', [Validators.required]),
+    evidence: new FormControl<any>(''),
     idProject: new FormControl<any>('', [Validators.required]),
   });
 
   ngOnInit(): void {
-    this.getProjects();
+    this.getProjects();    
+      this.minStartDate = new Date().toISOString().split('T')[0];
+      this.minEndDate = this.minStartDate;        
+  }
+
+  updateEndDateMin() {
+    this.minEndDate = this.task.get('limitDate')?.value || this.minStartDate;
   }
 
   onSubmit() {
@@ -84,5 +92,13 @@ export class ResgistrationTasksComponent implements OnInit {
         console.error('Error al obtener los proyectos', error);
       }
     );
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.register.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es obligatorio';
+    }
+    return '';
   }
 }
