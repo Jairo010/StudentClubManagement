@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar'; 
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; 
 import { TransactionsService } from '../services/api_serivices/transactions/transactions.service';
 import { CompetitionsService } from '../services/api_serivices/competitions/competitions.service';
 import { GroupsService } from '../services/api_serivices/groups/groups.service';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-transactions-register-form',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatSnackBarModule],
   templateUrl: './transactions-register-form.component.html',
   styleUrls: ['./transactions-register-form.component.css']
 })
@@ -27,8 +27,8 @@ export class TransactionsRegisterFormComponent implements OnInit {
       typeRegister: new FormControl<any>('', [Validators.required]),
       typeTransaction: new FormControl<any>('', [Validators.required]),
       idCompetition: new FormControl<any>(''),
-      idGroup: new FormControl<any>(''),
-      total: new FormControl<any>('', [Validators.required]),
+      idGroup: new FormControl<any>('', [Validators.required]),
+      total: new FormControl<any>(null, [Validators.required]), // Cambiado a 'number' esperado
       description: new FormControl<any>('', [Validators.required])
     });
 
@@ -86,4 +86,12 @@ export class TransactionsRegisterFormComponent implements OnInit {
         });
       }
     }
-  }
+
+    getErrorMessage(controlName: string): string {
+      const control = this.transactionForm.get(controlName);
+      if (control?.hasError('required')) {
+        return `El campo ${controlName} es requerido`;
+      }
+      return '';
+    }
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; // Importa MatSnackBar
 import { CommonModule } from '@angular/common';
 import { ISpeakers } from '../interfaces/speakers.interface';
 import { SpeakersService } from '../services/api_serivices/speakers/speakers.service';
@@ -11,7 +11,7 @@ import { SpeakersService } from '../services/api_serivices/speakers/speakers.ser
   standalone: true,
   templateUrl: './registration-speakers.component.html',
   styleUrls: ['./registration-speakers.component.css'],
-  imports: [FormsModule, ReactiveFormsModule, CommonModule]
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, MatSnackBarModule]
 })
 export class RegistrationSpeakersComponent implements OnInit {
   speakersService = inject(SpeakersService);
@@ -20,11 +20,11 @@ export class RegistrationSpeakersComponent implements OnInit {
   constructor(private snackBar: MatSnackBar) {}
 
   speakers = new FormGroup({
-    card: new FormControl<any>('', [Validators.required]),
+    card: new FormControl<any>('', [Validators.required, Validators.pattern('^[0-9]{1,10}$')]),
     name: new FormControl<any>('', [Validators.required]),
     lastName: new FormControl<any>('', [Validators.required]),
     email: new FormControl<any>('', [Validators.required, Validators.email]),
-    phone: new FormControl<any>('', [Validators.required]),
+    phone: new FormControl<any>('', [Validators.required, Validators.pattern('^[0-9]{10,15}$')]),
     biography: new FormControl<any>('', [Validators.required]),
     topic: new FormControl<any>('', [Validators.required])
   });
@@ -64,5 +64,24 @@ export class RegistrationSpeakersComponent implements OnInit {
         duration: 3000, // Duración del mensaje en milisegundos
       });
     }
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.speakers.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es obligatorio';
+    }
+    if (control?.hasError('email')) {
+      return 'Ingrese un correo electrónico válido';
+    }
+    if (control?.hasError('pattern')) {
+      if (controlName === 'card') {
+        return 'La cédula debe tener solo números';
+      }
+      if (controlName === 'phone') {
+        return 'El teléfono debe tener entre 10 y 15 dígitos';
+      }
+    }
+    return '';
   }
 }

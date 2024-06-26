@@ -69,4 +69,27 @@ export class RegistrationClubsComponent implements OnInit {
       }
     );
   }
+
+  showErrors() {
+    const controls = this.register.controls;
+    Object.keys(controls).forEach(key => {
+      const control = controls[key as keyof typeof controls];
+      if (control.invalid) {
+        const invalidControl = document.querySelector(`[formControlName="${key}"]`);
+        invalidControl?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        (invalidControl as HTMLElement)?.focus();
+        this.snackBar.open(`Por favor, complete el campo ${key}`, 'Cerrar', { duration: 1000 });
+        return;
+      }
+    });
+  }
+
+  getErrorMessage(controlName: string): string {
+    const control = this.register.get(controlName);
+    if (control?.hasError('required')) {
+      return 'Este campo es obligatorio';
+    }
+    return '';
+  }
+
 }
