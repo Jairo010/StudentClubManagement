@@ -1,25 +1,56 @@
 <app-container>
     <h1 class="font-bold text-3xl pb-10 text-center">Tareas</h1>
     <ng-scrollbar class="heightMaxScrollbar">
-      <app-table [data]="data" [metaDataColumns]="MetaDataColumn">
-      <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row"> 
-              <button mat-icon-button color="primary" (click)="openForm(row)">
-                  <mat-icon>edit</mat-icon>
-              </button>
-              <button mat-icon-button color="accent" (click)="delete(row.id)">
-                  <mat-icon>delete</mat-icon>
-              </button>
+      <table mat-table [dataSource]="data" class="mat-elevation-z8">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Código</th>
+          <td mat-cell *matCellDef="let task">{{ task.id }}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let task">{{ task.name }}</td>
+        </ng-container>
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let task">{{ task.description }}</td>
+        </ng-container>
+        <ng-container matColumnDef="limitDate">
+          <th mat-header-cell *matHeaderCellDef>Fecha Límite</th>
+          <td mat-cell *matCellDef="let task">{{ task.limitDate }}</td>
+        </ng-container>
+        <ng-container matColumnDef="state">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let task">{{ task.state }}</td>
+        </ng-container>
+        <ng-container matColumnDef="evidence">
+          <th mat-header-cell *matHeaderCellDef>Evidencia</th>
+          <td mat-cell *matCellDef="let task">{{ task.evidence }}</td>
+        </ng-container>
+        <ng-container matColumnDef="project">
+          <th mat-header-cell *matHeaderCellDef>Proyecto</th>
+          <td mat-cell *matCellDef="let task">{{ task.project }}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let task">
+            <button mat-icon-button color="primary" (click)="openForm(task)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="delete(task.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
           </td>
-      </ng-container>
-  </app-table>
-  </ng-scrollbar>
-  <app-paginator
-  fxLayout
-  fxLayoutAlign="end center"
-  [lenght]="totalRecords"
-  (onChangePage)="changePage($event)"
-  >
-  </app-paginator>
-      </app-container>
+        </ng-container>
+  
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </ng-scrollbar>
+    <app-paginator
+      fxLayout
+      fxLayoutAlign="end center"
+      [lenght]="totalRecords"
+      (onChangePage)="changePage($event)">
+    </app-paginator>
+  </app-container>
+  

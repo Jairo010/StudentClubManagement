@@ -1,26 +1,49 @@
-<app-container>
+<app-container class="container">
   <h1 class="font-bold text-3xl pb-10 text-center">Eventos</h1>
-  <ng-scrollbar class="heightMaxScrollbar">
-      <app-table [data]="data" [metaDataColumns]="MetaDataColumn">
-        <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef></th>
-          <td mat-cell *matCellDef="let row"> 
-            <button mat-icon-button color="primary" (click)="openForm(row)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="accent" (click)="delete(row.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </ng-container>
-      </app-table>
-    </ng-scrollbar>
-    <app-paginator
-  fxLayout
-  fxLayoutAlign="end center"
-  [lenght]="totalRecords"
-  (onChangePage)="changePage($event)"
-  >  
-</app-paginator>
-  </app-container>
-  
+  <table mat-table [dataSource]="field" class="mat-elevation-z8">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>ID</th>
+      <td mat-cell *matCellDef="let event">{{ event.id }}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Nombre del Evento</th>
+      <td mat-cell *matCellDef="let event">{{ event.name }}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Descripción</th>
+      <td mat-cell *matCellDef="let event">{{ event.description }}</td>
+    </ng-container>
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Inicio</th>
+      <td mat-cell *matCellDef="let event">{{ event.startDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Fin</th>
+      <td mat-cell *matCellDef="let event">{{ event.endDate }}</td>
+    </ng-container>
+    <ng-container matColumnDef="typeEvent">
+      <th mat-header-cell *matHeaderCellDef>Tipo de Evento</th>
+      <td mat-cell *matCellDef="let event">{{ event.typeEvent }}</td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Acciones</th>
+      <td mat-cell *matCellDef="let event">
+        <button mat-icon-button color="primary" (click)="openForm(event)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="delete(event.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <app-paginator
+    fxLayout
+    fxLayoutAlign="end center"
+    [lenght]="totalRecords"
+    (onChangePage)="changePage($event)">
+  </app-paginator>
+</app-container>

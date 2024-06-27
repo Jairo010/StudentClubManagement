@@ -31,8 +31,6 @@ import { GroupsParticipantsComponent } from './groups-participants/groups-partic
 import { ListParticipantsComponent } from './list-participants/list-participants.component';
 import { TransactionsRegisterFormComponent } from './transactions-register-form/transactions-register-form.component';
 import { TransactionsListComponent } from './transactions-list.component/transactions-list.component.component';
-import { AuthGuard } from './guard/auth.guard';
-
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
