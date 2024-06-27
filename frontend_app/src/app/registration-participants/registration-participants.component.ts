@@ -81,7 +81,7 @@ export class RegistrationParticipantsComponent implements OnInit {
         response => {
           console.log('Participant registered successfully', response);
           this.snackBar.open('Participante registrado correctamente', 'Cerrar', { duration: 3000 });
-          this.router.navigate(['/login']);
+          this.router.navigate(['/registrar-concurso']);
         },
         error => {
           console.error('Error registering participant', error);
