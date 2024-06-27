@@ -52,9 +52,9 @@ export class ProjectListComponent {
             id: dato.id,
             name: dato.Nombre,
             description: dato.Descripcion,
-            dateStart: dato.Fecha_Ini,
-            dateEnd: dato.Fecha_Fin,
-            club: dato.Id_Club.Nombre
+            startDate: dato.Fecha_Ini,
+            endDate: dato.Fecha_Fin,
+            idClub: dato.Id_Club.Nombre
           });
         });
         this.totalRecords = this.records.length;
