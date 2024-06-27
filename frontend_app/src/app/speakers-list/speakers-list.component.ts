@@ -22,7 +22,11 @@ export class SpeakersListComponent {
   private speakersService = inject(SpeakersService);
 
   data: any = [];
-  displayedColumns: string[] = ['card', 'name', 'lastName', 'email', 'phone', 'topic', 'actions'];
+  displayedColumns: string[] = ['card', 'name', 'lastName', 'email', 'phone','topic', 'actions'];
+
+  ngOnInit(): void{
+    this.loadSpeakers();
+  }
 
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'card', title: 'Cédula' },
@@ -84,7 +88,7 @@ export class SpeakersListComponent {
           this.snackBar.open('Ponente actualizado exitosamente', 'Cerrar', {
             duration: 3000, // Duración del mensaje en milisegundos
           });
-          this.loadSpeakers();
+          this.reloadPage();
         });
       }
     });
@@ -96,7 +100,7 @@ export class SpeakersListComponent {
         this.snackBar.open('Ponente eliminado exitosamente', 'Cerrar', {
           duration: 3000, // Duración del mensaje en milisegundos
         });
-        this.loadSpeakers();
+        this.reloadPage();
       }, (error) => {
         console.error('Error al eliminar el speaker:', error);
         this.snackBar.open('Error al eliminar el ponente', 'Cerrar', {
