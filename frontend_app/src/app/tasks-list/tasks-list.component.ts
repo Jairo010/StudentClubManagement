@@ -26,6 +26,8 @@ export class TasksListComponent {
   constructor(private dialog: MatDialog, private snackBar: MatSnackBar) {
     this.loadTasks();
   }
+  displayedColumns: string[] = ['id', 'name', 'description', 'limitDate', 'state', 'evidence', 'project', 'actions'];
+
 
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'id', title: 'Codigo' },
@@ -86,7 +88,7 @@ export class TasksListComponent {
         const task = { ...response }
         this.tasksService.updateTask(task).subscribe(() => {
           console.log("hora: " + JSON.stringify(task))
-          this.reloadPage()
+          this.loadTasks();
         })
       }
     });
@@ -98,7 +100,7 @@ export class TasksListComponent {
         this.snackBar.open('Tarea eliminada exitosamente', 'Cerrar', {
           duration: 3000, // Duración del mensaje en milisegundos
         });
-        this.reloadPage()
+        this.loadTasks();
       }, (error) => {
         console.error('Error deleting member:', error);
         this.snackBar.open('Error al eliminar la Tarea', 'Cerrar', {

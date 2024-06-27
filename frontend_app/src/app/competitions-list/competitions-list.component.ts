@@ -23,13 +23,8 @@ export class CompetitionsListComponent {
 
   data: any = [];
 
-  MetaDataColumn: MetaDataColumn[] = [
-    { field: 'id', title: 'ID' },
-    { field: 'type', title: 'Tipo de Competencia' },
-    { field: 'numParticipants', title: 'Número de Participantes' },
-    { field: 'price', title: 'Valor de Inscripción' },
-    { field: 'status', title: 'Estado' }
-  ];
+  displayedColumns: string[] = ['id', 'type', 'numParticipants', 'price', 'status', 'actions'];
+
 
   records: any = [];
   totalRecords = this.records.length;
@@ -82,7 +77,7 @@ export class CompetitionsListComponent {
           this.snackBar.open('Competición actualizada exitosamente.', 'Cerrar', {
             duration: 3000, // Duración del mensaje en milisegundos
           });
-          this.reloadPage();
+          this.loadCompetitions();
         });
       }
     });
@@ -94,7 +89,7 @@ export class CompetitionsListComponent {
         this.snackBar.open('Competicion eliminada correctamente.', 'Cerrar', {
           duration: 3000, // Duración del mensaje en milisegundos
         });
-        this.reloadPage();
+        this.loadCompetitions();
       }, (error) => {
         console.error('Error deleting competition:', error);
       });

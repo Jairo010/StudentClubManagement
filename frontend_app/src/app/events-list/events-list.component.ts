@@ -29,14 +29,6 @@ export class EventsListComponent {
   data: any = [];
   displayedColumns: string[] = ['id', 'name', 'description', 'startDate', 'endDate', 'typeEvent', 'actions'];
 
-  MetaDataColumn: MetaDataColumn[] = [
-    { field: 'id', title: 'ID' },
-    { field: 'name', title: 'Nombre del Evento' },
-    { field: 'description', title: 'Descripción' },
-    { field: 'startDate', title: 'Fecha de Inicio' },
-    { field: 'endDate', title: 'Fecha de Fin' },
-    { field: 'typeEvent', title: 'Tipo de Evento' }
-  ];
 
   records: any = [];
   totalRecords = this.records.length;
@@ -89,8 +81,8 @@ export class EventsListComponent {
           this.snackBar.open('Evento actualizado exitosamente', 'Cerrar', {
             duration: 3000,
           });
-          this.reloadPage();
-        });
+          this.loadEvents();
+                });
       }
     });
   }
@@ -101,8 +93,8 @@ export class EventsListComponent {
         this.snackBar.open('Evento eliminado correctamente', 'Cerrar', {
           duration: 3000,
         });
-        this.reloadPage();
-      }, (error) => {
+        this.loadEvents();
+            }, (error) => {
         console.error('Error deleting event:', error);
       });
     }

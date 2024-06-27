@@ -24,16 +24,12 @@ export class ClubsListComponent implements OnInit{
 
     data: any = []
 
-    MetaDataColumn: MetaDataColumn[] = [
-        { field: 'id', title: 'Codigo' },
-        { field: 'name', title: 'Nombre del club' },
-        { field: 'description', title: 'Descripción' },
-        { field: 'cardResponsible', title: 'Cedula responsable' }
-    ];
+    displayedColumns: string[] = ['id', 'name', 'description', 'cardResponsible', 'actions'];
 
     records: any = [];
     totalRecords = this.records.length;
     field: any[] = [];
+    
 
     constructor(
         private dialog: MatDialog,
@@ -45,6 +41,7 @@ export class ClubsListComponent implements OnInit{
     ngOnInit(): void{
         this.loadClubs();
     }
+    
 
     loadClubs() {
         this.clubsService.getClubs().subscribe(
@@ -88,7 +85,7 @@ export class ClubsListComponent implements OnInit{
                     this.snackBar.open('Club actualizado exitosamente', 'Cerrar', {
                         duration: 3000, // Duración del mensaje en milisegundos
                     });
-                    this.reloadPage();
+                    this.loadClubs();
                 });
             }
         });
@@ -100,7 +97,7 @@ export class ClubsListComponent implements OnInit{
                 this.snackBar.open('Club eliminado exitosamente', 'Cerrar', {
                     duration: 3000, // Duración del mensaje en milisegundos
                 });
-                this.reloadPage();
+                this.loadClubs();
             }, (error) => {
                 console.error('Error deleting club:', error);
             });

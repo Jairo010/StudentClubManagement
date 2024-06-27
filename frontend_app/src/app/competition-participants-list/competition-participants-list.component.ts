@@ -37,7 +37,7 @@ export class CompetitionParticipantsListComponent implements OnInit {
   allParticipants: any[] = [];
   selectedParticipantId: string | null = null;
   loadingParticipants = false;
-  displayedColumns: string[] = ['id', 'name', 'email', 'state', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email','state', 'actions'];
 
   constructor(
     private competitionsService: CompetitionsService,
