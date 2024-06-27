@@ -24,15 +24,14 @@ export class ProjectListComponent {
   private snackBar: MatSnackBar;
 
   data: any = []
-  displayedColumns: string[] = ['id', 'name', 'description', 'startDate', 'endDate', 'idClub', 'actions'];
 
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'id', title: 'Codigo' },
     { field: 'name', title: 'Nombre' },
     { field: 'description', title: 'Descripcion' },
-    { field: 'startDate', title: 'Fecha Inicio' },
-    { field: 'endDate', title: 'Fecha FIn' },
-    { field: 'idClub', title: 'Club' },
+    { field: 'dateStart', title: 'Fecha Inicio' },
+    { field: 'dateEnd', title: 'Fecha FIn' },
+    { field: 'club', title: 'Club' },
   ]
   records: any = []
   totalRecords = this.records.length
@@ -53,9 +52,9 @@ export class ProjectListComponent {
             id: dato.id,
             name: dato.Nombre,
             description: dato.Descripcion,
-            startDate: dato.Fecha_Ini,
-            endDate: dato.Fecha_Fin,
-            idClub: dato.Id_Club.Nombre
+            dateStart: dato.Fecha_Ini,
+            dateEnd: dato.Fecha_Fin,
+            club: dato.Id_Club.Nombre
           });
         });
         this.totalRecords = this.records.length;
@@ -83,7 +82,7 @@ export class ProjectListComponent {
         const project = { ...response };
         this.projectsService.updateProject(project).subscribe(() => {
           this.snackBar.open('Proyecto actualizado exitosamente', 'Cerrar', { duration: 3000 });
-          this.loadProjects();
+          this.reloadPage();
         });
       } 
     });
@@ -93,7 +92,7 @@ export class ProjectListComponent {
     if (confirm("¿Está seguro de eliminar este Proyecto?")) {
       this.projectsService.deleteProject!(id).subscribe(() => {
         this.snackBar.open('Proyecto eliminado exitosamente', 'Cerrar', { duration: 3000 });
-        this.loadProjects();
+        this.reloadPage();
       }, (error) => {
         console.error('Error al eliminar el proyecto:', error);
       });
@@ -101,6 +100,9 @@ export class ProjectListComponent {
   }
 
   reloadPage() {
-    window.location.reload();
+    this.records = [];
+    this.field = [];
+    this.data = [];
+    this.loadProjects();
   }
 }

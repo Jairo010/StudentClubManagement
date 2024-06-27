@@ -30,8 +30,6 @@ export class UniversityListComponent {
   ];
   records: any = [];
   totalRecords = this.records.length;
-  displayedColumns: string[] = ['id', 'name', 'city', 'province', 'actions'];
-
 
   constructor(private dialog: MatDialog, snackBar: MatSnackBar) {
     this.snackBar = snackBar; // Asigna snackBar
@@ -82,14 +80,14 @@ export class UniversityListComponent {
           this.snackBar.open('Universidad actualizada exitosamente', 'Cerrar', {
             duration: 3000, // Duración del mensaje en milisegundos
           });
-          this.loadUniversities();
+          this.reloadPage();
         });
       } else {
         this.universitiesService.createUniversity(response).subscribe(() => {
           this.snackBar.open('Universidad creada exitosamente', 'Cerrar', {
             duration: 3000, // Duración del mensaje en milisegundos
           });
-          this.loadUniversities();
+          this.reloadPage();
         });
       }
     });
@@ -101,7 +99,7 @@ export class UniversityListComponent {
         this.snackBar.open('Universidad eliminada exitosamente', 'Cerrar', {
           duration: 3000, // Duración del mensaje en milisegundos
         });
-        this.loadUniversities();
+        this.reloadPage();
       }, (error) => {
         console.error('Error al eliminar la universidad:', error);
       });
@@ -109,6 +107,9 @@ export class UniversityListComponent {
   }
 
   reloadPage() {
-    window.location.reload();
+    this.records = [];
+    this.field = [];
+    this.data = [];
+    this.loadUniversities();
   }
 }

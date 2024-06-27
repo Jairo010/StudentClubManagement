@@ -7,14 +7,15 @@ import { MatFormField, MatFormFieldModule, MatLabel } from '@angular/material/fo
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
 import { ClubsService } from '../services/api_serivices/clubs/clubs.service';
+import { IProjects } from '../interfaces/projects.interface';
 
-export interface IProjectData {
+export interface IProjectDatat {
   id?: string;
   name: string;
   description: string;
-  startDate: Date;
-  endDate: Date;
-  idClub: string;
+  dateStart: string;
+  dateEnd: string;
+  Club: string;
 }
 
 @Component({
@@ -33,7 +34,7 @@ export class ProjectEditFormComponent implements OnInit {
 
   constructor(
     private reference: MatDialogRef<ProjectEditFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IProjectData  ) {
+    @Inject(MAT_DIALOG_DATA) public data: IProjects  ) {
     this.title = data && data.id ? "EDITAR" : "NUEVO";
   }
 
