@@ -23,7 +23,7 @@ import { GroupsEditFormComponent } from '../groups-edit-form/groups-edit-form.co
   templateUrl: './groups-list.component.html',
   styleUrls: ['./groups-list.component.css']
 })
-export class GroupsListComponent implements OnInit{
+export class GroupsListComponent{
   private groupsService = inject(GroupsService);
 
   data: any = [];
@@ -36,10 +36,6 @@ export class GroupsListComponent implements OnInit{
     { field: 'status', title: 'Habilitado' },
     
   ];
-
-  ngOnInit(): void {
-      this.loadGroups();
-  }
 
   records: any = [];
   totalRecords = this.records.length;
@@ -90,7 +86,7 @@ export class GroupsListComponent implements OnInit{
           this.snackBar.open('Grupo actualizado exitosamente', 'Cerrar', {
             duration: 3000,
           });
-          this.reloadPage();
+          this.loadGroups();
         });
       }
     });
@@ -102,7 +98,7 @@ export class GroupsListComponent implements OnInit{
         this.snackBar.open('Grupo eliminado correctamente', 'Cerrar', {
           duration: 3000,
         });
-        this.reloadPage();
+        this.loadGroups();
       }, (error) => {
         console.error('Error al eliminar el grupo:', error);
       });

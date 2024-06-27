@@ -33,7 +33,7 @@ export class ListParticipantsComponent implements OnInit {
   pageIndex = 2;
   totalCompetition = 0;
   totalTalks = 0;
-
+  displayedColumns: string[] = ['card', 'name', 'lastName', 'email', 'status', 'actions'];
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'card', title: 'Cedula' },
     { field: 'name', title: 'Nombre del Participante' },
@@ -102,7 +102,7 @@ export class ListParticipantsComponent implements OnInit {
           this.snackBar.open('Participante actualizado exitosamente', 'Cerrar', {
             duration: 3000,
           });
-          this.reloadPage();
+          this.loadParticipants();
         }, (error) => {
           console.error('Error al actualizar el participante:', error);
         });
@@ -116,7 +116,7 @@ export class ListParticipantsComponent implements OnInit {
         this.snackBar.open('Participante eliminado correctamente', 'Cerrar', {
           duration: 3000,
         });
-        this.reloadPage();
+        this.loadParticipants();
       }, (error) => {
         console.error('Error al eliminar el participante:', error);
       });
