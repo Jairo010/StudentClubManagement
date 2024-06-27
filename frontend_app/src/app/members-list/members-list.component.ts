@@ -25,7 +25,7 @@ export class MembersListComponent {
     private userService = inject(UserService);
 
     data: any = []
-    displayedColumns: string[] = ['card', 'name', 'lastName', 'semester', 'major', 'rol', 'actions'];
+
     MetaDataColumn: MetaDataColumn[] = [
         { field: 'card', title: 'Cedula' },
         { field: 'name', title: 'Nombre' },
@@ -86,7 +86,7 @@ export class MembersListComponent {
                     this.snackBar.open('Miembro actualizado exitosamente', 'Cerrar', {
                         duration: 3000,
                     });
-                    this.loadMembers()
+                    this.reloadPage();
                 });
             }
         });
@@ -99,13 +99,16 @@ export class MembersListComponent {
                 this.snackBar.open('Miembro eliminado exitosamente', 'Cerrar', {
                     duration: 3000,
                 });
-                this.loadMembers()
+                this.reloadPage();
             }, (error) => {
                 console.error('Error deleting member:', error);
             });
         }
     }
     reloadPage() {
-        window.location.reload();
+        this.records = [];
+        this.field = [];
+        this.data = [];
+        this.loadMembers();
     }
 }

@@ -37,7 +37,7 @@ export class CompetitionParticipantsListComponent implements OnInit {
   allParticipants: any[] = [];
   selectedParticipantId: string | null = null;
   loadingParticipants = false;
-  displayedColumns: string[] = ['id', 'name', 'email','state', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'state', 'actions'];
 
   constructor(
     private competitionsService: CompetitionsService,
@@ -50,7 +50,7 @@ export class CompetitionParticipantsListComponent implements OnInit {
     console.log('Component initialized');
     this.loadCompetitions();
     this.loadAllParticipants();
-    this.loadAllGroups(); // Agregamos la carga de todos los grupos al inicio
+    this.loadAllGroups(); 
   }
 
   loadCompetitions() {
