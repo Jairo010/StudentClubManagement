@@ -29,9 +29,9 @@ export class ProjectListComponent {
     { field: 'id', title: 'Codigo' },
     { field: 'name', title: 'Nombre' },
     { field: 'description', title: 'Descripcion' },
-    { field: 'dateStart', title: 'Fecha Inicio' },
-    { field: 'dateEnd', title: 'Fecha FIn' },
-    { field: 'club', title: 'Club' },
+    { field: 'startDate', title: 'Fecha Inicio' },
+    { field: 'endDate', title: 'Fecha FIn' },
+    { field: 'idClub', title: 'Club' },
   ]
   records: any = []
   totalRecords = this.records.length
