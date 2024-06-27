@@ -22,11 +22,8 @@ export class TalksListComponent {
   private talksService = inject(TalksService);
 
   data: any = [];
-  displayedColumns: string[] = ['id','topic', 'image', 'startDate', 'endDate', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'topic', 'image', 'startDate', 'endDate', 'status', 'actions'];
 
-  ngOnInit(): void{
-      this.loadTalks();
-  }
 
   MetaDataColumn: MetaDataColumn[] = [
     { field: 'id', title: 'Codigo' },
@@ -88,7 +85,7 @@ export class TalksListComponent {
           this.snackBar.open('Charla actualizada exitosamente', 'Cerrar', {
             duration: 3000, // Duración del mensaje en milisegundos
           });
-          this.reloadPage();
+          this.loadTalks();
         });
       }
     });
@@ -100,7 +97,7 @@ export class TalksListComponent {
         this.snackBar.open('Charla eliminada exitosamente', 'Cerrar', {
           duration: 3000, // Duración del mensaje en milisegundos
         });
-        this.reloadPage();
+        this.loadTalks();
       }, (error) => {
         console.error('Error deleting member:', error);
         this.snackBar.open('Error al eliminar la charla', 'Cerrar', {
