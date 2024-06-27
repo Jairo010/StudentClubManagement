@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment.development';
   providedIn: 'root'
 })
 export class AuthService {
+  /*
   private supabase: SupabaseClient;
 
   constructor() { 
@@ -16,4 +17,5 @@ export class AuthService {
     const session = await this.supabase.auth.getSession();
     return !!session;
   }
+    */
 }

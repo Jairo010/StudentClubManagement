@@ -68,8 +68,8 @@ export class TransactionsListComponent implements OnInit {
             amount: transaction.Monto_Transaccion,
             typeRegister: transaction.Tipo_Registro,
             typeTransaction: transaction.Tipo_Transaccion,
-            idCompetition: transaction.Id_Concurso,
-            idGroup: transaction.Id_Grupo,
+            idCompetition: transaction.Id_Concurso.Tipo_Concurso,
+            idGroup: transaction.Id_Grupo.Nombre_Grupo,
             total: transaction.Total,
             description: transaction.Descripcion,
           });
